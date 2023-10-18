@@ -6,66 +6,46 @@ import {Button as UIButton} from 'src/components/UI/button/default-button';
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
-  const themeVariant = useColorScheme();
-  const safeThemeVariant =
-    themeVariant === 'light' || themeVariant === 'dark'
-      ? themeVariant
-      : 'light';
-
   const handeChangeTheme = () =>
     Appearance.setColorScheme(isDarkMode ? 'light' : 'dark');
 
   return (
     <>
       <View style={styles.buttonContainer}>
-        <UIButton
-          themeVariant={safeThemeVariant}
-          title="Small"
-          onPress={handeChangeTheme}
-          buttonSize={'small'}
-        />
+        <UIButton title="Small" onPress={handeChangeTheme} buttonSize="small" />
       </View>
       <View style={styles.buttonContainer}>
         <UIButton
-          themeVariant={safeThemeVariant}
           title="Disabled"
           onPress={handeChangeTheme}
-          buttonSize={'small'}
-          isDisabled={true}
+          buttonSize="small"
+          isDisabled
         />
       </View>
       <View style={styles.buttonContainer}>
         <UIButton
-          themeVariant={safeThemeVariant}
           title="Medium"
           onPress={handeChangeTheme}
-          buttonSize={'medium'}
+          buttonSize="medium"
         />
       </View>
       <View style={styles.buttonContainer}>
         <UIButton
-          themeVariant={safeThemeVariant}
           title="Disabled"
           onPress={handeChangeTheme}
-          buttonSize={'medium'}
-          isDisabled={true}
+          buttonSize="medium"
+          isDisabled
         />
       </View>
       <View style={styles.buttonContainer}>
-        <UIButton
-          themeVariant={safeThemeVariant}
-          title="Large"
-          onPress={handeChangeTheme}
-          buttonSize={'large'}
-        />
+        <UIButton title="Large" onPress={handeChangeTheme} buttonSize="large" />
       </View>
       <View style={styles.buttonContainer}>
         <UIButton
-          themeVariant={safeThemeVariant}
           title="Disabled"
           onPress={handeChangeTheme}
-          buttonSize={'large'}
-          isDisabled={true}
+          buttonSize="large"
+          isDisabled
         />
       </View>
     </>

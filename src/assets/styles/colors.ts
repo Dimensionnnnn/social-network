@@ -1,40 +1,31 @@
 export const COLORS = {
-  grayscaleDark: {
-    grayscale_01: '#FFFFFF',
-    grayscale_02: '#DEDEDE',
-    grayscale_03: '#9B9B9B',
-    grayscale_04: '#696969',
-    grayscale_05: '#303030',
-    grayscale_06: '#1B1B1B',
-    grayscale_07: '#131313',
-  },
-  grayscaleLight: {
-    grayscale_01: '#131313',
-    grayscale_02: '#696969',
-    grayscale_03: '#9B9B9B',
-    grayscale_04: '#D0D1D0',
-    grayscale_05: '#DEDEDE',
-    grayscale_06: '#F4F5F4',
-    grayscale_07: '#FFFFFF',
-  },
-  primaryLight: {
-    default: '#02FF3A',
-    pressed: '#75C537',
-  },
-  primaryDark: {
-    default: '#91C521',
-    pressed: '#7AA818',
-  },
-  secondaryLight: {
-    secondary_01: '#618909',
-  },
-  secondaryDark: {
-    secondary_01: '#B8DE64',
-  },
-  additionalError: {
-    error: '#C2534C',
-  },
-  darkMode: {
-    darkMode: '#87B71F',
-  },
+  grayscale_dark_01: '#FFFFFF',
+  grayscale_dark_02: '#DEDEDE',
+  grayscale_dark_03: '#9B9B9B',
+  grayscale_dark_04: '#696969',
+  grayscale_dark_05: '#303030',
+  grayscale_dark_06: '#1B1B1B',
+  grayscale_dark_07: '#131313',
+
+  grayscale_light_01: '#131313',
+  grayscale_light_02: '#696969',
+  grayscale_light_03: '#9B9B9B',
+  grayscale_light_04: '#D0D1D0',
+  grayscale_light_05: '#DEDEDE',
+  grayscale_light_06: '#F4F5F4',
+  grayscale_light_07: '#FFFFFF',
+
+  primary_dark_01: '#91C521',
+  primary_dark_02: '#7AA818',
+
+  primary_light_01: '#02FF3A',
+  primary_light_02: '#75C537',
+
+  secondary_light_01: '#618909',
+
+  secondary_dark_01: '#B8DE64',
+
+  additional_error: '#C2534C',
+
+  dark_mode: '#87B71F',
 };
