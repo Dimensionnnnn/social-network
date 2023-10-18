@@ -38,6 +38,14 @@ function App(): JSX.Element {
         />
       </View>
       <View style={styles.buttonContainer}>
+        <UIButton
+          title="Delete"
+          onPress={handeChangeTheme}
+          buttonSize="medium"
+          isDelete
+        />
+      </View>
+      <View style={styles.buttonContainer}>
         <UIButton title="Large" onPress={handeChangeTheme} buttonSize="large" />
       </View>
       <View style={styles.buttonContainer}>

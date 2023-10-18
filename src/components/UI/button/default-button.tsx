@@ -2,11 +2,9 @@ import React from 'react';
 import {Text, Pressable} from 'react-native';
 import {useColorTheme} from 'src/hooks/useColorTheme';
 import {
-  THEMES,
-  CONTAINER,
-  TEXT,
-  getButtonThemeStyles,
-  getButtonTextStyles,
+  defaultButtonStyles,
+  getButtonStyles,
+  ButtonType,
 } from './default-button-styles';
 import {ColorThemes} from 'hooks/useColorTheme';
 
@@ -28,22 +26,22 @@ export const Button: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   const themeVariant: ColorThemes = useColorTheme();
-  const stylesThemes = THEMES[themeVariant];
 
   const containerStyles = {
-    ...CONTAINER.container,
-    ...CONTAINER.sizes[buttonSize],
+    ...defaultButtonStyles.container,
+    ...defaultButtonStyles.sizes[buttonSize],
   };
 
-  const textStyles = TEXT.text;
+  const textStyles = defaultButtonStyles.text;
 
   return (
     <Pressable
       style={({pressed}) => [
         containerStyles,
-        ...getButtonThemeStyles(
+        ...getButtonStyles(
+          themeVariant,
+          ButtonType.button,
           pressed,
-          stylesThemes,
           buttonSize,
           isDelete,
           isDisabled,
@@ -55,9 +53,10 @@ export const Button: React.FC<ButtonProps> = ({
         <Text
           style={[
             textStyles,
-            getButtonTextStyles(
+            ...getButtonStyles(
+              themeVariant,
+              ButtonType.text,
               pressed,
-              stylesThemes,
               buttonSize,
               isDelete,
               isDisabled,

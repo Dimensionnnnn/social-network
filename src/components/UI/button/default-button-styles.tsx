@@ -1,10 +1,11 @@
 import {outfitTextStyles} from 'src/assets/styles/typography';
 import {COLORS} from 'src/assets/styles/colors';
 import {ButtonSize} from './default-button';
+import {ColorThemes} from 'hooks/useColorTheme';
 
-export const THEMES = {
+export const defaultButtonStyles = {
   dark: {
-    defaultButton: {
+    button: {
       pressed: {
         small: {backgroundColor: COLORS.secondary_dark_01},
         medium: {backgroundColor: COLORS.secondary_dark_01},
@@ -22,8 +23,12 @@ export const THEMES = {
         backgroundColor: COLORS.grayscale_dark_05,
       },
     },
-    defaultButtonText: {
-      pressed: {color: COLORS.grayscale_dark_07},
+    text: {
+      pressed: {
+        small: {color: COLORS.grayscale_dark_07},
+        medium: {color: COLORS.grayscale_dark_07},
+        large: {color: COLORS.grayscale_dark_07},
+      },
       delete: {color: COLORS.additional_error},
       disabled: {color: COLORS.grayscale_dark_04},
       small: {color: COLORS.secondary_dark_01},
@@ -32,7 +37,7 @@ export const THEMES = {
     },
   },
   light: {
-    defaultButton: {
+    button: {
       pressed: {
         small: {backgroundColor: COLORS.secondary_light_01},
         medium: {backgroundColor: COLORS.dark_mode},
@@ -54,8 +59,12 @@ export const THEMES = {
         backgroundColor: COLORS.dark_mode,
       },
     },
-    defaultButtonText: {
-      pressed: {color: COLORS.grayscale_light_07},
+    text: {
+      pressed: {
+        small: {color: COLORS.grayscale_light_07},
+        medium: {color: COLORS.grayscale_light_07},
+        large: {color: COLORS.grayscale_light_07},
+      },
       delete: {color: COLORS.additional_error},
       disabled: {color: COLORS.grayscale_light_03},
       small: {color: COLORS.grayscale_light_07},
@@ -63,9 +72,6 @@ export const THEMES = {
       large: {color: COLORS.grayscale_light_07},
     },
   },
-};
-
-export const CONTAINER = {
   container: {
     width: '100%',
     maxWidth: 343,
@@ -95,35 +101,36 @@ export const CONTAINER = {
       borderRadius: 21,
     },
   },
-};
-
-export const TEXT = {
   text: outfitTextStyles.bodyMedium_16,
 };
 
-export const getButtonThemeStyles = (
-  pressed: boolean,
-  stylesThemes: (typeof THEMES)[keyof typeof THEMES],
-  buttonSize: ButtonSize,
-  isDelete?: boolean,
-  isDisabled?: boolean,
-) => [
-  stylesThemes.defaultButton[buttonSize],
-  isDelete && stylesThemes.defaultButton.delete,
-  isDisabled && stylesThemes.defaultButton.disabled,
-  pressed && stylesThemes.defaultButton.pressed,
-  pressed && stylesThemes.defaultButton.pressed[buttonSize],
-];
+export enum ButtonType {
+  button = 'button',
+  text = 'text',
+}
 
-export const getButtonTextStyles = (
+export const getButtonStyles = (
+  themeVariant: ColorThemes,
+  type: ButtonType,
   pressed: boolean,
-  stylesThemes: (typeof THEMES)[keyof typeof THEMES],
   buttonSize: ButtonSize,
   isDelete?: boolean,
   isDisabled?: boolean,
-) => [
-  stylesThemes.defaultButtonText[buttonSize],
-  isDelete && stylesThemes.defaultButtonText.delete,
-  isDisabled && stylesThemes.defaultButtonText.disabled,
-  pressed && stylesThemes.defaultButtonText.pressed,
-];
+) => {
+  const theme = defaultButtonStyles[themeVariant];
+
+  const baseStyles = theme[type][buttonSize];
+
+  const specificStyles = {
+    delete: isDelete && theme[type].delete,
+    disabled: isDisabled && theme[type].disabled,
+    pressed: pressed && theme[type].pressed[buttonSize],
+  };
+
+  return [
+    baseStyles,
+    specificStyles.delete,
+    specificStyles.disabled,
+    specificStyles.pressed,
+  ];
+};

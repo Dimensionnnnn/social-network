@@ -7,7 +7,5 @@ export enum ColorThemes {
 
 export const useColorTheme = () => {
   const colorScheme = useColorScheme();
-  return colorScheme === 'light' || colorScheme === 'dark'
-    ? colorScheme
-    : ColorThemes.LIGHT;
+  return colorScheme ?? ColorThemes.LIGHT;
 };
