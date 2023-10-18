@@ -1,96 +1,50 @@
 import React from 'react';
 import {Text, Pressable, StyleSheet} from 'react-native';
-import {
-  darkMode,
-  grayscaleDark,
-  grayscaleLight,
-  secondaryDark,
-  secondaryLight,
-} from '../../../assets/styles/colors';
-import {outfitTextStyles} from '../../../assets/styles/typography';
+import {outfitTextStyles} from 'src/assets/styles/typography';
+import {THEMES} from './default-button-styles';
 
-export enum ButtonSize {
-  small = 'small',
-  medium = 'medium',
-  large = 'large',
-}
+type ButtonSize = 'small' | 'medium' | 'large';
 
 interface ButtonProps {
-  isDarkMode: boolean;
+  themeVariant: 'light' | 'dark';
   buttonSize: ButtonSize;
   title?: string;
-  loading?: boolean;
-  disabled?: boolean;
+  isDelete?: boolean;
+  isDisabled?: boolean;
   onPress?: () => void;
 }
 
 export const Button: React.FC<ButtonProps> = ({
-  isDarkMode,
+  themeVariant,
   title,
-  // loading,
-  // disabled,
+  isDelete,
+  isDisabled,
   buttonSize,
   onPress,
 }) => {
-  const isSmallButton = buttonSize === ButtonSize.small;
-  const isMediumButton = buttonSize === ButtonSize.medium;
-  const isLargeButton = buttonSize === ButtonSize.large;
-
-  const containerStyle = [
-    styles.container,
-    isSmallButton ? styles.containerSmallButton : null,
-    isMediumButton ? styles.containerMediumButton : null,
-    isLargeButton ? styles.containerLargeButton : null,
-  ];
-
-  let pressableBackgroundColor = '';
-  let pressableTextColor = '';
-
-  if (isDarkMode) {
-    pressableBackgroundColor = isLargeButton
-      ? grayscaleDark.grayscale_05
-      : grayscaleDark.grayscale_07;
-  } else {
-    pressableBackgroundColor =
-      isLargeButton || isSmallButton
-        ? darkMode.darkMode
-        : grayscaleLight.grayscale_07;
-  }
-
-  if (isDarkMode) {
-    pressableTextColor = secondaryDark.secondary_01;
-  } else {
-    pressableTextColor = isMediumButton
-      ? darkMode.darkMode
-      : grayscaleLight.grayscale_07;
-  }
+  const stylesThemes = THEMES[themeVariant];
 
   return (
     <Pressable
       style={({pressed}) => [
-        {
-          backgroundColor: pressed
-            ? isDarkMode
-              ? secondaryDark.secondary_01
-              : isMediumButton
-              ? darkMode.darkMode
-              : secondaryLight.secondary_01
-            : pressableBackgroundColor,
-        },
-        ...containerStyle,
+        styles.container,
+        styles[buttonSize],
+        stylesThemes.defaultButton[buttonSize],
+        isDelete && stylesThemes.defaultButton.delete,
+        isDisabled && stylesThemes.defaultButton.disabled,
+        pressed && stylesThemes.defaultButton.pressed,
+        pressed && stylesThemes.defaultButton.pressed[buttonSize],
       ]}
+      disabled={isDisabled}
       onPress={onPress}>
       {({pressed}) => (
         <Text
           style={[
             styles.text,
-            {
-              color: pressed
-                ? isDarkMode
-                  ? grayscaleDark.grayscale_07
-                  : grayscaleLight.grayscale_07
-                : pressableTextColor,
-            },
+            stylesThemes.defaultButtonText[buttonSize],
+            isDelete && stylesThemes.defaultButtonText.delete,
+            isDisabled && stylesThemes.defaultButtonText.disabled,
+            pressed && stylesThemes.defaultButtonText.pressed,
           ]}>
           {title}
         </Text>
@@ -105,7 +59,7 @@ const styles = StyleSheet.create({
     maxWidth: 343,
     alignItems: 'center',
   },
-  containerSmallButton: {
+  small: {
     maxWidth: 148,
     borderRadius: 17,
     paddingTop: 12,
@@ -113,14 +67,14 @@ const styles = StyleSheet.create({
     paddingLeft: 32,
     paddingRight: 32,
   },
-  containerMediumButton: {
+  medium: {
     paddingTop: 12,
     paddingRight: 12,
     paddingBottom: 10,
     paddingLeft: 12,
     borderRadius: 15,
   },
-  containerLargeButton: {
+  large: {
     paddingTop: 16,
     paddingRight: 32,
     paddingBottom: 16,
