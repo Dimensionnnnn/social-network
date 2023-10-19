@@ -4,7 +4,7 @@ import {useColorTheme} from 'src/hooks/useColorTheme';
 import {
   defaultButtonStyles,
   getButtonStyles,
-  ButtonType,
+  ButtonElement,
 } from './default-button-styles';
 import {ColorThemes} from 'hooks/useColorTheme';
 
@@ -40,7 +40,7 @@ export const Button: React.FC<ButtonProps> = ({
         containerStyles,
         ...getButtonStyles(
           themeVariant,
-          ButtonType.button,
+          ButtonElement.button,
           pressed,
           buttonSize,
           isDelete,
@@ -55,7 +55,7 @@ export const Button: React.FC<ButtonProps> = ({
             textStyles,
             ...getButtonStyles(
               themeVariant,
-              ButtonType.text,
+              ButtonElement.text,
               pressed,
               buttonSize,
               isDelete,

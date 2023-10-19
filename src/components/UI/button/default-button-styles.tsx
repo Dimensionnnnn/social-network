@@ -104,14 +104,14 @@ export const defaultButtonStyles = {
   text: outfitTextStyles.bodyMedium_16,
 };
 
-export enum ButtonType {
+export enum ButtonElement {
   button = 'button',
   text = 'text',
 }
 
 export const getButtonStyles = (
   themeVariant: ColorThemes,
-  type: ButtonType,
+  type: ButtonElement,
   pressed: boolean,
   buttonSize: ButtonSize,
   isDelete?: boolean,
