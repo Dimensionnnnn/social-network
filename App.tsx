@@ -3,6 +3,7 @@ import {Appearance, StyleSheet, useColorScheme, View} from 'react-native';
 
 import {Button as UIButton} from 'src/components/UI/button/default-button/default-button';
 import {Button as UIButtonTextIcon} from 'src/components/UI/button/text-icon/text-icon-button';
+import {Button as UIBUttonText} from 'src/components/UI/button/text-button/text-button';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -62,6 +63,12 @@ function App(): JSX.Element {
       </View>
       <View style={styles.buttonContainer}>
         <UIButtonTextIcon title="Link" onPress={handeChangeTheme} isDisabled />
+      </View>
+      <View style={styles.buttonContainer}>
+        <UIBUttonText title="Done" onPress={handeChangeTheme} />
+      </View>
+      <View style={styles.buttonContainer}>
+        <UIBUttonText title="Done" onPress={handeChangeTheme} isDisabled />
       </View>
     </>
   );

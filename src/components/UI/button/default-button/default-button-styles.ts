@@ -1,7 +1,7 @@
 import {outfitTextStyles} from 'src/assets/styles/typography';
 import {COLORS} from 'src/assets/styles/colors';
 import {ButtonSize} from './default-button';
-import {ColorThemes} from 'hooks/useColorTheme';
+import {ColorThemes} from 'src/hooks/useColorTheme';
 
 export const defaultButtonStyles = {
   dark: {
