@@ -12,6 +12,8 @@ import {Button as UIButtonTextIcon} from 'src/components/UI/button/text-icon/tex
 import {Button as UIBUttonText} from 'src/components/UI/button/text-button/text-button';
 import {Button as UIButtonTextIconLeft} from 'src/components/UI/button/text-icon-left/text-icon-left';
 
+import {Input as EmailInput} from 'src/components/UI/input/email-input/email-input';
+
 import {SvgExit} from 'src/shared/icons/components/exit-svg';
 
 function App(): JSX.Element {
@@ -100,6 +102,33 @@ function App(): JSX.Element {
             title="Link"
             onPress={handeChangeTheme}
             isDisabled
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <EmailInput label="Email" placeholder="Enter email" />
+        </View>
+        <View style={styles.buttonContainer}>
+          <EmailInput
+            label="Email"
+            placeholder="Enter email"
+            value="Email"
+            isDisabled
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <EmailInput
+            label="Email"
+            placeholder="Enter email"
+            value="Email"
+            isSuccess
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <EmailInput
+            label="Email"
+            placeholder="Enter email"
+            value="Email"
+            isError
           />
         </View>
       </ScrollView>
