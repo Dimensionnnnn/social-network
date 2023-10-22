@@ -10,7 +10,7 @@ export const SvgDarkTheme = (props: SvgProps) => (
     {...props}>
     <G clipPath="url(#a)">
       <Path
-        fill={props.fill || '#fff'}
+        fill="currentColor"
         stroke="#fff"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -20,7 +20,7 @@ export const SvgDarkTheme = (props: SvgProps) => (
     </G>
     <Defs>
       <ClipPath id="a">
-        <Path fill={props.fill || '#fff'} d="M0 0h24v24H0z" />
+        <Path fill="currentColor" d="M0 0h24v24H0z" />
       </ClipPath>
     </Defs>
   </Svg>
