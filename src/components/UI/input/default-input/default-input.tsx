@@ -17,27 +17,30 @@ export const Input: React.FC<InputProps> = ({
   isError,
   ...props
 }) => {
-  const [isFocus, setIsFocus] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
   const themeVariant: ColorThemes = useColorTheme();
 
-  const inputStyles = getInputStyles(
+  const inputStyles = getInputStyles({
     themeVariant,
-    isFocus,
+    isTyping,
     isFilled,
     isDisabled,
     isSuccess,
     isError,
-  );
+  });
 
   const handleFocus = () => {
-    setIsFocus(!isFocus);
+    setIsTyping(!isTyping);
   };
 
   const handleEndEdit = () => {
-    setIsFocus(false);
+    setIsTyping(false);
     setIsFilled(!isFilled);
   };
+
+  console.log('isTyping', isTyping);
+  console.log('isFilled', isFilled);
 
   return (
     <View style={inputStyles.container}>

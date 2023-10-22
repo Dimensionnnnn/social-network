@@ -79,14 +79,23 @@ export const inputStyles = {
   }),
 };
 
-export const getInputStyles = (
-  themeVariant: ColorThemes,
-  isTyping?: boolean,
-  isFilled?: boolean,
-  isDisabled?: boolean,
-  isSuccess?: boolean,
-  isError?: boolean,
-) => {
+interface InputStylesOptions {
+  themeVariant: ColorThemes;
+  isTyping?: boolean;
+  isFilled?: boolean;
+  isDisabled?: boolean;
+  isSuccess?: boolean;
+  isError?: boolean;
+}
+
+export const getInputStyles = ({
+  themeVariant,
+  isTyping,
+  isFilled,
+  isDisabled,
+  isSuccess,
+  isError,
+}: InputStylesOptions) => {
   return {
     container: inputStyles.root.container,
     label: inputStyles.label,
