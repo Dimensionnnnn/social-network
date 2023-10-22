@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {ColorThemes, useColorTheme} from 'src/hooks/useColorTheme';
 import {Pressable, Text} from 'react-native';
-import {getButtonStyleSheet, getIconStyles} from './styles';
+import {getButtonStyles} from './styles';
 import {SvgCopy} from 'src/shared/icons/components/copy-svg';
 
 interface ButtonProps {
@@ -17,11 +17,10 @@ export const Button: React.FC<ButtonProps> = ({
   // isLoading,
   onPress,
 }) => {
-  const [isPressed, setIsPressed] = useState(false);
+  const [isPressed, setIsPressed] = React.useState(false);
   const themeVariant: ColorThemes = useColorTheme();
 
-  const buttonStyles = getButtonStyleSheet(themeVariant, isPressed, isDisabled);
-  const iconStyles = getIconStyles(themeVariant, isPressed, isDisabled);
+  const buttonStyles = getButtonStyles(themeVariant, isPressed, isDisabled);
 
   const handlePress = () => {
     setIsPressed(!isPressed);
@@ -30,13 +29,13 @@ export const Button: React.FC<ButtonProps> = ({
   return (
     <Pressable
       style={[buttonStyles.container, buttonStyles.button]}
-      disabled={isDisabled}
       onPress={onPress}
       onPressIn={handlePress}
-      onPressOut={handlePress}>
+      onPressOut={handlePress}
+      disabled={isDisabled}>
       <>
-        <Text style={buttonStyles.contentText}>{title}</Text>
-        <SvgCopy {...iconStyles} />
+        <Text style={[buttonStyles.fontText, buttonStyles.text]}>{title}</Text>
+        <SvgCopy style={buttonStyles.text} />
       </>
     </Pressable>
   );
