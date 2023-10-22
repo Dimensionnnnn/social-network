@@ -6,17 +6,23 @@ import {getButtonStyles} from './styles';
 interface ButtonProps {
   title?: string;
   isDisabled?: boolean;
+  Icon: React.FC;
   onPress?: () => void;
 }
 
-export const Button: React.FC<ButtonProps> = ({title, isDisabled, onPress}) => {
+export const Button: React.FC<ButtonProps> = ({
+  title,
+  isDisabled,
+  Icon,
+  onPress,
+}) => {
   const [isPressed, setIsPressed] = useState(false);
   const themeVariant: ColorThemes = useColorTheme();
 
   const buttonStyles = getButtonStyles(themeVariant, isPressed, isDisabled);
 
   const handlePress = () => {
-    setIsPressed(!isPressed);
+    setIsPressed(prevPressed => !prevPressed);
   };
 
   return (
@@ -26,6 +32,7 @@ export const Button: React.FC<ButtonProps> = ({title, isDisabled, onPress}) => {
       onPress={onPress}
       onPressIn={handlePress}
       onPressOut={handlePress}>
+      <Icon style={buttonStyles.text} />
       <Text style={[buttonStyles.font, buttonStyles.text]}>{title}</Text>
     </Pressable>
   );

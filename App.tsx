@@ -93,12 +93,17 @@ function App(): JSX.Element {
           <UIBUttonText title="Done" onPress={handeChangeTheme} isDisabled />
         </View>
         <View style={styles.buttonContainer}>
-          <UIButtonTextIconLeft title="Link" onPress={handeChangeTheme} />
+          <UIButtonTextIconLeft
+            title="Link"
+            onPress={handeChangeTheme}
+            Icon={SvgExit}
+          />
         </View>
         <View style={styles.buttonContainer}>
           <UIButtonTextIconLeft
             title="Link"
             onPress={handeChangeTheme}
+            Icon={SvgExit}
             isDisabled
           />
         </View>
