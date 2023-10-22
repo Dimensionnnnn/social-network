@@ -16,7 +16,7 @@ export const Button: React.FC<ButtonProps> = ({title, isDisabled, onPress}) => {
   const buttonStyles = getButtonStyles(themeVariant, isPressed, isDisabled);
 
   const handlePress = () => {
-    setIsPressed(!isPressed);
+    setIsPressed(prevPressed => !prevPressed);
   };
 
   return (
