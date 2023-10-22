@@ -10,10 +10,15 @@ export const textIconButtonStyles = {
       disabled: {backgroundColor: COLORS.grayscale_dark_04},
       initial: {backgroundColor: COLORS.grayscale_dark_05},
     },
-    text: {
+    textColor: {
       pressed: {color: COLORS.grayscale_dark_05},
       disabled: {color: COLORS.grayscale_dark_02},
       initial: {color: COLORS.grayscale_dark_01},
+    },
+    iconColor: {
+      pressed: COLORS.secondary_dark_05,
+      disabled: COLORS.grayscale_dark_02,
+      initial: COLORS.grayscale_dark_01,
     },
   },
   [ColorThemes.LIGHT]: {
@@ -22,10 +27,15 @@ export const textIconButtonStyles = {
       disabled: {backgroundColor: COLORS.grayscale_light_05},
       initial: {backgroundColor: COLORS.grayscale_light_05},
     },
-    text: {
+    textColor: {
       pressed: {color: COLORS.grayscale_light_01},
       disabled: {color: COLORS.grayscale_light_03},
       initial: {color: COLORS.grayscale_light_01},
+    },
+    iconColor: {
+      pressed: COLORS.grayscale_light_01,
+      disabled: COLORS.grayscale_light_03,
+      initial: COLORS.grayscale_light_01,
     },
   },
   root: StyleSheet.create({
@@ -58,10 +68,15 @@ export const getButtonStyles = (
       pressed && textIconButtonStyles[themeVariant].button.pressed,
       isDisabled && textIconButtonStyles[themeVariant].button.disabled,
     ],
-    text: [
-      textIconButtonStyles[themeVariant].text.initial,
-      pressed && textIconButtonStyles[themeVariant].text.pressed,
-      isDisabled && textIconButtonStyles[themeVariant].text.disabled,
+    textColor: [
+      textIconButtonStyles[themeVariant].textColor.initial,
+      pressed && textIconButtonStyles[themeVariant].textColor.pressed,
+      isDisabled && textIconButtonStyles[themeVariant].textColor.disabled,
     ],
+    iconColor: pressed
+      ? textIconButtonStyles[themeVariant].iconColor.pressed
+      : isDisabled
+      ? textIconButtonStyles[themeVariant].iconColor.disabled
+      : textIconButtonStyles[themeVariant].iconColor.initial,
   };
 };

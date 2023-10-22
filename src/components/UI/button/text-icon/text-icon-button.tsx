@@ -23,7 +23,7 @@ export const Button: React.FC<ButtonProps> = ({
   const buttonStyles = getButtonStyles(themeVariant, isPressed, isDisabled);
 
   const handlePress = () => {
-    setIsPressed(!isPressed);
+    setIsPressed(prevPressed => !prevPressed);
   };
 
   return (
@@ -34,8 +34,10 @@ export const Button: React.FC<ButtonProps> = ({
       onPressOut={handlePress}
       disabled={isDisabled}>
       <>
-        <Text style={[buttonStyles.fontText, buttonStyles.text]}>{title}</Text>
-        <SvgCopy style={buttonStyles.text} />
+        <Text style={[buttonStyles.fontText, buttonStyles.textColor]}>
+          {title}
+        </Text>
+        <SvgCopy color={buttonStyles.iconColor} />
       </>
     </Pressable>
   );
