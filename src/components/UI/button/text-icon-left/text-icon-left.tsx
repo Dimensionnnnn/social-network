@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 import {ColorThemes, useColorTheme} from 'src/hooks/useColorTheme';
 import {Pressable, Text} from 'react-native';
 import {getButtonStyles} from './styles';
+import {SvgProps} from 'react-native-svg';
 
 interface ButtonProps {
   title?: string;
   isDisabled?: boolean;
-  Icon: React.FC;
+  Icon: (props: SvgProps) => JSX.Element;
   onPress?: () => void;
 }
 
@@ -25,6 +26,8 @@ export const Button: React.FC<ButtonProps> = ({
     setIsPressed(prevPressed => !prevPressed);
   };
 
+  console.log(buttonStyles.text);
+
   return (
     <Pressable
       style={[buttonStyles.container]}
@@ -32,7 +35,7 @@ export const Button: React.FC<ButtonProps> = ({
       onPress={onPress}
       onPressIn={handlePress}
       onPressOut={handlePress}>
-      <Icon style={buttonStyles.text} />
+      <Icon color={buttonStyles.iconColor} />
       <Text style={[buttonStyles.font, buttonStyles.text]}>{title}</Text>
     </Pressable>
   );
