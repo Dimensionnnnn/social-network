@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {Pressable, View, Text} from 'react-native';
+import {Pressable, Text} from 'react-native';
 import {ColorThemes, useColorTheme} from 'src/hooks/useColorTheme';
-import {getButtonStyleSheet, textButtonStyles} from './styles';
+import {getButtonStyles} from './styles';
 
 interface ButtonProps {
   title?: string;
@@ -13,7 +13,7 @@ export const Button: React.FC<ButtonProps> = ({title, isDisabled, onPress}) => {
   const [isPressed, setIsPressed] = useState(false);
   const themeVariant: ColorThemes = useColorTheme();
 
-  const buttonStyles = getButtonStyleSheet(themeVariant, isPressed, isDisabled);
+  const buttonStyles = getButtonStyles(themeVariant, isPressed, isDisabled);
 
   const handlePress = () => {
     setIsPressed(!isPressed);
@@ -24,10 +24,9 @@ export const Button: React.FC<ButtonProps> = ({title, isDisabled, onPress}) => {
       onPress={onPress}
       onPressIn={handlePress}
       onPressOut={handlePress}
-      style={textButtonStyles.container}
+      style={buttonStyles.container}
       disabled={isDisabled}>
-      <Text style={buttonStyles.textStyle}>{title}</Text>
-      <View style={buttonStyles.borderLineStyle} />
+      <Text style={[buttonStyles.fontText, buttonStyles.text]}>{title}</Text>
     </Pressable>
   );
 };
