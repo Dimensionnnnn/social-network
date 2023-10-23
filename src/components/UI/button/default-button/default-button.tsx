@@ -1,11 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, Pressable} from 'react-native';
 import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
-import {
-  defaultButtonStyles,
-  getButtonStyles,
-  ButtonElement,
-} from './default-button-styles';
+import {getButtonStyles} from './default-button-styles';
 
 export type ButtonSize = 'small' | 'medium' | 'large';
 
@@ -24,46 +20,33 @@ export const Button: React.FC<ButtonProps> = ({
   buttonSize,
   onPress,
 }) => {
+  const [isPressed, setIsPressed] = useState(false);
   const themeVariant: ColorThemes = useColorTheme();
 
-  const containerStyles = {
-    ...defaultButtonStyles.container,
-    ...defaultButtonStyles.sizes[buttonSize],
-  };
+  const buttonStyles = getButtonStyles({
+    themeVariant,
+    buttonSize,
+    isPressed,
+    isDisabled,
+    isDelete,
+  });
 
-  const textStyles = defaultButtonStyles.text;
+  const handlePress = () => {
+    setIsPressed(prevPressed => !prevPressed);
+  };
 
   return (
     <Pressable
-      style={({pressed}) => [
-        containerStyles,
-        ...getButtonStyles(
-          themeVariant,
-          ButtonElement.button,
-          pressed,
-          buttonSize,
-          isDelete,
-          isDisabled,
-        ),
+      style={[
+        buttonStyles.container,
+        buttonStyles.sizeContainer,
+        buttonStyles.button,
       ]}
       disabled={isDisabled}
-      onPress={onPress}>
-      {({pressed}) => (
-        <Text
-          style={[
-            textStyles,
-            ...getButtonStyles(
-              themeVariant,
-              ButtonElement.text,
-              pressed,
-              buttonSize,
-              isDelete,
-              isDisabled,
-            ),
-          ]}>
-          {title}
-        </Text>
-      )}
+      onPress={onPress}
+      onPressIn={handlePress}
+      onPressOut={handlePress}>
+      <Text style={[buttonStyles.fontText, buttonStyles.text]}>{title}</Text>
     </Pressable>
   );
 };

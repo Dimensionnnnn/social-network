@@ -16,7 +16,7 @@ export const textIconButtonStyles = {
       initial: {color: COLORS.grayscale_dark_01},
     },
     iconColor: {
-      pressed: COLORS.secondary_dark_05,
+      pressed: COLORS.grayscale_dark_05,
       disabled: COLORS.grayscale_dark_02,
       initial: COLORS.grayscale_dark_01,
     },

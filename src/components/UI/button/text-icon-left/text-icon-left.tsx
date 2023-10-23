@@ -26,8 +26,6 @@ export const Button: React.FC<ButtonProps> = ({
     setIsPressed(prevPressed => !prevPressed);
   };
 
-  console.log(buttonStyles.text);
-
   return (
     <Pressable
       style={[buttonStyles.container]}
