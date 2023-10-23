@@ -11,6 +11,7 @@ import {Button as UIButton} from 'src/components/UI/button/default-button/defaul
 import {Button as UIButtonTextIcon} from 'src/components/UI/button/text-icon/text-icon-button';
 import {Button as UIBUttonText} from 'src/components/UI/button/text-button/text-button';
 import {Button as UIButtonTextIconLeft} from 'src/components/UI/button/text-icon-left/text-icon-left';
+import {Button as UIButtonIcon} from 'src/components/UI/button/button-icon/button-icon';
 
 import {Input as EmailInput} from 'src/components/UI/input/default-input/default-input';
 
@@ -134,6 +135,44 @@ function App(): JSX.Element {
             placeholder="Enter email"
             value="Email"
             isError
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <UIButtonIcon
+            isDefaultIcon={false}
+            Icon={SvgExit}
+            onPress={handeChangeTheme}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <UIButtonIcon
+            isDefaultIcon={true}
+            Icon={SvgExit}
+            onPress={handeChangeTheme}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <UIButtonIcon
+            isDefaultIcon={false}
+            Icon={SvgExit}
+            onPress={handeChangeTheme}
+            buttonSize="small"
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <UIButtonIcon
+            isDefaultIcon={false}
+            Icon={SvgExit}
+            onPress={handeChangeTheme}
+            buttonSize="medium"
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <UIButtonIcon
+            isDefaultIcon={false}
+            Icon={SvgExit}
+            onPress={handeChangeTheme}
+            buttonSize="large"
           />
         </View>
       </ScrollView>
