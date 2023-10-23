@@ -1,7 +1,8 @@
 import React from 'react';
 import {Appearance, StyleSheet, useColorScheme, View} from 'react-native';
 
-import {Button as UIButton} from 'src/components/UI/button/default-button';
+import {Button as UIButton} from 'src/components/UI/button/default-button/default-button';
+import {Button as UIButtonTextIcon} from 'src/components/UI/button/text-icon/text-icon-button';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -55,6 +56,12 @@ function App(): JSX.Element {
           buttonSize="large"
           isDisabled
         />
+      </View>
+      <View style={styles.buttonContainer}>
+        <UIButtonTextIcon title="Link" onPress={handeChangeTheme} />
+      </View>
+      <View style={styles.buttonContainer}>
+        <UIButtonTextIcon title="Link" onPress={handeChangeTheme} isDisabled />
       </View>
     </>
   );
