@@ -39,9 +39,6 @@ export const Input: React.FC<InputProps> = ({
     setIsFilled(!isFilled);
   };
 
-  console.log('isTyping', isTyping);
-  console.log('isFilled', isFilled);
-
   return (
     <View style={inputStyles.container}>
       <Text style={[inputStyles.labelFont, inputStyles.label]}>{label}</Text>
