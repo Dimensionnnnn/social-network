@@ -1,12 +1,11 @@
 import React from 'react';
 import {Text, Pressable} from 'react-native';
-import {useColorTheme} from 'src/hooks/useColorTheme';
+import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
 import {
   defaultButtonStyles,
   getButtonStyles,
   ButtonElement,
 } from './default-button-styles';
-import {ColorThemes} from 'hooks/useColorTheme';
 
 export type ButtonSize = 'small' | 'medium' | 'large';
 
