@@ -15,6 +15,7 @@ import {Button as UIButtonIcon} from 'src/components/UI/button/button-icon/butto
 import {Button as UIButtonDelete} from 'src/components/UI/button/delete-button/delete-button';
 
 import {Input as EmailInput} from 'src/components/UI/input/default-input/default-input';
+import {Input as PasswordInput} from 'src/components/UI/input/password-input/password-input';
 
 import {SvgExit} from 'src/shared/icons/components/exit-svg';
 import {SvgXMini} from 'src/shared/icons/components/x-mark-mini-svg';
@@ -175,6 +176,9 @@ function App(): JSX.Element {
             value="Email"
             isError
           />
+        </View>
+        <View style={styles.buttonContainer}>
+          <PasswordInput label="Password" placeholder="Enter password" />
         </View>
         <View style={styles.buttonContainer}>
           <UIButtonIcon
