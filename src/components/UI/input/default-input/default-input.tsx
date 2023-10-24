@@ -53,10 +53,7 @@ export const Input: React.FC<InputProps> = ({
         {...props}
       />
       {isSuccess && SuccessIcon && (
-        <SuccessIcon
-          style={inputStyles.iconContainer}
-          color={inputStyles.iconColor}
-        />
+        <SuccessIcon style={inputStyles.iconContainer} />
       )}
     </View>
   );

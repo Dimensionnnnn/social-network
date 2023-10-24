@@ -116,6 +116,5 @@ export const getInputStyles = ({
       isError && inputStyles[themeVariant].error,
     ],
     iconContainer: isSuccess && inputStyles.root.containerIcon,
-    iconColor: isSuccess && inputStyles[themeVariant].success.color,
   };
 };
