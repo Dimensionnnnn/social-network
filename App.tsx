@@ -11,10 +11,16 @@ import {Button as UIButton} from 'src/components/UI/button/default-button/defaul
 import {Button as UIButtonTextIcon} from 'src/components/UI/button/text-icon/text-icon-button';
 import {Button as UIBUttonText} from 'src/components/UI/button/text-button/text-button';
 import {Button as UIButtonTextIconLeft} from 'src/components/UI/button/text-icon-left/text-icon-left';
+import {Button as UIButtonIcon} from 'src/components/UI/button/button-icon/button-icon';
 
 import {Input as EmailInput} from 'src/components/UI/input/default-input/default-input';
 
 import {SvgExit} from 'src/shared/icons/components/exit-svg';
+import {SvgXMini} from 'src/shared/icons/components/x-mark-mini-svg';
+import {SvgXMark} from 'src/shared/icons/components/x-mark-svg';
+import {SvgPlus} from 'src/shared/icons/components/plus-svg';
+import {SvgCamera} from 'src/shared/icons/components/camera-svg';
+import {SvgArrowLeft} from 'src/shared/icons/components/arrow-left-svg';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -134,6 +140,44 @@ function App(): JSX.Element {
             placeholder="Enter email"
             value="Email"
             isError
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <UIButtonIcon
+            isDefaultIcon={true}
+            Icon={SvgArrowLeft}
+            onPress={handeChangeTheme}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <UIButtonIcon
+            isDefaultIcon={false}
+            Icon={SvgXMark}
+            onPress={handeChangeTheme}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <UIButtonIcon
+            isDefaultIcon={false}
+            Icon={SvgXMini}
+            onPress={handeChangeTheme}
+            buttonSize="small"
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <UIButtonIcon
+            isDefaultIcon={false}
+            Icon={SvgCamera}
+            onPress={handeChangeTheme}
+            buttonSize="medium"
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <UIButtonIcon
+            isDefaultIcon={false}
+            Icon={SvgPlus}
+            onPress={handeChangeTheme}
+            buttonSize="large"
           />
         </View>
       </ScrollView>
