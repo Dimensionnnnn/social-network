@@ -26,6 +26,12 @@ export const defaultButtonStyles = {
       medium: {color: COLORS.secondary_dark_01},
       large: {color: COLORS.secondary_dark_01},
     },
+    spinnerColor: COLORS.secondary_dark_01,
+    spinnerStrokeColor: {
+      small: COLORS.grayscale_dark_01,
+      medium: COLORS.grayscale_dark_01,
+      large: COLORS.grayscale_dark_01,
+    },
   },
   [ColorThemes.LIGHT]: {
     button: {
@@ -47,6 +53,12 @@ export const defaultButtonStyles = {
       small: {color: COLORS.grayscale_light_07},
       medium: {color: COLORS.dark_mode},
       large: {color: COLORS.grayscale_light_07},
+    },
+    spinnerColor: COLORS.secondary_light_01,
+    spinnerStrokeColor: {
+      small: COLORS.grayscale_light_07,
+      medium: COLORS.grayscale_light_03,
+      large: COLORS.grayscale_light_07,
     },
   },
   sizes: {
@@ -82,6 +94,9 @@ export const defaultButtonStyles = {
       flexDirection: 'row',
       justifyContent: 'center',
     },
+    spinnerContainer: {
+      justifyContent: 'center',
+    },
   }),
 };
 
@@ -91,6 +106,7 @@ interface ButtonStylesOptions {
   isPressed?: boolean;
   isDisabled?: boolean;
   isDelete?: boolean;
+  isLoading?: boolean;
 }
 
 export const getButtonStyles = ({
@@ -99,6 +115,7 @@ export const getButtonStyles = ({
   isPressed,
   isDisabled,
   isDelete,
+  isLoading,
 }: ButtonStylesOptions) => {
   return {
     container: defaultButtonStyles.root.container,
@@ -116,5 +133,10 @@ export const getButtonStyles = ({
       isPressed && defaultButtonStyles[themeVariant].text.pressed,
       isDisabled && defaultButtonStyles[themeVariant].text.disabled,
     ],
+    spinnerColor: isLoading && defaultButtonStyles[themeVariant].spinnerColor,
+    spinnerStrokeColor:
+      isLoading &&
+      defaultButtonStyles[themeVariant].spinnerStrokeColor[buttonSize],
+    spinnerContainer: isLoading && defaultButtonStyles.root.spinnerContainer,
   };
 };

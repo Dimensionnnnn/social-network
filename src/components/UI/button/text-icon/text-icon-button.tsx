@@ -3,6 +3,7 @@ import {ColorThemes, useColorTheme} from 'src/hooks/useColorTheme';
 import {Pressable, Text} from 'react-native';
 import {getButtonStyles} from './styles';
 import {SvgCopy} from 'src/shared/icons/components/copy-svg';
+import {Spinner} from 'src/components/UI/spinner/spinner';
 
 interface ButtonProps {
   title?: string;
@@ -14,13 +15,18 @@ interface ButtonProps {
 export const Button: React.FC<ButtonProps> = ({
   title,
   isDisabled,
-  // isLoading,
+  isLoading,
   onPress,
 }) => {
   const [isPressed, setIsPressed] = React.useState(false);
   const themeVariant: ColorThemes = useColorTheme();
 
-  const buttonStyles = getButtonStyles(themeVariant, isPressed, isDisabled);
+  const buttonStyles = getButtonStyles({
+    themeVariant,
+    isPressed,
+    isDisabled,
+    isLoading,
+  });
 
   const handlePress = () => {
     setIsPressed(prevPressed => !prevPressed);
@@ -28,16 +34,26 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <Pressable
-      style={[buttonStyles.container, buttonStyles.button]}
+      style={[
+        buttonStyles.container,
+        buttonStyles.button,
+        buttonStyles.spinnerContainer,
+      ]}
       onPress={onPress}
       onPressIn={handlePress}
       onPressOut={handlePress}
       disabled={isDisabled}>
       <>
-        <Text style={[buttonStyles.fontText, buttonStyles.textColor]}>
-          {title}
-        </Text>
-        <SvgCopy color={buttonStyles.iconColor} />
+        {isLoading ? (
+          <Spinner color={buttonStyles.spinnerColor} />
+        ) : (
+          <>
+            <Text style={[buttonStyles.fontText, buttonStyles.textColor]}>
+              {title}
+            </Text>
+            <SvgCopy color={buttonStyles.iconColor} />
+          </>
+        )}
       </>
     </Pressable>
   );
