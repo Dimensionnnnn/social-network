@@ -149,6 +149,39 @@ interface IconButtonStylesOptions {
   isDisabled?: boolean;
 }
 
+interface IconStylesStateOptions {
+  isDisabled?: boolean;
+  isPressed?: boolean;
+  styles: {
+    pressed: {
+      color: string;
+      backgroundColor: string;
+    };
+    disabled: {
+      color: string;
+      backgroundColor: string;
+    };
+    initial: {
+      color: string;
+      backgroundColor: string;
+    };
+  };
+}
+
+const getIconColorByState = ({
+  isDisabled,
+  isPressed,
+  styles,
+}: IconStylesStateOptions) => {
+  if (isDisabled) {
+    return styles.disabled;
+  }
+  if (isPressed) {
+    return styles.pressed;
+  }
+  return styles.initial;
+};
+
 const getIconColor = ({
   themeVariant,
   buttonSize,
@@ -159,26 +192,26 @@ const getIconColor = ({
   const iconColor = iconButtonStyles[themeVariant].icon;
 
   if (buttonSize) {
-    return isPressed
-      ? iconColor[buttonSize]?.pressed.color
-      : isDisabled
-      ? iconColor[buttonSize]?.disabled.color
-      : iconColor[buttonSize]?.initial.color;
+    return getIconColorByState({
+      isDisabled,
+      isPressed,
+      styles: iconColor[buttonSize],
+    }).color;
   }
 
   if (isDefaultIcon) {
-    return isPressed
-      ? iconColor.defaultIcon.pressed
-      : isDisabled
-      ? iconColor.defaultIcon.disabled
-      : iconColor.defaultIcon.initial;
+    return getIconColorByState({
+      isDisabled,
+      isPressed,
+      styles: iconColor.defaultIcon,
+    });
   }
 
-  return isPressed
-    ? iconColor.closedIcon.pressed
-    : isDisabled
-    ? iconColor.closedIcon.disabled
-    : iconColor.closedIcon.initial;
+  return getIconColorByState({
+    isDisabled,
+    isPressed,
+    styles: iconColor.closedIcon,
+  });
 };
 
 export const getIconButtonStyles = ({
@@ -193,11 +226,11 @@ export const getIconButtonStyles = ({
     sizeContainer: buttonSize && iconButtonStyles.root[buttonSize],
     buttonBackground:
       buttonSize &&
-      (isPressed
-        ? iconButtonStyles[themeVariant].icon[buttonSize]?.pressed
-        : isDisabled
-        ? iconButtonStyles[themeVariant].icon[buttonSize]?.disabled
-        : iconButtonStyles[themeVariant].icon[buttonSize]?.initial),
+      getIconColorByState({
+        isDisabled,
+        isPressed,
+        styles: iconButtonStyles[themeVariant].icon[buttonSize],
+      }),
     iconColor: getIconColor({
       themeVariant,
       buttonSize,
