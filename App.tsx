@@ -12,6 +12,7 @@ import {Button as UIButtonTextIcon} from 'src/components/UI/button/text-icon/tex
 import {Button as UIBUttonText} from 'src/components/UI/button/text-button/text-button';
 import {Button as UIButtonTextIconLeft} from 'src/components/UI/button/text-icon-left/text-icon-left';
 import {Button as UIButtonIcon} from 'src/components/UI/button/button-icon/button-icon';
+import {Button as UIButtonDelete} from 'src/components/UI/button/delete-button/delete-button';
 
 import {Input as EmailInput} from 'src/components/UI/input/default-input/default-input';
 
@@ -210,6 +211,9 @@ function App(): JSX.Element {
             onPress={handeChangeTheme}
             buttonSize="large"
           />
+        </View>
+        <View style={styles.buttonContainer}>
+          <UIButtonDelete title="Delete" onPress={handeChangeTheme} />
         </View>
       </ScrollView>
     </>
