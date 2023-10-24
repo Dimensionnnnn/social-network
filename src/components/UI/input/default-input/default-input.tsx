@@ -1,14 +1,18 @@
 import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
 import React, {useState} from 'react';
-import {Text, TextInput, View, TextInputProps} from 'react-native';
+import {Text, TextInput, View, TextInputProps, Pressable} from 'react-native';
 import {getInputStyles} from './styles';
 import {SvgProps} from 'react-native-svg';
+import {SvgPasswordShow} from 'src/shared/icons/components/password-show-svg';
+import {SvgPasswordHide} from 'src/shared/icons/components/password-hide-svg';
 
 interface InputProps extends TextInputProps {
   label?: string;
   isDisabled?: boolean;
   isSuccess?: boolean;
   isError?: boolean;
+  errorMessage?: string;
+  isPassword?: boolean;
   SuccessIcon?: (props: SvgProps) => JSX.Element;
 }
 
@@ -17,11 +21,14 @@ export const Input: React.FC<InputProps> = ({
   isDisabled,
   isSuccess,
   isError,
+  errorMessage,
+  isPassword,
   SuccessIcon,
   ...props
 }) => {
   const [isTyping, setIsTyping] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
+  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const themeVariant: ColorThemes = useColorTheme();
 
   const inputStyles = getInputStyles({
@@ -31,6 +38,7 @@ export const Input: React.FC<InputProps> = ({
     isDisabled,
     isSuccess,
     isError,
+    isPassword,
   });
 
   const handleFocus = () => {
@@ -42,6 +50,10 @@ export const Input: React.FC<InputProps> = ({
     setIsFilled(!isFilled);
   };
 
+  const handlePasswordHide = () => {
+    setIsPasswordHidden(!isPasswordHidden);
+  };
+
   return (
     <View style={inputStyles.container}>
       <Text style={[inputStyles.labelFont, inputStyles.label]}>{label}</Text>
@@ -50,10 +62,27 @@ export const Input: React.FC<InputProps> = ({
         onFocus={handleFocus}
         onEndEditing={handleEndEdit}
         editable={!isDisabled}
+        secureTextEntry={isPassword ? isPasswordHidden : false}
         {...props}
       />
       {isSuccess && SuccessIcon && (
         <SuccessIcon style={inputStyles.iconContainer} />
+      )}
+      {isPassword && (
+        <Pressable
+          onPress={handlePasswordHide}
+          style={inputStyles.iconContainer}>
+          {isPasswordHidden ? (
+            <SvgPasswordHide color={inputStyles.iconColor} />
+          ) : (
+            <SvgPasswordShow color={inputStyles.iconColor} />
+          )}
+        </Pressable>
+      )}
+      {isError && (
+        <Text style={[inputStyles.errorContainer, inputStyles.errorFont]}>
+          {errorMessage}
+        </Text>
       )}
     </View>
   );

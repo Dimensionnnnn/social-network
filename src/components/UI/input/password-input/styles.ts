@@ -5,8 +5,8 @@ import {ColorThemes} from 'src/hooks/useColorTheme';
 export const passwordInputStyles = {
   [ColorThemes.DARK]: {
     iconColor: {
-      typing: COLORS.secondary_dark_01,
-      filled: COLORS.secondary_dark_01,
+      typing: COLORS.grayscale_dark_01,
+      filled: COLORS.grayscale_dark_01,
       disabled: COLORS.grayscale_dark_05,
       success: COLORS.secondary_dark_01,
       error: COLORS.additional_error,

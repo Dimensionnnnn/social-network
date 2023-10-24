@@ -174,11 +174,19 @@ function App(): JSX.Element {
             label="Email"
             placeholder="Enter email"
             value="Email"
+            errorMessage="Enter correct e-mail"
             isError
           />
         </View>
         <View style={styles.buttonContainer}>
           <PasswordInput label="Password" placeholder="Enter password" />
+        </View>
+        <View style={styles.buttonContainer}>
+          <EmailInput
+            label="Password"
+            placeholder="Enter password"
+            isPassword={true}
+          />
         </View>
         <View style={styles.buttonContainer}>
           <UIButtonIcon
