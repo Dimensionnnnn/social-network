@@ -20,6 +20,7 @@ export const textIconButtonStyles = {
       disabled: COLORS.grayscale_dark_02,
       initial: COLORS.grayscale_dark_01,
     },
+    spinnerColor: COLORS.secondary_dark_01,
   },
   [ColorThemes.LIGHT]: {
     button: {
@@ -37,6 +38,7 @@ export const textIconButtonStyles = {
       disabled: COLORS.grayscale_light_03,
       initial: COLORS.grayscale_light_01,
     },
+    spinnerColor: COLORS.secondary_light_01,
   },
   root: StyleSheet.create({
     fontText: outfitTextStyles.bodyRegular_18,
@@ -52,31 +54,44 @@ export const textIconButtonStyles = {
       paddingBottom: 12,
       paddingLeft: 16,
     },
+    spinnerContainer: {
+      justifyContent: 'center',
+    },
   }),
 };
 
-export const getButtonStyles = (
-  themeVariant: ColorThemes,
-  pressed: boolean,
-  isDisabled?: boolean,
-) => {
+interface IconButtonStylesOptions {
+  themeVariant: ColorThemes;
+  isPressed?: boolean;
+  isDisabled?: boolean;
+  isLoading?: boolean;
+}
+
+export const getButtonStyles = ({
+  themeVariant,
+  isPressed,
+  isDisabled,
+  isLoading,
+}: IconButtonStylesOptions) => {
   return {
     container: textIconButtonStyles.root.container,
     fontText: textIconButtonStyles.root.fontText,
     button: [
       textIconButtonStyles[themeVariant].button.initial,
-      pressed && textIconButtonStyles[themeVariant].button.pressed,
+      isPressed && textIconButtonStyles[themeVariant].button.pressed,
       isDisabled && textIconButtonStyles[themeVariant].button.disabled,
     ],
     textColor: [
       textIconButtonStyles[themeVariant].textColor.initial,
-      pressed && textIconButtonStyles[themeVariant].textColor.pressed,
+      isPressed && textIconButtonStyles[themeVariant].textColor.pressed,
       isDisabled && textIconButtonStyles[themeVariant].textColor.disabled,
     ],
-    iconColor: pressed
+    iconColor: isPressed
       ? textIconButtonStyles[themeVariant].iconColor.pressed
       : isDisabled
       ? textIconButtonStyles[themeVariant].iconColor.disabled
       : textIconButtonStyles[themeVariant].iconColor.initial,
+    spinnerColor: isLoading && textIconButtonStyles[themeVariant].spinnerColor,
+    spinnerContainer: isLoading && textIconButtonStyles.root.spinnerContainer,
   };
 };

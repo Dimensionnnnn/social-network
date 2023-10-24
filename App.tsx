@@ -40,6 +40,14 @@ function App(): JSX.Element {
         </View>
         <View style={styles.buttonContainer}>
           <UIButton
+            title="Small"
+            onPress={handeChangeTheme}
+            buttonSize="small"
+            isLoading={true}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <UIButton
             title="Disabled"
             onPress={handeChangeTheme}
             buttonSize="small"
@@ -51,6 +59,14 @@ function App(): JSX.Element {
             title="Medium"
             onPress={handeChangeTheme}
             buttonSize="medium"
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <UIButton
+            title="Medium"
+            onPress={handeChangeTheme}
+            buttonSize="medium"
+            isLoading={true}
           />
         </View>
         <View style={styles.buttonContainer}>
@@ -78,6 +94,14 @@ function App(): JSX.Element {
         </View>
         <View style={styles.buttonContainer}>
           <UIButton
+            title="Large"
+            onPress={handeChangeTheme}
+            buttonSize="large"
+            isLoading={true}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <UIButton
             title="Disabled"
             onPress={handeChangeTheme}
             buttonSize="large"
@@ -86,6 +110,13 @@ function App(): JSX.Element {
         </View>
         <View style={styles.buttonContainer}>
           <UIButtonTextIcon title="Link" onPress={handeChangeTheme} />
+        </View>
+        <View style={styles.buttonContainer}>
+          <UIButtonTextIcon
+            title="Link"
+            onPress={handeChangeTheme}
+            isLoading={true}
+          />
         </View>
         <View style={styles.buttonContainer}>
           <UIButtonTextIcon
