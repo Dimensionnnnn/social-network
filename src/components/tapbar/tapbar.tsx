@@ -23,32 +23,32 @@ export const BottomTab = () => {
         tabBarItemStyle: tapBarStyles.containerItem,
       }}>
       <Tab.Screen
-        name={TabBarIconsNames.Main}
+        name={TabBarIconsNames.MAIN}
         component={Main}
         options={{
-          tabBarLabel: TabBarIconsNames.Main,
+          tabBarLabel: TabBarIconsNames.MAIN,
           tabBarIcon: ({color}) => (
             <TabBarIcon name={TabBarIconsNames.Main} color={color} />
           ),
         }}
       />
       <Tab.Screen
-        name={TabBarIconsNames.Favorites}
+        name={TabBarIconsNames.FAVORITES}
         component={Favorites}
         options={{
-          tabBarLabel: TabBarIconsNames.Favorites,
+          tabBarLabel: TabBarIconsNames.FAVORITES,
           tabBarIcon: ({color}) => (
-            <TabBarIcon name={TabBarIconsNames.Favorites} color={color} />
+            <TabBarIcon name={TabBarIconsNames.FAVORITES} color={color} />
           ),
         }}
       />
       <Tab.Screen
-        name={TabBarIconsNames['My posts']}
+        name={TabBarIconsNames.MY_POSTS}
         component={Posts}
         options={{
-          tabBarLabel: TabBarIconsNames['My posts'],
+          tabBarLabel: TabBarIconsNames.MY_POSTS,
           tabBarIcon: ({color}) => (
-            <TabBarIcon name={TabBarIconsNames['My posts']} color={color} />
+            <TabBarIcon name={TabBarIconsNames.MY_POSTS} color={color} />
           ),
         }}
       />

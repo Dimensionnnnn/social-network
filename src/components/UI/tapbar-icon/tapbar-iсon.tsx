@@ -10,19 +10,20 @@ interface TabBarIconProps {
 }
 
 export enum TabBarIconsNames {
-  Favorites = 'Favorites',
-  Main = 'Main',
-  'My posts' = 'My posts',
+  FAVORITES = 'Favorites',
+  MAIN = 'Main',
+  MY_POSTS = 'My posts',
 }
 
 export const TabBarIcon: React.FC<TabBarIconProps> = ({name, color}) => {
   switch (name) {
-    default:
-    case TabBarIconsNames.Favorites:
+    case TabBarIconsNames.FAVORITES:
       return <SvgBookmark color={color} />;
-    case TabBarIconsNames.Main:
+    case TabBarIconsNames.MAIN:
       return <SvgHomeIcon color={color} />;
-    case TabBarIconsNames['My posts']:
+    case TabBarIconsNames.MY_POSTS:
       return <SvgPhoto color={color} />;
+    default:
+      return <SvgHomeIcon color={color} />;
   }
 };
