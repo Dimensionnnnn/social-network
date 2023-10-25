@@ -75,6 +75,12 @@ export const inputStyles = {
       maxWidth: 343,
       paddingTop: 12,
       paddingBottom: 16,
+      position: 'relative',
+    },
+    containerIcon: {
+      position: 'absolute',
+      top: 42,
+      right: 0,
     },
   }),
 };
@@ -109,5 +115,6 @@ export const getInputStyles = ({
       isSuccess && inputStyles[themeVariant].success,
       isError && inputStyles[themeVariant].error,
     ],
+    iconContainer: isSuccess && inputStyles.root.containerIcon,
   };
 };

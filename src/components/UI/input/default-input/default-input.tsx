@@ -2,12 +2,14 @@ import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
 import React, {useState} from 'react';
 import {Text, TextInput, View, TextInputProps} from 'react-native';
 import {getInputStyles} from './styles';
+import {SvgProps} from 'react-native-svg';
 
 interface InputProps extends TextInputProps {
   label?: string;
   isDisabled?: boolean;
   isSuccess?: boolean;
   isError?: boolean;
+  SuccessIcon?: (props: SvgProps) => JSX.Element;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -15,6 +17,7 @@ export const Input: React.FC<InputProps> = ({
   isDisabled,
   isSuccess,
   isError,
+  SuccessIcon,
   ...props
 }) => {
   const [isTyping, setIsTyping] = useState(false);
@@ -49,6 +52,9 @@ export const Input: React.FC<InputProps> = ({
         editable={!isDisabled}
         {...props}
       />
+      {isSuccess && SuccessIcon && (
+        <SuccessIcon style={inputStyles.iconContainer} />
+      )}
     </View>
   );
 };

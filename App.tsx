@@ -22,6 +22,7 @@ import {SvgXMark} from 'src/shared/icons/components/x-mark-svg';
 import {SvgPlus} from 'src/shared/icons/components/plus-svg';
 import {SvgCamera} from 'src/shared/icons/components/camera-svg';
 import {SvgArrowLeft} from 'src/shared/icons/components/arrow-left-svg';
+import {SvgCheckMini} from 'src/shared/icons/components/check-mini-svg';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -164,6 +165,7 @@ function App(): JSX.Element {
             placeholder="Enter email"
             value="Email"
             isSuccess
+            SuccessIcon={SvgCheckMini}
           />
         </View>
         <View style={styles.buttonContainer}>
