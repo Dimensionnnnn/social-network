@@ -79,8 +79,8 @@ export const outfitTextStyles: {[key: string]: TextStyle} = {
     fontSize: 14,
     lineHeight: 19.32,
   },
-  captionSemiBold_12: {
-    fontFamily: fonts.OUTFIT_SEMIBOLD,
+  captionRegular_12: {
+    fontFamily: fonts.OUTFIT_REGULAR,
     fontWeight: '500',
     fontSize: 12,
     lineHeight: 15.12,
