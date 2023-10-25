@@ -24,6 +24,10 @@ import {SvgCamera} from 'src/shared/icons/components/camera-svg';
 import {SvgArrowLeft} from 'src/shared/icons/components/arrow-left-svg';
 import {SvgCheckMini} from 'src/shared/icons/components/check-mini-svg';
 
+import {BottomTab} from 'src/components/tapbar/tapbar';
+
+import {NavigationContainer} from '@react-navigation/native';
+
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -32,7 +36,10 @@ function App(): JSX.Element {
 
   return (
     <>
-      <ScrollView>
+      <NavigationContainer>
+        <BottomTab />
+      </NavigationContainer>
+      {/* <ScrollView>
         <View style={styles.buttonContainer}>
           <UIButton
             title="Small"
@@ -225,7 +232,7 @@ function App(): JSX.Element {
         <View style={styles.buttonContainer}>
           <UIButtonDelete title="Delete" onPress={handeChangeTheme} />
         </View>
-      </ScrollView>
+      </ScrollView> */}
     </>
   );
 }
