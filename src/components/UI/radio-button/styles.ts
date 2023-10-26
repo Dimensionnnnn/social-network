@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {COLORS} from 'src/assets/styles/colors';
+import {outfitTextStyles} from 'src/assets/styles/typography';
 import {ColorThemes} from 'src/hooks/useColorTheme';
 
 export const radioButtonStyles = {
@@ -12,6 +13,7 @@ export const radioButtonStyles = {
       initial: {borderColor: COLORS.grayscale_dark_04},
     },
     checkedColor: {backgroundColor: COLORS.secondary_dark_01},
+    labelColor: {color: COLORS.grayscale_dark_01},
   },
   [ColorThemes.LIGHT]: {
     containerColor: {
@@ -22,6 +24,7 @@ export const radioButtonStyles = {
       initial: {borderColor: COLORS.grayscale_light_02},
     },
     checkedColor: {backgroundColor: COLORS.secondary_light_01},
+    labelColor: {color: COLORS.grayscale_light_01},
   },
   root: StyleSheet.create({
     container: {
@@ -40,6 +43,14 @@ export const radioButtonStyles = {
       maxWidth: 8,
       borderRadius: 26,
     },
+    radioButtonContainer: {
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      gap: 8,
+    },
+    fontText: outfitTextStyles.bodyRegular_16,
   }),
 };
 
@@ -53,6 +64,9 @@ export const getRadioButtonStyles = (
       ? radioButtonStyles[themeVariant].containerColor.checked
       : radioButtonStyles[themeVariant].containerColor.initial,
     checkedContainer: radioButtonStyles.root.checkedContainer,
+    radioButtonContainer: radioButtonStyles.root.radioButtonContainer,
+    labelColor: radioButtonStyles[themeVariant].labelColor,
+    fontText: radioButtonStyles.root.fontText,
     checkedColor: isChecked && radioButtonStyles[themeVariant].checkedColor,
   };
 };

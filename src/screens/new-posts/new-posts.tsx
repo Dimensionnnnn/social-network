@@ -1,22 +1,12 @@
-import {StyleSheet, Text, View, useColorScheme, Appearance} from 'react-native';
-import React, {useState} from 'react';
-import {RadioButton} from 'src/components/UI/radio-button/radio-button';
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {RadioField} from 'src/components/radio-field/radio-field';
 
 export const NewPosts = () => {
-  const [isRadioChecked, setIsRadioChecked] = useState(false);
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const handleRadioPress = () => {
-    setIsRadioChecked(prevPressed => !prevPressed);
-    Appearance.setColorScheme(isDarkMode ? 'light' : 'dark');
-  };
-
   return (
     <View style={styles.container}>
       <Text>New posts</Text>
-      <RadioButton onPress={handleRadioPress} isChecked={isRadioChecked} />
-      <RadioButton isChecked />
-      <RadioButton />
+      <RadioField />
     </View>
   );
 };
