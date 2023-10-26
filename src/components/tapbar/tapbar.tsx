@@ -2,7 +2,6 @@ import React from 'react';
 import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {getTapBarStyles} from './styles';
-import {Main} from 'src/screens/main/main';
 import {Favorites} from 'src/screens/favorites/favorites';
 import {Posts} from 'src/screens/posts/posts';
 import {TabBarIcon, TabBarIconsNames} from '../UI/tapbar-icon/tapbar-iсon';
