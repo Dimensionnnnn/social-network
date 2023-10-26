@@ -6,6 +6,7 @@ import {Main} from 'src/screens/main/main';
 import {Favorites} from 'src/screens/favorites/favorites';
 import {Posts} from 'src/screens/posts/posts';
 import {TabBarIcon, TabBarIconsNames} from '../UI/tapbar-icon/tapbar-iсon';
+import {TopTabs} from 'src/components/tabs/tabs';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +25,7 @@ export const BottomTab = () => {
       }}>
       <Tab.Screen
         name={TabBarIconsNames.MAIN}
-        component={Main}
+        component={TopTabs}
         options={{
           tabBarLabel: TabBarIconsNames.MAIN,
           tabBarIcon: ({color}) => (
