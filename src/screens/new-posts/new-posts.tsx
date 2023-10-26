@@ -1,12 +1,14 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {RadioField} from 'src/components/radio-field/radio-field';
+import {RadioGroup} from 'src/components/radio-field/radio-group';
+
+const LABELS = ['Male', 'Female', 'Other'];
 
 export const NewPosts = () => {
   return (
     <View style={styles.container}>
       <Text>New posts</Text>
-      <RadioField />
+      <RadioGroup labels={LABELS} />
     </View>
   );
 };
