@@ -1,28 +1,30 @@
-import {useColorScheme, Appearance} from 'react-native';
 import React, {useState} from 'react';
 import {RadioButton} from 'src/components/UI/radio-button/radio-button';
 
+interface Labels {
+  id: number;
+  label: string;
+}
+
 interface RadioGroupProps {
-  labels: string[];
+  labels?: Labels[];
 }
 
 export const RadioGroup: React.FC<RadioGroupProps> = ({labels}) => {
   const [selectedLabel, setSelectedLabel] = useState('');
-  const isDarkMode = useColorScheme() === 'dark';
 
   const handleRadioPress = (label: string) => {
     setSelectedLabel(label);
-    Appearance.setColorScheme(isDarkMode ? 'light' : 'dark');
   };
 
   return (
     <>
-      {labels.map((label: string) => (
+      {labels?.map((label: Labels) => (
         <RadioButton
-          key={label}
-          label={label}
-          isChecked={selectedLabel === label}
-          onPress={() => handleRadioPress(label)}
+          key={label.id}
+          label={label.label}
+          isChecked={selectedLabel === label.label}
+          onPress={() => handleRadioPress(label.label)}
         />
       ))}
     </>
