@@ -3,6 +3,7 @@ import React from 'react';
 import {RadioGroup} from 'src/components/radio-field/radio-group';
 import {UserIcon} from 'src/components/UI/button/user-icon/user-icon';
 import {CustomSwitch} from 'src/components/UI/switch/switch';
+import {PostCard} from 'src/components/UI/post-card/post-card';
 
 const LABELS = [
   {id: 101, label: 'Male'},
@@ -10,8 +11,12 @@ const LABELS = [
   {id: 103, label: 'Other'},
 ];
 
+const description =
+  'The Queen of the Carnival in Rio de Janeiro and up to two princesses having the duty to woo the revelry, along with the King Momo. Unlike some cities, in the city of Rio de Janeiro, Queens of Carnival do not see a certain school of samba. In competitions, princesses are usually placed as second and third, and are correspondingly 1st and 2nd Princess. Some of them after the reign become queens or battery bridesmaids. Incorporated into every aspect of the Rio carnival are dancing and music. The most famous dance is carnival samba, a Brazilian dance with African influences. The samba remains a popular dance not only in carnival but in the ghettos outside of the main cities.Some of them after the reign become queens or battery bridesmaids. Incorporated into every aspect of the Rio';
+
 export const NewPosts = () => {
   const userPhotoUrl = require('src\\shared\\images\\userPhoto.png');
+  const postPhotoUrl = require('src\\shared\\images\\postPhoto.png');
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -24,6 +29,15 @@ export const NewPosts = () => {
         <UserIcon size="medium" />
         <UserIcon size="large" userPhotoUrl={userPhotoUrl} />
         <UserIcon size="large" />
+        <PostCard
+          postName="Apple love"
+          postDateOfCreation="11.09.22"
+          postPhotoUrl={postPhotoUrl}
+          postAuthorPhotoUrl={userPhotoUrl}
+          postLikesCount={137}
+          postAuthorName="Hannah K."
+          postDescription={description}
+        />
       </View>
     </ScrollView>
   );
@@ -34,5 +48,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#131313',
   },
 });
