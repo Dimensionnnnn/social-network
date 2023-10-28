@@ -170,6 +170,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#424244',
   },
   [ColorThemes.LIGHT]: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F0F0F0',
   },
 });
