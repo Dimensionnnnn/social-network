@@ -22,8 +22,10 @@ export const postCardDescriptionStyles = {
 
 export const getPostCardDescriptionStyles = (themeVariant: ColorThemes) => {
   return {
-    container: postCardDescriptionStyles.root.container,
-    textColor: postCardDescriptionStyles[themeVariant].textColor,
-    fontText: postCardDescriptionStyles.root.fontText,
+    descriptionStyles: [
+      postCardDescriptionStyles.root.container,
+      postCardDescriptionStyles.root.fontText,
+      postCardDescriptionStyles[themeVariant].textColor,
+    ],
   };
 };

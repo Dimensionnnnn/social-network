@@ -3,7 +3,7 @@ import {COLORS} from 'src/assets/styles/colors';
 import {ColorThemes} from 'src/hooks/useColorTheme';
 import {UserIconSize} from './user-icon';
 
-export const useIconStyles = {
+export const userIconStyles = {
   [ColorThemes.DARK]: {
     iconColor: COLORS.grayscale_dark_06,
     containerColor: {backgroundColor: COLORS.grayscale_dark_05},
@@ -63,11 +63,11 @@ export const getUserIconStyles = (
   size: UserIconSize,
 ) => {
   return {
-    container: useIconStyles.root.container,
-    containerColor: useIconStyles[themeVariant].containerColor,
-    containerBySize: useIconStyles.containerBySize[size],
-    iconColor: useIconStyles[themeVariant].iconColor,
-    iconSize: useIconStyles.iconSize[size],
-    imageSize: useIconStyles.root.imageSize,
+    container: userIconStyles.root.container,
+    containerColor: userIconStyles[themeVariant].containerColor,
+    containerBySize: userIconStyles.containerBySize[size],
+    iconColor: userIconStyles[themeVariant].iconColor,
+    iconSize: userIconStyles.iconSize[size],
+    imageSize: userIconStyles.root.imageSize,
   };
 };

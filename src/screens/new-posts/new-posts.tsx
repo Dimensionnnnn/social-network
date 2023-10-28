@@ -4,6 +4,7 @@ import {RadioGroup} from 'src/components/radio-field/radio-group';
 import {UserIcon} from 'src/components/UI/button/user-icon/user-icon';
 import {CustomSwitch} from 'src/components/UI/switch/switch';
 import {PostCard} from 'src/components/UI/post-card/post-card';
+import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
 
 const LABELS = [
   {id: 101, label: 'Male'},
@@ -17,9 +18,11 @@ const description =
 export const NewPosts = () => {
   const userPhotoUrl = require('src\\shared\\images\\userPhoto.png');
   const postPhotoUrl = require('src\\shared\\images\\postPhoto.png');
+
+  const themeVariant: ColorThemes = useColorTheme();
   return (
     <ScrollView>
-      <View style={styles.container}>
+      <View style={[styles.container, styles[themeVariant]]}>
         <CustomSwitch />
         <Text>New posts</Text>
         <RadioGroup labels={LABELS} />
@@ -48,6 +51,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  [ColorThemes.DARK]: {
     backgroundColor: '#131313',
+  },
+  [ColorThemes.LIGHT]: {
+    backgroundColor: '#FFFFFF',
   },
 });

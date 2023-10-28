@@ -11,16 +11,7 @@ export const PostCardDescription: React.FC<PostCardDescriptionProps> = ({
   postDescription,
 }) => {
   const themeVariant: ColorThemes = useColorTheme();
-  const postCardDescriptionStyles = getPostCardDescriptionStyles(themeVariant);
+  const styles = getPostCardDescriptionStyles(themeVariant);
 
-  return (
-    <Text
-      style={[
-        postCardDescriptionStyles.container,
-        postCardDescriptionStyles.fontText,
-        postCardDescriptionStyles.textColor,
-      ]}>
-      {postDescription}
-    </Text>
-  );
+  return <Text style={styles.descriptionStyles}>{postDescription}</Text>;
 };
