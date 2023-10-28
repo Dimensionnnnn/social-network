@@ -3,7 +3,7 @@ import {COLORS} from 'src/assets/styles/colors';
 import {outfitTextStyles} from 'src/assets/styles/typography';
 import {ColorThemes} from 'src/hooks/useColorTheme';
 
-export const postCardDescriptionStyles = {
+export const cardDescriptionStyles = {
   [ColorThemes.DARK]: {
     textColor: {color: COLORS.grayscale_dark_02},
   },
@@ -20,12 +20,12 @@ export const postCardDescriptionStyles = {
   }),
 };
 
-export const getPostCardDescriptionStyles = (themeVariant: ColorThemes) => {
+export const getCardDescriptionStyles = (themeVariant: ColorThemes) => {
   return {
     descriptionStyles: [
-      postCardDescriptionStyles.root.container,
-      postCardDescriptionStyles.root.fontText,
-      postCardDescriptionStyles[themeVariant].textColor,
+      cardDescriptionStyles.root.container,
+      cardDescriptionStyles.root.fontText,
+      cardDescriptionStyles[themeVariant].textColor,
     ],
   };
 };

@@ -1,17 +1,17 @@
 import React from 'react';
 import {Text} from 'react-native';
 import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
-import {getPostCardDescriptionStyles} from './styles';
+import {getCardDescriptionStyles} from './styles';
 
 interface PostCardDescriptionProps {
-  postDescription: string;
+  description: string;
 }
 
 export const PostCardDescription: React.FC<PostCardDescriptionProps> = ({
-  postDescription,
+  description,
 }) => {
   const themeVariant: ColorThemes = useColorTheme();
-  const styles = getPostCardDescriptionStyles(themeVariant);
+  const styles = getCardDescriptionStyles(themeVariant);
 
-  return <Text style={styles.descriptionStyles}>{postDescription}</Text>;
+  return <Text style={styles.descriptionStyles}>{description}</Text>;
 };

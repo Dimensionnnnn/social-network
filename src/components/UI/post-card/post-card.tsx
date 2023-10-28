@@ -9,23 +9,23 @@ import {PostCardFooter} from './post-card-footer/post-card-footer';
 import {PostCardDescription} from './post-card-description/post-card-description';
 
 interface PostCardProps {
-  postName: string;
-  postDateOfCreation: string;
-  postDescription: string;
-  postPhotoUrl: number;
-  postAuthorPhotoUrl: number;
-  postAuthorName: string;
-  postLikesCount: number;
+  name: string;
+  dateOfCreation: string;
+  description: string;
+  photoUrl: number;
+  authorPhotoUrl: number;
+  authorName: string;
+  likesCount: number;
 }
 
 export const PostCard: React.FC<PostCardProps> = ({
-  postName,
-  postDateOfCreation,
-  postDescription,
-  postPhotoUrl,
-  postAuthorPhotoUrl,
-  postAuthorName,
-  postLikesCount,
+  name,
+  dateOfCreation,
+  description,
+  photoUrl,
+  authorPhotoUrl,
+  authorName,
+  likesCount,
 }) => {
   const [isPostOpen, setIsPostOpen] = useState(false);
   const themeVariant: ColorThemes = useColorTheme();
@@ -45,30 +45,30 @@ export const PostCard: React.FC<PostCardProps> = ({
       {isPostOpen ? (
         <>
           <PostCardTitle
-            postName={postName}
-            postDateOfCreation={postDateOfCreation}
+            name={name}
+            dateOfCreation={dateOfCreation}
             isPostOpen={isPostOpen}
           />
-          <PostCardImage postPhotoUrl={postPhotoUrl} onPress={handleOpenPost} />
-          <PostCardDescription postDescription={postDescription} />
+          <PostCardImage photoUrl={photoUrl} onPress={handleOpenPost} />
+          <PostCardDescription description={description} />
           <PostCardFooter
-            authorName={postAuthorName}
-            likesCount={postLikesCount}
-            authorPhotoUrl={postAuthorPhotoUrl}
+            authorName={authorName}
+            likesCount={likesCount}
+            authorPhotoUrl={authorPhotoUrl}
           />
         </>
       ) : (
         <>
           <PostCardTitle
-            postName={postName}
-            postDateOfCreation={postDateOfCreation}
+            name={name}
+            dateOfCreation={dateOfCreation}
             isPostOpen={isPostOpen}
           />
-          <PostCardImage postPhotoUrl={postPhotoUrl} onPress={handleOpenPost} />
+          <PostCardImage photoUrl={photoUrl} onPress={handleOpenPost} />
           <PostCardFooter
-            authorName={postAuthorName}
-            likesCount={postLikesCount}
-            authorPhotoUrl={postAuthorPhotoUrl}
+            authorName={authorName}
+            likesCount={likesCount}
+            authorPhotoUrl={authorPhotoUrl}
           />
         </>
       )}

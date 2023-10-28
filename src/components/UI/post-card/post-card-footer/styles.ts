@@ -3,7 +3,7 @@ import {COLORS} from 'src/assets/styles/colors';
 import {outfitTextStyles} from 'src/assets/styles/typography';
 import {ColorThemes} from 'src/hooks/useColorTheme';
 
-export const postCardFooterStyles = {
+export const cardFooterStyles = {
   [ColorThemes.DARK]: {
     primaryColor: {color: COLORS.grayscale_dark_03},
     secondaryColor: {color: COLORS.grayscale_dark_02},
@@ -49,16 +49,16 @@ export const postCardFooterStyles = {
   }),
 };
 
-export const getPostCardFooterStyles = (themeVariant: ColorThemes) => {
+export const getCardFooterStyles = (themeVariant: ColorThemes) => {
   return {
-    container: postCardFooterStyles.root.container,
-    containerAuthorInfo: postCardFooterStyles.root.containerAuthorInfo,
-    containerButtons: postCardFooterStyles.root.containerButtons,
-    containerLikes: postCardFooterStyles.root.containerLikes,
-    containerImage: postCardFooterStyles.root.containerImage,
-    fontText: postCardFooterStyles.root.fontText,
-    primaryColor: postCardFooterStyles[themeVariant].primaryColor,
-    secondaryColor: postCardFooterStyles[themeVariant].secondaryColor,
-    imageSize: postCardFooterStyles.root.imageSize,
+    container: cardFooterStyles.root.container,
+    containerAuthorInfo: cardFooterStyles.root.containerAuthorInfo,
+    containerButtons: cardFooterStyles.root.containerButtons,
+    containerLikes: cardFooterStyles.root.containerLikes,
+    containerImage: cardFooterStyles.root.containerImage,
+    fontText: cardFooterStyles.root.fontText,
+    primaryColor: cardFooterStyles[themeVariant].primaryColor,
+    secondaryColor: cardFooterStyles[themeVariant].secondaryColor,
+    imageSize: cardFooterStyles.root.imageSize,
   };
 };

@@ -1,25 +1,25 @@
 import React from 'react';
 import {Image, Pressable} from 'react-native';
-import {getPostCardTitleStyles} from './styles';
+import {getCardTitleStyles} from './styles';
 
 interface PostCardImageProps {
-  postPhotoUrl: number;
+  photoUrl: number;
   onPress?: () => void;
 }
 
 export const PostCardImage: React.FC<PostCardImageProps> = ({
-  postPhotoUrl,
+  photoUrl,
   onPress,
 }) => {
-  const postCardImageStyles = getPostCardTitleStyles();
+  const cardImageStyles = getCardTitleStyles();
 
   return (
-    <Pressable style={postCardImageStyles.container} onPress={onPress}>
+    <Pressable style={cardImageStyles.container} onPress={onPress}>
       <Image
         resizeMethod="resize"
         resizeMode="contain"
-        source={postPhotoUrl}
-        style={postCardImageStyles.imageSize}
+        source={photoUrl}
+        style={cardImageStyles.imageSize}
       />
     </Pressable>
   );

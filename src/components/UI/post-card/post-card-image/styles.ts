@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-export const postCardImageStyles = {
+export const cardImageStyles = {
   root: StyleSheet.create({
     container: {
       width: '100%',
@@ -16,9 +16,9 @@ export const postCardImageStyles = {
   }),
 };
 
-export const getPostCardTitleStyles = () => {
+export const getCardTitleStyles = () => {
   return {
-    container: postCardImageStyles.root.container,
-    imageSize: postCardImageStyles.root.imageSize,
+    container: cardImageStyles.root.container,
+    imageSize: cardImageStyles.root.imageSize,
   };
 };

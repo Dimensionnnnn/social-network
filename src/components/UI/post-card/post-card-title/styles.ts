@@ -3,18 +3,18 @@ import {COLORS} from 'src/assets/styles/colors';
 import {outfitTextStyles} from 'src/assets/styles/typography';
 import {ColorThemes} from 'src/hooks/useColorTheme';
 
-export const postCardTitleStyles = {
+export const cardTitleStyles = {
   [ColorThemes.DARK]: {
-    postName: {color: COLORS.grayscale_dark_01},
-    postDate: {color: COLORS.grayscale_dark_03},
+    name: {color: COLORS.grayscale_dark_01},
+    date: {color: COLORS.grayscale_dark_03},
   },
   [ColorThemes.LIGHT]: {
-    postName: {color: COLORS.grayscale_light_01},
-    postDate: {color: COLORS.grayscale_light_03},
+    name: {color: COLORS.grayscale_light_01},
+    date: {color: COLORS.grayscale_light_03},
   },
   root: StyleSheet.create({
-    fontPostName: outfitTextStyles.bodyMedium_16,
-    fontPostDate: outfitTextStyles.bodyRegular_14,
+    fontName: outfitTextStyles.bodyMedium_16,
+    fontDate: outfitTextStyles.bodyRegular_14,
     container: {
       width: '100%',
       display: 'flex',
@@ -29,16 +29,16 @@ export const postCardTitleStyles = {
   }),
 };
 
-export const getPostCardTitleStyles = (
+export const getCardTitleStyles = (
   themeVariant: ColorThemes,
   isPostOpen: boolean,
 ) => {
   return {
-    container: postCardTitleStyles.root.container,
-    containerPostOpen: isPostOpen && postCardTitleStyles.root.containerPostOpen,
-    fontPostName: postCardTitleStyles.root.fontPostName,
-    fontPostDate: postCardTitleStyles.root.fontPostDate,
-    colorPostName: postCardTitleStyles[themeVariant].postName,
-    colorPostDate: postCardTitleStyles[themeVariant].postDate,
+    container: cardTitleStyles.root.container,
+    containerPostOpen: isPostOpen && cardTitleStyles.root.containerPostOpen,
+    fontName: cardTitleStyles.root.fontName,
+    fontDate: cardTitleStyles.root.fontDate,
+    colorName: cardTitleStyles[themeVariant].name,
+    colorDate: cardTitleStyles[themeVariant].date,
   };
 };
