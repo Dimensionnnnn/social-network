@@ -3,7 +3,7 @@ import {SvgShare} from 'src/shared/icons/components/share-svg';
 import {SvgHeart} from 'src/shared/icons/components/heart-svg';
 import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
 import {Image, Text, View} from 'react-native';
-import {getPostCardFooterStyles} from './styles';
+import {getCardFooterStyles} from './styles';
 import {Button} from 'src/components/UI/button/button-icon/button-icon';
 
 interface PostCardFooterProps {
@@ -18,34 +18,31 @@ export const PostCardFooter: React.FC<PostCardFooterProps> = ({
   authorPhotoUrl,
 }) => {
   const themeVariant: ColorThemes = useColorTheme();
-  const postCardFooterStyles = getPostCardFooterStyles(themeVariant);
+  const cardFooterStyles = getCardFooterStyles(themeVariant);
 
   return (
-    <View style={postCardFooterStyles.container}>
-      <View style={postCardFooterStyles.containerAuthorInfo}>
-        <View style={postCardFooterStyles.containerImage}>
+    <View style={cardFooterStyles.container}>
+      <View style={cardFooterStyles.containerAuthorInfo}>
+        <View style={cardFooterStyles.containerImage}>
           <Image
             resizeMethod="resize"
             resizeMode="contain"
             source={authorPhotoUrl}
-            style={postCardFooterStyles.imageSize}
+            style={cardFooterStyles.imageSize}
           />
         </View>
         <Text
-          style={[
-            postCardFooterStyles.fontText,
-            postCardFooterStyles.primaryColor,
-          ]}>
+          style={[cardFooterStyles.fontText, cardFooterStyles.primaryColor]}>
           {authorName}
         </Text>
       </View>
-      <View style={postCardFooterStyles.containerButtons}>
-        <View style={postCardFooterStyles.containerLikes}>
+      <View style={cardFooterStyles.containerButtons}>
+        <View style={cardFooterStyles.containerLikes}>
           <Button isDefaultIcon Icon={SvgHeart} />
           <Text
             style={[
-              postCardFooterStyles.fontText,
-              postCardFooterStyles.secondaryColor,
+              cardFooterStyles.fontText,
+              cardFooterStyles.secondaryColor,
             ]}>
             {likesCount}
           </Text>

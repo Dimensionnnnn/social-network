@@ -33,13 +33,13 @@ export const NewPosts = () => {
         <UserIcon size="large" userPhotoUrl={userPhotoUrl} />
         <UserIcon size="large" />
         <PostCard
-          postName="Apple love"
-          postDateOfCreation="11.09.22"
-          postPhotoUrl={postPhotoUrl}
-          postAuthorPhotoUrl={userPhotoUrl}
-          postLikesCount={137}
-          postAuthorName="Hannah K."
-          postDescription={description}
+          name="Apple love"
+          dateOfCreation="11.09.22"
+          photoUrl={postPhotoUrl}
+          authorPhotoUrl={userPhotoUrl}
+          likesCount={137}
+          authorName="Hannah K."
+          description={description}
         />
       </View>
     </ScrollView>

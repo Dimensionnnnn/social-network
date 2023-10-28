@@ -1,42 +1,31 @@
 import React from 'react';
-import {getPostCardTitleStyles} from './styles';
+import {getCardTitleStyles} from './styles';
 import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
 import {Text, View} from 'react-native';
 
 interface PostCardTitleProps {
-  postName: string;
-  postDateOfCreation: string;
+  name: string;
+  dateOfCreation: string;
   isPostOpen: boolean;
 }
 
 export const PostCardTitle: React.FC<PostCardTitleProps> = ({
-  postName,
-  postDateOfCreation,
+  name,
+  dateOfCreation,
   isPostOpen,
 }) => {
   const themeVariant: ColorThemes = useColorTheme();
-  const postCardTitleStyles = getPostCardTitleStyles(themeVariant, isPostOpen);
+  const cardTitleStyles = getCardTitleStyles(themeVariant, isPostOpen);
   return (
     <View
-      style={[
-        postCardTitleStyles.container,
-        postCardTitleStyles.containerPostOpen,
-      ]}>
+      style={[cardTitleStyles.container, cardTitleStyles.containerPostOpen]}>
       {!isPostOpen && (
-        <Text
-          style={[
-            postCardTitleStyles.fontPostName,
-            postCardTitleStyles.colorPostName,
-          ]}>
-          {postName}
+        <Text style={[cardTitleStyles.fontName, cardTitleStyles.colorName]}>
+          {name}
         </Text>
       )}
-      <Text
-        style={[
-          postCardTitleStyles.fontPostDate,
-          postCardTitleStyles.colorPostDate,
-        ]}>
-        {postDateOfCreation}
+      <Text style={[cardTitleStyles.fontDate, cardTitleStyles.colorDate]}>
+        {dateOfCreation}
       </Text>
     </View>
   );
