@@ -58,7 +58,7 @@ export const Input: React.FC<InputProps> = ({
     <View style={inputStyles.container}>
       <Text style={[inputStyles.labelFont, inputStyles.label]}>{label}</Text>
       <TextInput
-        style={inputStyles.inputTextColor}
+        style={[inputStyles.inputTextColor, inputStyles.containerInput]}
         onFocus={handleFocus}
         onEndEditing={handleEndEdit}
         editable={!isDisabled}

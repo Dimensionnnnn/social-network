@@ -38,7 +38,6 @@ export const textButtonStyles = {
     fontText: outfitTextStyles.bodyMedium_16,
     container: {
       width: '100%',
-      maxWidth: 39,
       backgroundColor: 'initial',
       borderBottomColor: 'black',
     },
