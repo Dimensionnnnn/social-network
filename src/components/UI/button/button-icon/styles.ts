@@ -119,6 +119,7 @@ export const iconButtonStyles = {
   root: StyleSheet.create({
     container: {
       width: '100%',
+      maxWidth: 24,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
