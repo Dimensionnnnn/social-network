@@ -38,7 +38,6 @@ export const AuthProvider: React.FC<AuthContextProviderProps> = ({
 
   const setStorageToken = async () => {
     try {
-      //removeItemStorage('userToken');
       const userTokenStorage = await getItemStorage('userToken');
       setUserToken(userTokenStorage);
     } catch (e) {
