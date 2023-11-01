@@ -1,6 +1,8 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {RadioGroup} from 'src/components/radio-field/radio-group';
+import {UserIcon} from 'src/components/UI/button/user-icon/user-icon';
+import {CustomSwitch} from 'src/components/UI/switch/switch';
 
 const LABELS = [
   {id: 101, label: 'Male'},
@@ -9,11 +11,21 @@ const LABELS = [
 ];
 
 export const NewPosts = () => {
+  const userPhotoUrl = require('src\\shared\\images\\userPhoto.png');
   return (
-    <View style={styles.container}>
-      <Text>New posts</Text>
-      <RadioGroup labels={LABELS} />
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <CustomSwitch />
+        <Text>New posts</Text>
+        <RadioGroup labels={LABELS} />
+        <UserIcon size="small" userPhotoUrl={userPhotoUrl} />
+        <UserIcon size="small" />
+        <UserIcon size="medium" userPhotoUrl={userPhotoUrl} />
+        <UserIcon size="medium" />
+        <UserIcon size="large" userPhotoUrl={userPhotoUrl} />
+        <UserIcon size="large" />
+      </View>
+    </ScrollView>
   );
 };
 

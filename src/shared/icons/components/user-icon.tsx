@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Svg, {SvgProps, G, Path} from 'react-native-svg';
-export const SvgUserMini = (props: SvgProps) => (
+export const SvgUserIcon = (props: SvgProps) => (
   <Svg
-    width={24}
-    height={24}
+    width={props.width}
+    height={props.height}
     fill="currentColor"
     viewBox="0 0 24 24"
     {...props}>
