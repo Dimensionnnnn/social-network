@@ -17,6 +17,7 @@ export const tabsStyles = {
       active: {backgroundColor: COLORS.secondary_dark_01},
       initial: {backgroundColor: COLORS.grayscale_dark_05},
     },
+    tabsContainerBgColor: {backgroundColor: COLORS.grayscale_dark_07},
   },
   [ColorThemes.LIGHT]: {
     containerColor: {
@@ -31,9 +32,14 @@ export const tabsStyles = {
       active: {backgroundColor: COLORS.dark_mode},
       initial: {backgroundColor: COLORS.grayscale_light_06},
     },
+    tabsContainerBgColor: {backgroundColor: COLORS.grayscale_light_07},
   },
   root: StyleSheet.create({
     fontText: outfitTextStyles.bodyRegular_18,
+    tabsContainer: {
+      flex: 1,
+      width: '100%',
+    },
     container: {
       height: 47,
       width: '100%',
@@ -74,6 +80,7 @@ export const getTabsStyles = (themeVariant: ColorThemes) => {
       tabsStyles.root.containerIndicator,
       tabsStyles[themeVariant].indicatorColor.initial,
     ],
+    tabsContainer: tabsStyles.root.tabsContainer,
     indicatorStyles: {
       styles: tabsStyles.root.indicatorStyles,
       itemLeft: tabsStyles.root.indicatorItemLeft,
@@ -85,5 +92,6 @@ export const getTabsStyles = (themeVariant: ColorThemes) => {
       active: tabsStyles[themeVariant].textColor.active,
       initial: tabsStyles[themeVariant].textColor.initial,
     },
+    tabsContainerBgColor: tabsStyles[themeVariant].tabsContainerBgColor,
   };
 };

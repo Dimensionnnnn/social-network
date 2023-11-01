@@ -6,6 +6,7 @@ import {Favorites} from 'src/screens/favorites/favorites';
 import {Posts} from 'src/screens/posts/posts';
 import {TabBarIcon, TabBarIconsNames} from '../UI/tapbar-icon/tapbar-iсon';
 import {TopTabs} from 'src/components/tabs/tabs';
+import {UIKit} from 'src/screens/ui-kit/ui-kit';
 
 const Tab = createBottomTabNavigator();
 
@@ -49,6 +50,16 @@ export const BottomTab = () => {
           tabBarLabel: TabBarIconsNames.MY_POSTS,
           tabBarIcon: ({color}) => (
             <TabBarIcon name={TabBarIconsNames.MY_POSTS} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="UI_KIT"
+        component={UIKit}
+        options={{
+          tabBarLabel: 'UI KIT',
+          tabBarIcon: ({color}) => (
+            <TabBarIcon name={TabBarIconsNames.Main} color={color} />
           ),
         }}
       />
