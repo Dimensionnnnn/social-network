@@ -1,5 +1,5 @@
 import {Input} from 'src/components/UI/input/default-input/default-input';
-import React from 'react';
+import React, {useContext} from 'react';
 import {ScrollView, Text, View} from 'react-native';
 import {Button as LogInButton} from 'src/components/UI/button/text-button/text-button';
 import {Button as RegistrationButton} from 'src/components/UI/button/default-button/default-button';
@@ -10,6 +10,7 @@ import {RootStackParamList} from 'src/routes/routes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {USER_SIGN_UP} from 'src/api/user/gql/mutations/userMutations';
 import {useMutation} from '@apollo/client';
+import {AuthContext, AuthContextProps} from 'src/context/auth-context';
 
 interface RegistrationScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Registration'>;
@@ -23,6 +24,7 @@ interface SubmitProps {
 
 export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
   const [userSignUp, {data, loading, error}] = useMutation(USER_SIGN_UP);
+  const {authenticate} = useContext<AuthContextProps>(AuthContext);
   const {
     control,
     handleSubmit,
@@ -61,7 +63,7 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
             message: response.data.userSignUp.problem.message,
           });
         } else if (response.data?.userSignUp?.token) {
-          console.log(response.data);
+          authenticate(response.data.userSignUp.token);
         }
       });
     } catch (e) {

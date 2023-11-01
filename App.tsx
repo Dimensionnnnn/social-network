@@ -5,13 +5,16 @@ import {Routes} from 'src/routes/routes';
 import BootSplash from 'react-native-bootsplash';
 import {ApolloProvider} from '@apollo/client';
 import {apolloClient} from 'src/api/client';
+import {AuthProvider} from 'src/context/auth-context';
 
 function App(): JSX.Element {
   return (
     <ApolloProvider client={apolloClient}>
-      <NavigationContainer onReady={() => BootSplash.hide()}>
-        <Routes />
-      </NavigationContainer>
+      <AuthProvider>
+        <NavigationContainer onReady={() => BootSplash.hide()}>
+          <Routes />
+        </NavigationContainer>
+      </AuthProvider>
     </ApolloProvider>
   );
 }
