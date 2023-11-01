@@ -6,9 +6,9 @@ import {Button as LogInButton} from 'src/components/UI/button/default-button/def
 import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
 import {getLoginScreenStyles} from './styles';
 import {useForm, Controller} from 'react-hook-form';
-import {RootStackParamList} from 'src/types/navigation-types/types';
+import {RootStackParamList} from 'src/routes/routes';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {USER_SIGN_IN} from 'src/services/queries';
+import {USER_SIGN_IN} from 'src/api/user/gql/mutations/userMutations';
 import {useMutation} from '@apollo/client';
 
 interface LoginScreenProps {
@@ -25,6 +25,7 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
   const {
     control,
     handleSubmit,
+    setError,
     formState: {errors},
   } = useForm({
     defaultValues: {
@@ -34,14 +35,31 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
   });
 
   const onSubmit = async (dataSubmit: SubmitProps) => {
-    await userSignIn({
-      variables: {
-        input: {
-          email: dataSubmit.email,
-          password: dataSubmit.password,
+    try {
+      await userSignIn({
+        variables: {
+          input: {
+            email: dataSubmit.email,
+            password: dataSubmit.password,
+          },
         },
-      },
-    });
+      }).then(response => {
+        if (response.data?.userSignIn?.problem) {
+          setError('email', {
+            type: 'manual',
+            message: response.data.userSignIn.problem.message,
+          });
+          setError('password', {
+            type: 'manual',
+            message: response.data.userSignIn.problem.message,
+          });
+        } else if (response.data?.userSignIn?.token) {
+          console.log(response.data);
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const themeVariant: ColorThemes = useColorTheme();
@@ -65,6 +83,8 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
+              isError={!!errors.email}
+              errorMessage={errors.email?.message}
             />
           )}
           name="email"
@@ -79,6 +99,8 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
+              isError={!!errors.email}
+              errorMessage={errors.email?.message}
               isPassword
             />
           )}

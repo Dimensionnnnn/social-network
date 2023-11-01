@@ -1,14 +1,14 @@
 import {Input} from 'src/components/UI/input/default-input/default-input';
 import React from 'react';
-import {Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import {Button as LogInButton} from 'src/components/UI/button/text-button/text-button';
 import {Button as RegistrationButton} from 'src/components/UI/button/default-button/default-button';
 import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
 import {getLoginScreenStyles} from './styles';
 import {useForm, Controller} from 'react-hook-form';
-import {RootStackParamList} from 'src/types/navigation-types/types';
+import {RootStackParamList} from 'src/routes/routes';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {USER_SIGN_UP} from 'src/services/queries';
+import {USER_SIGN_UP} from 'src/api/user/gql/mutations/userMutations';
 import {useMutation} from '@apollo/client';
 
 interface RegistrationScreenProps {
@@ -26,6 +26,7 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
   const {
     control,
     handleSubmit,
+    setError,
     formState: {errors},
   } = useForm({
     defaultValues: {
@@ -36,21 +37,44 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
   });
 
   const onSubmit = async (dataSubmit: SubmitProps) => {
-    await userSignUp({
-      variables: {
-        input: {
-          email: dataSubmit.email,
-          password: dataSubmit.password,
-          passwordConfirm: dataSubmit.passwordConfirm,
+    try {
+      await userSignUp({
+        variables: {
+          input: {
+            email: dataSubmit.email,
+            password: dataSubmit.password,
+            passwordConfirm: dataSubmit.passwordConfirm,
+          },
         },
-      },
-    });
+      }).then(response => {
+        if (response.data?.userSignUp?.problem) {
+          setError('email', {
+            type: 'manual',
+            message: response.data.userSignUp.problem.message,
+          });
+          setError('password', {
+            type: 'manual',
+            message: response.data.userSignUp.problem.message,
+          });
+          setError('passwordConfirm', {
+            type: 'manual',
+            message: response.data.userSignUp.problem.message,
+          });
+        } else if (response.data?.userSignUp?.token) {
+          console.log(response.data);
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const themeVariant: ColorThemes = useColorTheme();
   const styles = getLoginScreenStyles(themeVariant);
   return (
-    <View style={[styles.container, styles.containerBackground]}>
+    <ScrollView
+      style={styles.containerBackground}
+      contentContainerStyle={styles.container}>
       <View style={styles.wrapper}>
         <View style={styles.containerTitle}>
           <Text style={[styles.fontTitle, styles.titleColor]}>Join us</Text>
@@ -68,6 +92,8 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
+              isError={!!errors.email}
+              errorMessage={errors.email?.message}
             />
           )}
           name="email"
@@ -82,6 +108,8 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
+              isError={!!errors.password}
+              errorMessage={errors.password?.message}
               isPassword
             />
           )}
@@ -97,6 +125,8 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
+              isError={!!errors.passwordConfirm}
+              errorMessage={errors.passwordConfirm?.message}
               isPassword
             />
           )}
@@ -122,6 +152,6 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
           isLoading={loading}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };

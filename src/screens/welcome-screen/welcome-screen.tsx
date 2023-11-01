@@ -5,7 +5,7 @@ import {Button as RegistrationButton} from 'src/components/UI/button/default-but
 import {Button as LogInButton} from 'src/components/UI/button/text-button/text-button';
 import {getWelcomeScreenStyles} from './styles';
 import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
-import {RootStackParamList} from 'src/types/navigation-types/types';
+import {RootStackParamList} from 'src/routes/routes';
 
 const welcomeImage = require('src\\assets\\images\\welcome.png');
 
