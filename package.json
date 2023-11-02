@@ -8,10 +8,18 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "gql-codegen:gen": "graphql-codegen --config gql-codegen.yml -r dotenv/config",
+    "gql-codegen:watch": "graphql-codegen --config gql-codegen.yml -r dotenv/config -w",
+    "gql-codegen:rm": "find . -regex './src/.*__generated__.*' -type d -prune -exec rm -r \"{}\" \\;"
   },
   "dependencies": {
     "@apollo/client": "^3.8.6",
+    "@graphql-codegen/fragment-matcher": "^5.0.0",
+    "@graphql-codegen/near-operation-file-preset": "^3.0.0",
+    "@graphql-codegen/typed-document-node": "^5.0.1",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@graphql-codegen/typescript-react-apollo": "^4.1.0",
     "@react-native-async-storage/async-storage": "^1.19.4",
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/material-top-tabs": "^6.6.5",
@@ -36,7 +44,7 @@
     "@babel/runtime": "^7.20.0",
     "@graphql-codegen/cli": "5.0.0",
     "@graphql-codegen/client-preset": "4.1.0",
-    "@graphql-codegen/introspection": "4.0.0",
+    "@graphql-codegen/introspection": "^4.0.0",
     "@react-native/eslint-config": "^0.72.2",
     "@react-native/metro-config": "^0.72.11",
     "@tsconfig/react-native": "^3.0.0",

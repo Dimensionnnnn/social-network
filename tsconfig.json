@@ -1,7 +1,22 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": ".",
+    "paths": {
+      "src": ["./src"],
+      "@app": [
+        "./src/app"
+      ],
+      "@processes": [
+        "./src/processes"
+      ],
+      "@screens": [
+        "./src/screens"
+      ],
+      "@shared": [
+        "./src/shared"
+      ]
+    }
   },
   "include": [
     "src"

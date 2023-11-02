@@ -4,8 +4,9 @@ import {
   getItemStorage,
   removeItemStorage,
 } from 'src/utils/async-storage';
+import {apolloClient} from 'src/api/client';
 
-interface AuthContextProps {
+export interface AuthContextProps {
   userToken: string | null;
   authenticate: (token: string) => void;
   logout: () => void;
@@ -34,6 +35,7 @@ export const AuthProvider: React.FC<AuthContextProviderProps> = ({
   const logout = () => {
     setUserToken(null);
     removeItemStorage('userToken');
+    apolloClient.cache.reset();
   };
 
   const setStorageToken = async () => {

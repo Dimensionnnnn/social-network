@@ -8,9 +8,8 @@ import {getLoginScreenStyles} from './styles';
 import {useForm, Controller} from 'react-hook-form';
 import {RootStackParamList} from 'src/routes/routes';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {USER_SIGN_IN} from 'src/api/user/gql/mutations/userMutations';
-import {useMutation} from '@apollo/client';
 import {AuthContext, AuthContextProps} from 'src/context/auth-context';
+import {useUserSignIn} from 'src/api/user/gql/mutations/__generated__/user-signin.mutation';
 
 interface LoginScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Login'>;
@@ -22,7 +21,8 @@ interface SubmitProps {
 }
 
 export const LoginScreen = ({navigation}: LoginScreenProps) => {
-  const [userSignIn, {data, loading, error}] = useMutation(USER_SIGN_IN);
+  const [userSignIn, {data, loading, error}] = useUserSignIn();
+
   const {authenticate} = useContext<AuthContextProps>(AuthContext);
   const {
     control,
@@ -38,27 +38,27 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
 
   const onSubmit = async (dataSubmit: SubmitProps) => {
     try {
-      await userSignIn({
+      const response = await userSignIn({
         variables: {
           input: {
             email: dataSubmit.email,
             password: dataSubmit.password,
           },
         },
-      }).then(response => {
-        if (response.data?.userSignIn?.problem) {
-          setError('email', {
-            type: 'manual',
-            message: response.data.userSignIn.problem.message,
-          });
-          setError('password', {
-            type: 'manual',
-            message: response.data.userSignIn.problem.message,
-          });
-        } else if (response.data?.userSignIn?.token) {
-          authenticate(response.data.userSignIn.token);
-        }
       });
+
+      if (response.data?.userSignIn?.problem) {
+        setError('email', {
+          type: 'manual',
+          message: response.data.userSignIn.problem.message,
+        });
+        setError('password', {
+          type: 'manual',
+          message: response.data.userSignIn.problem.message,
+        });
+      } else if (response.data?.userSignIn?.token) {
+        authenticate(response.data.userSignIn.token);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -101,8 +101,8 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
-              isError={!!errors.email}
-              errorMessage={errors.email?.message}
+              isError={!!errors.password}
+              errorMessage={errors.password?.message}
               isPassword
             />
           )}

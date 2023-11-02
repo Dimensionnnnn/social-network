@@ -8,9 +8,8 @@ import {getLoginScreenStyles} from './styles';
 import {useForm, Controller} from 'react-hook-form';
 import {RootStackParamList} from 'src/routes/routes';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {USER_SIGN_UP} from 'src/api/user/gql/mutations/userMutations';
-import {useMutation} from '@apollo/client';
 import {AuthContext, AuthContextProps} from 'src/context/auth-context';
+import {useUserSignUp} from 'src/api/user/gql/mutations/__generated__/user-signup.mutation';
 
 interface RegistrationScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Registration'>;
@@ -23,7 +22,7 @@ interface SubmitProps {
 }
 
 export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
-  const [userSignUp, {data, loading, error}] = useMutation(USER_SIGN_UP);
+  const [userSignUp, {data, loading, error}] = useUserSignUp();
   const {authenticate} = useContext<AuthContextProps>(AuthContext);
   const {
     control,
@@ -40,7 +39,7 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
 
   const onSubmit = async (dataSubmit: SubmitProps) => {
     try {
-      await userSignUp({
+      const respone = await userSignUp({
         variables: {
           input: {
             email: dataSubmit.email,
@@ -48,24 +47,24 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
             passwordConfirm: dataSubmit.passwordConfirm,
           },
         },
-      }).then(response => {
-        if (response.data?.userSignUp?.problem) {
-          setError('email', {
-            type: 'manual',
-            message: response.data.userSignUp.problem.message,
-          });
-          setError('password', {
-            type: 'manual',
-            message: response.data.userSignUp.problem.message,
-          });
-          setError('passwordConfirm', {
-            type: 'manual',
-            message: response.data.userSignUp.problem.message,
-          });
-        } else if (response.data?.userSignUp?.token) {
-          authenticate(response.data.userSignUp.token);
-        }
       });
+
+      if (respone.data?.userSignUp?.problem) {
+        setError('email', {
+          type: 'manual',
+          message: respone.data.userSignUp.problem.message,
+        });
+        setError('password', {
+          type: 'manual',
+          message: respone.data.userSignUp.problem.message,
+        });
+        setError('passwordConfirm', {
+          type: 'manual',
+          message: respone.data.userSignUp.problem.message,
+        });
+      } else if (respone.data?.userSignUp?.token) {
+        authenticate(respone.data.userSignUp.token);
+      }
     } catch (e) {
       console.log(e);
     }
