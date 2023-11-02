@@ -1,5 +1,5 @@
+import React from 'react';
 import {Input} from 'src/components/UI/input/default-input/default-input';
-import React, {useContext} from 'react';
 import {ScrollView, Text, View} from 'react-native';
 import {Button as LogInButton} from 'src/components/UI/button/text-button/text-button';
 import {Button as RegistrationButton} from 'src/components/UI/button/default-button/default-button';
@@ -8,8 +8,8 @@ import {getLoginScreenStyles} from './styles';
 import {useForm, Controller} from 'react-hook-form';
 import {RootStackParamList} from 'src/routes/routes';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {AuthContext, AuthContextProps} from 'src/context/auth-context';
 import {useUserSignUp} from 'src/api/user/gql/mutations/__generated__/user-signup.mutation';
+import {useAuth} from 'src/hooks/useAuth';
 
 interface RegistrationScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Registration'>;
@@ -22,8 +22,8 @@ interface SubmitProps {
 }
 
 export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
-  const [userSignUp, {data, loading, error}] = useUserSignUp();
-  const {authenticate} = useContext<AuthContextProps>(AuthContext);
+  const [userSignUp, {loading}] = useUserSignUp();
+  const {authenticate} = useAuth();
   const {
     control,
     handleSubmit,
@@ -52,15 +52,15 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
       if (respone.data?.userSignUp?.problem) {
         setError('email', {
           type: 'manual',
-          message: respone.data.userSignUp.problem.message,
+          message: 'Something went wrong.',
         });
         setError('password', {
           type: 'manual',
-          message: respone.data.userSignUp.problem.message,
+          message: 'Something went wrong.',
         });
         setError('passwordConfirm', {
           type: 'manual',
-          message: respone.data.userSignUp.problem.message,
+          message: 'Something went wrong.',
         });
       } else if (respone.data?.userSignUp?.token) {
         authenticate(respone.data.userSignUp.token);

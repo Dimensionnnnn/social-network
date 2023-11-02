@@ -1,15 +1,15 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {WelcomeScreen} from 'src/screens/welcome-screen/welcome-screen';
 import {LoginScreen} from 'src/screens/login/login';
 import {RegistrationScreen} from 'src/screens/registration/registration';
 import {BottomTab} from 'src/components/tapbar/tapbar';
-import {AuthContext, AuthContextProps} from 'src/context/auth-context';
+import {useAuth} from 'src/hooks/useAuth';
 
 const Stack = createNativeStackNavigator();
 
 export const Routes = () => {
-  const {userToken} = useContext<AuthContextProps>(AuthContext);
+  const {userToken} = useAuth();
 
   return (
     <Stack.Navigator>

@@ -1,5 +1,5 @@
+import React from 'react';
 import {Input} from 'src/components/UI/input/default-input/default-input';
-import React, {useContext} from 'react';
 import {Text, View} from 'react-native';
 import {Button as RegistrationButton} from 'src/components/UI/button/text-button/text-button';
 import {Button as LogInButton} from 'src/components/UI/button/default-button/default-button';
@@ -8,8 +8,8 @@ import {getLoginScreenStyles} from './styles';
 import {useForm, Controller} from 'react-hook-form';
 import {RootStackParamList} from 'src/routes/routes';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {AuthContext, AuthContextProps} from 'src/context/auth-context';
 import {useUserSignIn} from 'src/api/user/gql/mutations/__generated__/user-signin.mutation';
+import {useAuth} from 'src/hooks/useAuth';
 
 interface LoginScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Login'>;
@@ -21,9 +21,8 @@ interface SubmitProps {
 }
 
 export const LoginScreen = ({navigation}: LoginScreenProps) => {
-  const [userSignIn, {data, loading, error}] = useUserSignIn();
-
-  const {authenticate} = useContext<AuthContextProps>(AuthContext);
+  const [userSignIn, {loading}] = useUserSignIn();
+  const {authenticate} = useAuth();
   const {
     control,
     handleSubmit,
@@ -50,11 +49,11 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
       if (response.data?.userSignIn?.problem) {
         setError('email', {
           type: 'manual',
-          message: response.data.userSignIn.problem.message,
+          message: 'Something went wrong.',
         });
         setError('password', {
           type: 'manual',
-          message: response.data.userSignIn.problem.message,
+          message: 'Something went wrong.',
         });
       } else if (response.data?.userSignIn?.token) {
         authenticate(response.data.userSignIn.token);

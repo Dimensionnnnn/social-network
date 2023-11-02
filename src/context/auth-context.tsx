@@ -6,6 +6,10 @@ import {
 } from 'src/utils/async-storage';
 import {apolloClient} from 'src/api/client';
 
+enum TOKEN {
+  USER_TOKEN = 'userToken',
+}
+
 export interface AuthContextProps {
   userToken: string | null;
   authenticate: (token: string) => void;
@@ -29,7 +33,7 @@ export const AuthProvider: React.FC<AuthContextProviderProps> = ({
 
   const authenticate = (token: string) => {
     setUserToken(token);
-    setItemStorage('userToken', token);
+    setItemStorage(TOKEN.USER_TOKEN, token);
   };
 
   const logout = () => {
@@ -40,7 +44,7 @@ export const AuthProvider: React.FC<AuthContextProviderProps> = ({
 
   const setStorageToken = async () => {
     try {
-      const userTokenStorage = await getItemStorage('userToken');
+      const userTokenStorage = await getItemStorage(TOKEN.USER_TOKEN);
       setUserToken(userTokenStorage);
     } catch (e) {
       console.log(e);
