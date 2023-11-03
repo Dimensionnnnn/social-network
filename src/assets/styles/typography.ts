@@ -30,6 +30,12 @@ export const outfitTextStyles: {[key: string]: TextStyle} = {
     fontSize: 32,
     lineHeight: 40.32,
   },
+  titleSemiBold_20: {
+    fontFamily: fonts.OUTFIT_SEMIBOLD,
+    fontWeight: '600',
+    fontSize: 20,
+    lineHeight: 25.2,
+  },
   headlineSemiBold_18: {
     fontFamily: fonts.OUTFIT_SEMIBOLD,
     fontWeight: '600',

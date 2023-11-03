@@ -2,8 +2,9 @@ import * as React from 'react';
 import Svg, {SvgProps, G, Path} from 'react-native-svg';
 export const SvgUserIcon = (props: SvgProps) => (
   <Svg
-    width={props.width}
-    height={props.height}
+    width={props.width || 24}
+    height={props.height || 24}
+    strokeWidth={1.5}
     fill="currentColor"
     viewBox="0 0 24 24"
     {...props}>

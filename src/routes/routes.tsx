@@ -3,8 +3,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {WelcomeScreen} from 'src/screens/welcome-screen/welcome-screen';
 import {LoginScreen} from 'src/screens/login/login';
 import {RegistrationScreen} from 'src/screens/registration/registration';
-import {BottomTab} from 'src/components/tapbar/tapbar';
 import {useAuth} from 'src/hooks/useAuth';
+import {CustomDrawer} from 'src/screens/drawer/drawer';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,8 +15,8 @@ export const Routes = () => {
     <Stack.Navigator>
       {userToken ? (
         <Stack.Screen
-          name="BottomTab"
-          component={BottomTab}
+          name="CustomDrawer"
+          component={CustomDrawer}
           options={{headerShown: false}}
         />
       ) : (
