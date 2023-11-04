@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Input} from 'src/components/UI/input/default-input/default-input';
 import {ScrollView, Text, View} from 'react-native';
 import {Button as LogInButton} from 'src/components/UI/button/text-button/text-button';
@@ -10,6 +10,7 @@ import {RootStackParamList} from 'src/routes/routes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useUserSignUp} from 'src/api/user/gql/mutations/__generated__/user-signup.mutation';
 import {useAuth} from 'src/hooks/useAuth';
+import {validateEmail, validatePassword} from 'src/utils/validation';
 
 interface RegistrationScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Registration'>;
@@ -22,12 +23,12 @@ interface SubmitProps {
 }
 
 export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
+  const [serverError, setServerError] = useState<string | null>(null);
   const [userSignUp, {loading}] = useUserSignUp();
   const {authenticate} = useAuth();
   const {
     control,
     handleSubmit,
-    setError,
     formState: {errors},
   } = useForm({
     defaultValues: {
@@ -39,6 +40,7 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
 
   const onSubmit = async (dataSubmit: SubmitProps) => {
     try {
+      setServerError(null);
       const respone = await userSignUp({
         variables: {
           input: {
@@ -50,22 +52,13 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
       });
 
       if (respone.data?.userSignUp?.problem) {
-        setError('email', {
-          type: 'manual',
-          message: 'Something went wrong.',
-        });
-        setError('password', {
-          type: 'manual',
-          message: 'Something went wrong.',
-        });
-        setError('passwordConfirm', {
-          type: 'manual',
-          message: 'Something went wrong.',
-        });
+        setServerError(respone.data?.userSignUp?.problem.message);
       } else if (respone.data?.userSignUp?.token) {
+        setServerError(null);
         authenticate(respone.data.userSignUp.token);
       }
     } catch (e) {
+      setServerError('Something went wrong!');
       console.log(e);
     }
   };
@@ -85,7 +78,7 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
         </View>
         <Controller
           control={control}
-          rules={{required: true}}
+          rules={{required: true, validate: validateEmail}}
           render={({field: {onChange, onBlur, value}}) => (
             <Input
               label="E-mail"
@@ -101,7 +94,7 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
         />
         <Controller
           control={control}
-          rules={{required: true}}
+          rules={{required: true, validate: validatePassword}}
           render={({field: {onChange, onBlur, value}}) => (
             <Input
               label="Password"
@@ -118,7 +111,7 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
         />
         <Controller
           control={control}
-          rules={{required: true}}
+          rules={{required: true, validate: validatePassword}}
           render={({field: {onChange, onBlur, value}}) => (
             <Input
               label="Confirm password"
@@ -133,6 +126,11 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
           )}
           name="passwordConfirm"
         />
+        {serverError && (
+          <Text style={[styles.fontText, styles.textServerError]}>
+            {serverError}
+          </Text>
+        )}
       </View>
       <View style={styles.containerButton}>
         <View style={styles.containerHaveAccount}>

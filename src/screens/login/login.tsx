@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Input} from 'src/components/UI/input/default-input/default-input';
 import {Text, View} from 'react-native';
 import {Button as RegistrationButton} from 'src/components/UI/button/text-button/text-button';
@@ -10,6 +10,7 @@ import {RootStackParamList} from 'src/routes/routes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useUserSignIn} from 'src/api/user/gql/mutations/__generated__/user-signin.mutation';
 import {useAuth} from 'src/hooks/useAuth';
+import {validateEmail, validatePassword} from 'src/utils/validation';
 
 interface LoginScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Login'>;
@@ -21,12 +22,12 @@ interface SubmitProps {
 }
 
 export const LoginScreen = ({navigation}: LoginScreenProps) => {
+  const [serverError, setServerError] = useState<string | null>(null);
   const [userSignIn, {loading}] = useUserSignIn();
   const {authenticate} = useAuth();
   const {
     control,
     handleSubmit,
-    setError,
     formState: {errors},
   } = useForm({
     defaultValues: {
@@ -37,6 +38,7 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
 
   const onSubmit = async (dataSubmit: SubmitProps) => {
     try {
+      setServerError(null);
       const response = await userSignIn({
         variables: {
           input: {
@@ -47,24 +49,20 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
       });
 
       if (response.data?.userSignIn?.problem) {
-        setError('email', {
-          type: 'manual',
-          message: 'Something went wrong.',
-        });
-        setError('password', {
-          type: 'manual',
-          message: 'Something went wrong.',
-        });
+        setServerError(response.data?.userSignIn?.problem.message);
       } else if (response.data?.userSignIn?.token) {
+        setServerError(null);
         authenticate(response.data.userSignIn.token);
       }
     } catch (e) {
+      setServerError('Something went wrong!');
       console.log(e);
     }
   };
 
   const themeVariant: ColorThemes = useColorTheme();
   const styles = getLoginScreenStyles(themeVariant);
+
   return (
     <View style={[styles.container, styles.containerBackground]}>
       <View style={styles.wrapper}>
@@ -76,7 +74,7 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
         </View>
         <Controller
           control={control}
-          rules={{required: true}}
+          rules={{required: true, validate: validateEmail}}
           render={({field: {onChange, onBlur, value}}) => (
             <Input
               label="E-mail"
@@ -92,7 +90,7 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
         />
         <Controller
           control={control}
-          rules={{required: true}}
+          rules={{required: true, validate: validatePassword}}
           render={({field: {onChange, onBlur, value}}) => (
             <Input
               label="Password"
@@ -100,13 +98,18 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
+              isPassword
               isError={!!errors.password}
               errorMessage={errors.password?.message}
-              isPassword
             />
           )}
           name="password"
         />
+        {serverError && (
+          <Text style={[styles.fontText, styles.textServerError]}>
+            {serverError}
+          </Text>
+        )}
       </View>
       <View style={styles.containerButton}>
         <View style={styles.containerNoAccount}>
