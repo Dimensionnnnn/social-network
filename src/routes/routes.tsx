@@ -8,6 +8,20 @@ import {CustomDrawer} from 'src/screens/drawer/drawer';
 
 const Stack = createNativeStackNavigator();
 
+export type RootStackParamList = {
+  WelcomeScreen: undefined;
+  Login: undefined;
+  Registration: undefined;
+  BottomTab: undefined;
+};
+
+enum RouteNames {
+  CUSTOM_DRAWER = 'CustomDrawer',
+  WELCOME_SCREEN = 'WelcomeScreen',
+  LOGIN = 'Login',
+  REGISTRATION = 'Registration',
+}
+
 export const Routes = () => {
   const {userToken} = useAuth();
 
@@ -15,24 +29,24 @@ export const Routes = () => {
     <Stack.Navigator>
       {userToken ? (
         <Stack.Screen
-          name="CustomDrawer"
+          name={RouteNames.CUSTOM_DRAWER}
           component={CustomDrawer}
           options={{headerShown: false}}
         />
       ) : (
         <>
           <Stack.Screen
-            name="WelcomeScreen"
+            name={RouteNames.WELCOME_SCREEN}
             component={WelcomeScreen}
             options={{headerShown: false}}
           />
           <Stack.Screen
-            name="Login"
+            name={RouteNames.LOGIN}
             component={LoginScreen}
             options={{headerShown: false}}
           />
           <Stack.Screen
-            name="Registration"
+            name={RouteNames.REGISTRATION}
             component={RegistrationScreen}
             options={{headerShown: false}}
           />
@@ -40,11 +54,4 @@ export const Routes = () => {
       )}
     </Stack.Navigator>
   );
-};
-
-export type RootStackParamList = {
-  WelcomeScreen: undefined;
-  Login: undefined;
-  Registration: undefined;
-  BottomTab: undefined;
 };
