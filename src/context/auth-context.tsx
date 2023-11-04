@@ -6,7 +6,7 @@ import {
 } from 'src/utils/async-storage';
 import {apolloClient} from 'src/api/client';
 
-enum TOKEN {
+export enum TOKEN {
   USER_TOKEN = 'userToken',
 }
 

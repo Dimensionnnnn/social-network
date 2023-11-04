@@ -9,7 +9,7 @@ import {Button} from 'src/components/UI/button/button-icon/button-icon';
 interface PostCardFooterProps {
   authorName: string;
   likesCount: number;
-  authorPhotoUrl: number;
+  authorPhotoUrl?: string;
 }
 
 export const PostCardFooter: React.FC<PostCardFooterProps> = ({
@@ -27,7 +27,7 @@ export const PostCardFooter: React.FC<PostCardFooterProps> = ({
           <Image
             resizeMethod="resize"
             resizeMode="contain"
-            source={authorPhotoUrl}
+            source={{uri: authorPhotoUrl}}
             style={cardFooterStyles.imageSize}
           />
         </View>

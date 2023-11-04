@@ -12,7 +12,6 @@ export const postCardStyles = {
   root: StyleSheet.create({
     container: {
       width: '100%',
-      maxWidth: 375,
       alignItems: 'center',
       display: 'flex',
       flexDirection: 'column',

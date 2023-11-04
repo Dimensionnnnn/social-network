@@ -47,6 +47,7 @@ export const tabsStyles = {
       elevation: 0,
       alignSelf: 'center',
       backgroundColor: 'transparent',
+      marginBottom: 40,
     },
     containerItem: {
       maxWidth: 171.5,

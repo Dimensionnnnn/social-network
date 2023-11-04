@@ -9,13 +9,13 @@ import {AuthProvider} from 'src/context/auth-context';
 
 function App(): JSX.Element {
   return (
-    <ApolloProvider client={apolloClient}>
-      <AuthProvider>
+    <AuthProvider>
+      <ApolloProvider client={apolloClient}>
         <NavigationContainer onReady={() => BootSplash.hide()}>
           <Routes />
         </NavigationContainer>
-      </AuthProvider>
-    </ApolloProvider>
+      </ApolloProvider>
+    </AuthProvider>
   );
 }
 

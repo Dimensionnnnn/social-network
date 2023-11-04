@@ -9,21 +9,21 @@ import {PostCardFooter} from './post-card-footer/post-card-footer';
 import {PostCardDescription} from './post-card-description/post-card-description';
 
 interface PostCardProps {
-  name: string;
-  dateOfCreation: string;
+  title: string;
+  createdAt: string;
   description: string;
-  photoUrl: number;
-  authorPhotoUrl: number;
-  authorName: string;
+  mediaUrl: string;
+  avatarUrl?: string;
+  authorName?: string;
   likesCount: number;
 }
 
 export const PostCard: React.FC<PostCardProps> = ({
-  name,
-  dateOfCreation,
+  title,
+  createdAt,
   description,
-  photoUrl,
-  authorPhotoUrl,
+  mediaUrl,
+  avatarUrl,
   authorName,
   likesCount,
 }) => {
@@ -45,30 +45,30 @@ export const PostCard: React.FC<PostCardProps> = ({
       {isPostOpen ? (
         <>
           <PostCardTitle
-            name={name}
-            dateOfCreation={dateOfCreation}
+            name={title}
+            dateOfCreation={createdAt}
             isPostOpen={isPostOpen}
           />
-          <PostCardImage photoUrl={photoUrl} onPress={handleOpenPost} />
+          <PostCardImage photoUrl={mediaUrl} onPress={handleOpenPost} />
           <PostCardDescription description={description} />
           <PostCardFooter
-            authorName={authorName}
+            authorName={authorName ? authorName : 'User'}
             likesCount={likesCount}
-            authorPhotoUrl={authorPhotoUrl}
+            authorPhotoUrl={avatarUrl}
           />
         </>
       ) : (
         <>
           <PostCardTitle
-            name={name}
-            dateOfCreation={dateOfCreation}
+            name={title}
+            dateOfCreation={createdAt}
             isPostOpen={isPostOpen}
           />
-          <PostCardImage photoUrl={photoUrl} onPress={handleOpenPost} />
+          <PostCardImage photoUrl={mediaUrl} onPress={handleOpenPost} />
           <PostCardFooter
-            authorName={authorName}
+            authorName={authorName ? authorName : 'User'}
             likesCount={likesCount}
-            authorPhotoUrl={authorPhotoUrl}
+            authorPhotoUrl={avatarUrl}
           />
         </>
       )}

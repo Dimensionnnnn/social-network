@@ -3,7 +3,7 @@ import {Image, Pressable} from 'react-native';
 import {getCardTitleStyles} from './styles';
 
 interface PostCardImageProps {
-  photoUrl: number;
+  photoUrl: string;
   onPress?: () => void;
 }
 
@@ -18,7 +18,7 @@ export const PostCardImage: React.FC<PostCardImageProps> = ({
       <Image
         resizeMethod="resize"
         resizeMode="contain"
-        source={photoUrl}
+        source={{uri: photoUrl}}
         style={cardImageStyles.imageSize}
       />
     </Pressable>
