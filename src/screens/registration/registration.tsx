@@ -12,7 +12,7 @@ import {useUserSignUp} from 'src/api/user/gql/mutations/__generated__/user-signu
 import {useAuth} from 'src/hooks/useAuth';
 import {validateEmail, validatePassword} from 'src/utils/validation';
 import {useToast} from 'react-native-toast-notifications';
-import {serverErrorMessage, toasterParamsError} from 'src/utils/serverError';
+import {setToastFunction, showServerError} from 'src/utils/serverError';
 
 interface RegistrationScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Registration'>;
@@ -27,7 +27,10 @@ interface SubmitProps {
 export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
   const [userSignUp, {loading}] = useUserSignUp();
   const {authenticate} = useAuth();
+
   const toast = useToast();
+  setToastFunction(toast.show);
+
   const {
     control,
     handleSubmit,
@@ -53,15 +56,12 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
       });
 
       if (respone.data?.userSignUp?.problem) {
-        toast.show(
-          respone.data?.userSignUp?.problem.message,
-          toasterParamsError,
-        );
+        showServerError(respone.data?.userSignUp?.problem.message);
       } else if (respone.data?.userSignUp?.token) {
         authenticate(respone.data.userSignUp.token);
       }
     } catch (e) {
-      toast.show(serverErrorMessage, toasterParamsError);
+      showServerError();
       console.log(e);
     }
   };

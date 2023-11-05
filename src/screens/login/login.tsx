@@ -12,7 +12,7 @@ import {useUserSignIn} from 'src/api/user/gql/mutations/__generated__/user-signi
 import {useAuth} from 'src/hooks/useAuth';
 import {validateEmail, validatePassword} from 'src/utils/validation';
 import {useToast} from 'react-native-toast-notifications';
-import {serverErrorMessage, toasterParamsError} from 'src/utils/serverError';
+import {setToastFunction, showServerError} from 'src/utils/serverError';
 
 interface LoginScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Login'>;
@@ -26,7 +26,10 @@ interface SubmitProps {
 export const LoginScreen = ({navigation}: LoginScreenProps) => {
   const [userSignIn, {loading}] = useUserSignIn();
   const {authenticate} = useAuth();
+
   const toast = useToast();
+  setToastFunction(toast.show);
+
   const {
     control,
     handleSubmit,
@@ -50,15 +53,12 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
       });
 
       if (response.data?.userSignIn?.problem) {
-        toast.show(
-          response.data?.userSignIn?.problem.message,
-          toasterParamsError,
-        );
+        showServerError(response.data?.userSignIn?.problem.message);
       } else if (response.data?.userSignIn?.token) {
         authenticate(response.data.userSignIn.token);
       }
     } catch (e) {
-      toast.show(serverErrorMessage, toasterParamsError);
+      showServerError();
       console.log(e);
     }
   };
