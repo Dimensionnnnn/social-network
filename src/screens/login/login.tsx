@@ -11,8 +11,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {useUserSignIn} from 'src/api/user/gql/mutations/__generated__/user-signin.mutation';
 import {useAuth} from 'src/hooks/useAuth';
 import {validateEmail, validatePassword} from 'src/utils/validation';
-import {useToast} from 'react-native-toast-notifications';
-import {setToastFunction, showServerError} from 'src/utils/serverError';
+import {showToast} from 'src/utils/serverError';
 
 interface LoginScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Login'>;
@@ -26,10 +25,6 @@ interface SubmitProps {
 export const LoginScreen = ({navigation}: LoginScreenProps) => {
   const [userSignIn, {loading}] = useUserSignIn();
   const {authenticate} = useAuth();
-
-  const toast = useToast();
-  setToastFunction(toast.show);
-
   const {
     control,
     handleSubmit,
@@ -53,12 +48,15 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
       });
 
       if (response.data?.userSignIn?.problem) {
-        showServerError(response.data?.userSignIn?.problem.message);
+        showToast({
+          type: 'danger',
+          message: response.data?.userSignIn?.problem.message,
+        });
       } else if (response.data?.userSignIn?.token) {
         authenticate(response.data.userSignIn.token);
       }
     } catch (e) {
-      showServerError();
+      showToast({type: 'danger'});
       console.log(e);
     }
   };

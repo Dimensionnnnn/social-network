@@ -1,7 +1,6 @@
-import {ToastOptions} from 'react-native-toast-notifications';
+import {Toast, ToastOptions} from 'react-native-toast-notifications';
 
 const toasterParamsError: ToastOptions = {
-  type: 'danger',
   placement: 'top',
   duration: 3000,
   animationType: 'slide-in',
@@ -9,19 +8,14 @@ const toasterParamsError: ToastOptions = {
 
 const serverErrorMessage = 'Something went wrong!';
 
-type ShowToastFunction = (message: string, params: ToastOptions) => void;
+interface ShowToastProps {
+  type?: 'normal' | 'success' | 'danger' | 'warning' | string;
+  message?: string;
+}
 
-let showToastFunction: ShowToastFunction | null = null;
-
-export const setToastFunction = (showToast: ShowToastFunction) => {
-  showToastFunction = showToast;
-};
-
-export const showServerError = (message?: string) => {
-  if (showToastFunction) {
-    showToastFunction(
-      message ? message : serverErrorMessage,
-      toasterParamsError,
-    );
-  }
+export const showToast = ({type, message}: ShowToastProps) => {
+  Toast.show(message ? message : serverErrorMessage, {
+    type: type ? type : 'normal',
+    ...toasterParamsError,
+  });
 };

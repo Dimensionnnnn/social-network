@@ -11,8 +11,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {useUserSignUp} from 'src/api/user/gql/mutations/__generated__/user-signup.mutation';
 import {useAuth} from 'src/hooks/useAuth';
 import {validateEmail, validatePassword} from 'src/utils/validation';
-import {useToast} from 'react-native-toast-notifications';
-import {setToastFunction, showServerError} from 'src/utils/serverError';
+import {showToast} from 'src/utils/serverError';
 
 interface RegistrationScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Registration'>;
@@ -27,10 +26,6 @@ interface SubmitProps {
 export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
   const [userSignUp, {loading}] = useUserSignUp();
   const {authenticate} = useAuth();
-
-  const toast = useToast();
-  setToastFunction(toast.show);
-
   const {
     control,
     handleSubmit,
@@ -56,12 +51,15 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
       });
 
       if (respone.data?.userSignUp?.problem) {
-        showServerError(respone.data?.userSignUp?.problem.message);
+        showToast({
+          type: 'danger',
+          message: respone.data?.userSignUp?.problem.message,
+        });
       } else if (respone.data?.userSignUp?.token) {
         authenticate(respone.data.userSignUp.token);
       }
     } catch (e) {
-      showServerError();
+      showToast({type: 'danger'});
       console.log(e);
     }
   };
