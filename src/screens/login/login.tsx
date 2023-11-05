@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Input} from 'src/components/UI/input/default-input/default-input';
 import {Text, View} from 'react-native';
 import {Button as RegistrationButton} from 'src/components/UI/button/text-button/text-button';
@@ -11,6 +11,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {useUserSignIn} from 'src/api/user/gql/mutations/__generated__/user-signin.mutation';
 import {useAuth} from 'src/hooks/useAuth';
 import {validateEmail, validatePassword} from 'src/utils/validation';
+import {useToast} from 'react-native-toast-notifications';
+import {serverErrorMessage, toasterParamsError} from 'src/utils/serverError';
 
 interface LoginScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Login'>;
@@ -22,9 +24,9 @@ interface SubmitProps {
 }
 
 export const LoginScreen = ({navigation}: LoginScreenProps) => {
-  const [serverError, setServerError] = useState<string | null>(null);
   const [userSignIn, {loading}] = useUserSignIn();
   const {authenticate} = useAuth();
+  const toast = useToast();
   const {
     control,
     handleSubmit,
@@ -38,7 +40,6 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
 
   const onSubmit = async (dataSubmit: SubmitProps) => {
     try {
-      setServerError(null);
       const response = await userSignIn({
         variables: {
           input: {
@@ -49,13 +50,15 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
       });
 
       if (response.data?.userSignIn?.problem) {
-        setServerError(response.data?.userSignIn?.problem.message);
+        toast.show(
+          response.data?.userSignIn?.problem.message,
+          toasterParamsError,
+        );
       } else if (response.data?.userSignIn?.token) {
-        setServerError(null);
         authenticate(response.data.userSignIn.token);
       }
     } catch (e) {
-      setServerError('Something went wrong!');
+      toast.show(serverErrorMessage, toasterParamsError);
       console.log(e);
     }
   };
@@ -105,11 +108,6 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
           )}
           name="password"
         />
-        {serverError && (
-          <Text style={[styles.fontText, styles.textServerError]}>
-            {serverError}
-          </Text>
-        )}
       </View>
       <View style={styles.containerButton}>
         <View style={styles.containerNoAccount}>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Input} from 'src/components/UI/input/default-input/default-input';
 import {ScrollView, Text, View} from 'react-native';
 import {Button as LogInButton} from 'src/components/UI/button/text-button/text-button';
@@ -11,6 +11,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {useUserSignUp} from 'src/api/user/gql/mutations/__generated__/user-signup.mutation';
 import {useAuth} from 'src/hooks/useAuth';
 import {validateEmail, validatePassword} from 'src/utils/validation';
+import {useToast} from 'react-native-toast-notifications';
+import {serverErrorMessage, toasterParamsError} from 'src/utils/serverError';
 
 interface RegistrationScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Registration'>;
@@ -23,9 +25,9 @@ interface SubmitProps {
 }
 
 export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
-  const [serverError, setServerError] = useState<string | null>(null);
   const [userSignUp, {loading}] = useUserSignUp();
   const {authenticate} = useAuth();
+  const toast = useToast();
   const {
     control,
     handleSubmit,
@@ -40,7 +42,6 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
 
   const onSubmit = async (dataSubmit: SubmitProps) => {
     try {
-      setServerError(null);
       const respone = await userSignUp({
         variables: {
           input: {
@@ -52,13 +53,15 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
       });
 
       if (respone.data?.userSignUp?.problem) {
-        setServerError(respone.data?.userSignUp?.problem.message);
+        toast.show(
+          respone.data?.userSignUp?.problem.message,
+          toasterParamsError,
+        );
       } else if (respone.data?.userSignUp?.token) {
-        setServerError(null);
         authenticate(respone.data.userSignUp.token);
       }
     } catch (e) {
-      setServerError('Something went wrong!');
+      toast.show(serverErrorMessage, toasterParamsError);
       console.log(e);
     }
   };
@@ -126,11 +129,6 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
           )}
           name="passwordConfirm"
         />
-        {serverError && (
-          <Text style={[styles.fontText, styles.textServerError]}>
-            {serverError}
-          </Text>
-        )}
       </View>
       <View style={styles.containerButton}>
         <View style={styles.containerHaveAccount}>

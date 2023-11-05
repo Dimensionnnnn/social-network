@@ -8,13 +8,11 @@ const loginScreenStyles = {
     containerBackground: {backgroundColor: COLORS.grayscale_dark_07},
     titleColor: {color: COLORS.secondary_dark_01},
     textColor: {color: COLORS.grayscale_dark_01},
-    textServerError: {color: COLORS.additional_error},
   },
   [ColorThemes.LIGHT]: {
     containerBackground: {backgroundColor: COLORS.grayscale_light_07},
     titleColor: {color: COLORS.dark_mode},
     textColor: {color: COLORS.grayscale_light_01},
-    textServerError: {color: COLORS.additional_error},
   },
   root: StyleSheet.create({
     fontTitle: outfitTextStyles.titleSemiBold_32,
