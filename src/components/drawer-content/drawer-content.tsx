@@ -64,9 +64,7 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
         <DrawerItem
           label="Exit"
           icon={() => DrawerItemIcon(SvgExit, styles.colorIcon)}
-          onPress={() => {
-            logout();
-          }}
+          onPress={logout}
           labelStyle={[
             styles.itemLabel,
             styles.fontItemLabel,
