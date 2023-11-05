@@ -51,15 +51,12 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
       });
 
       if (respone.data?.userSignUp?.problem) {
-        showToast({
-          type: 'danger',
-          message: respone.data?.userSignUp?.problem.message,
-        });
+        showToast({message: respone.data?.userSignUp?.problem.message});
       } else if (respone.data?.userSignUp?.token) {
         authenticate(respone.data.userSignUp.token);
       }
     } catch (e) {
-      showToast({type: 'danger'});
+      showToast();
       console.log(e);
     }
   };

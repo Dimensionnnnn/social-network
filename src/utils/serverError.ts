@@ -13,9 +13,12 @@ interface ShowToastProps {
   message?: string;
 }
 
-export const showToast = ({type, message}: ShowToastProps) => {
-  Toast.show(message ? message : serverErrorMessage, {
-    type: type ? type : 'normal',
+export const showToast = ({
+  type = 'danger',
+  message = serverErrorMessage,
+}: Partial<ShowToastProps> = {}) => {
+  Toast.show(message, {
+    type: type,
     ...toasterParamsError,
   });
 };

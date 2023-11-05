@@ -48,15 +48,12 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
       });
 
       if (response.data?.userSignIn?.problem) {
-        showToast({
-          type: 'danger',
-          message: response.data?.userSignIn?.problem.message,
-        });
+        showToast({message: response.data?.userSignIn?.problem.message});
       } else if (response.data?.userSignIn?.token) {
         authenticate(response.data.userSignIn.token);
       }
     } catch (e) {
-      showToast({type: 'danger'});
+      showToast();
       console.log(e);
     }
   };
