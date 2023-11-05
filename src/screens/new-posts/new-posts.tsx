@@ -5,13 +5,16 @@ import {PostCard} from 'src/components/UI/post-card/post-card';
 import {PostFilterType} from 'src/shared/types/__generated__/gql-types';
 import {getNewPostsStyles} from './styles';
 import {ColorThemes, useColorTheme} from 'src/hooks/useColorTheme';
+import {formatAuthorName} from 'src/helpers/formatAuthorName';
+import {Spinner} from 'src/components/UI/spinner/spinner';
+import {NotFound} from 'src/components/UI/not-found/not-found';
 import dayjs from 'dayjs';
 
 export const NewPosts = () => {
   const themeVariant: ColorThemes = useColorTheme();
   const styles = getNewPostsStyles(themeVariant);
 
-  const {data} = usePosts({
+  const {loading, error, data} = usePosts({
     variables: {
       input: {
         type: PostFilterType.New,
@@ -19,16 +22,14 @@ export const NewPosts = () => {
     },
   });
 
-  const getAuthorName = (firstName: string, lastName: string) => {
-    if (firstName && lastName) {
-      const partLastName = ' ' + lastName[0] + '.';
-      return firstName.concat(partLastName);
-    }
-  };
+  const errorMessage = 'Something went wrong, sorry :(';
 
   return (
     <ScrollView
       contentContainerStyle={[styles.container, styles.containerBackground]}>
+      {loading && (
+        <Spinner color={styles.spinnerColor} stroke={styles.spinnerStroke} />
+      )}
       {data?.posts?.data &&
         Object.values(data.posts.data).map(post => (
           <PostCard
@@ -38,13 +39,14 @@ export const NewPosts = () => {
             description={post.description}
             mediaUrl={post.mediaUrl}
             avatarUrl={post.author.avatarUrl || ''}
-            authorName={getAuthorName(
+            authorName={formatAuthorName(
               post.author.firstName || '',
               post.author.lastName || '',
             )}
             likesCount={post.likesCount}
           />
         ))}
+      {error && <NotFound text={errorMessage} />}
     </ScrollView>
   );
 };

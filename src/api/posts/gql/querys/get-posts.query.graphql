@@ -3,5 +3,8 @@ query Posts($input: FindPostsRequest!) {
     data {
       ...PostFragment
     }
+    pageInfo {
+      afterCursor
+    }
   }
 }
