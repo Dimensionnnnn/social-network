@@ -82,13 +82,11 @@ export const inputStyles = {
     container: {
       width: '100%',
       maxWidth: 343,
-      paddingTop: 12,
-      paddingBottom: 16,
       position: 'relative',
     },
     containerIcon: {
       position: 'absolute',
-      top: 42,
+      top: 32,
       right: 0,
     },
     containerError: {
@@ -97,6 +95,10 @@ export const inputStyles = {
       paddingBottom: 4,
       width: '100%',
       maxWidth: 343,
+    },
+    containerInput: {
+      paddingTop: 12,
+      paddingBottom: 16,
     },
   }),
 };
@@ -122,6 +124,7 @@ export const getInputStyles = ({
 }: InputStylesOptions) => {
   return {
     container: inputStyles.root.container,
+    containerInput: inputStyles.root.containerInput,
     label: inputStyles.label,
     inputTextFont: inputStyles.root.fontInput,
     labelFont: inputStyles.root.fontLabel,
