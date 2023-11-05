@@ -10,6 +10,9 @@ import {RootStackParamList} from 'src/routes/routes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useUserSignUp} from 'src/api/user/gql/mutations/__generated__/user-signup.mutation';
 import {useAuth} from 'src/hooks/useAuth';
+import {validateEmail, validatePassword} from 'src/utils/validation';
+import {useToast} from 'react-native-toast-notifications';
+import {serverErrorMessage, toasterParamsError} from 'src/utils/serverError';
 
 interface RegistrationScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Registration'>;
@@ -24,10 +27,10 @@ interface SubmitProps {
 export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
   const [userSignUp, {loading}] = useUserSignUp();
   const {authenticate} = useAuth();
+  const toast = useToast();
   const {
     control,
     handleSubmit,
-    setError,
     formState: {errors},
   } = useForm({
     defaultValues: {
@@ -50,22 +53,15 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
       });
 
       if (respone.data?.userSignUp?.problem) {
-        setError('email', {
-          type: 'manual',
-          message: 'Something went wrong.',
-        });
-        setError('password', {
-          type: 'manual',
-          message: 'Something went wrong.',
-        });
-        setError('passwordConfirm', {
-          type: 'manual',
-          message: 'Something went wrong.',
-        });
+        toast.show(
+          respone.data?.userSignUp?.problem.message,
+          toasterParamsError,
+        );
       } else if (respone.data?.userSignUp?.token) {
         authenticate(respone.data.userSignUp.token);
       }
     } catch (e) {
+      toast.show(serverErrorMessage, toasterParamsError);
       console.log(e);
     }
   };
@@ -85,7 +81,7 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
         </View>
         <Controller
           control={control}
-          rules={{required: true}}
+          rules={{required: true, validate: validateEmail}}
           render={({field: {onChange, onBlur, value}}) => (
             <Input
               label="E-mail"
@@ -101,7 +97,7 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
         />
         <Controller
           control={control}
-          rules={{required: true}}
+          rules={{required: true, validate: validatePassword}}
           render={({field: {onChange, onBlur, value}}) => (
             <Input
               label="Password"
@@ -118,7 +114,7 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
         />
         <Controller
           control={control}
-          rules={{required: true}}
+          rules={{required: true, validate: validatePassword}}
           render={({field: {onChange, onBlur, value}}) => (
             <Input
               label="Confirm password"
