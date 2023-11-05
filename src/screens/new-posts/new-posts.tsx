@@ -8,6 +8,10 @@ import {ColorThemes, useColorTheme} from 'src/hooks/useColorTheme';
 import {formatAuthorName} from 'src/helpers/formatAuthorName';
 import {Spinner} from 'src/components/UI/spinner/spinner';
 import {NotFound} from 'src/components/UI/not-found/not-found';
+import {
+  errorMessage,
+  notFoundMessage,
+} from 'src/constants/notificationMessages';
 import dayjs from 'dayjs';
 
 export const NewPosts = () => {
@@ -22,7 +26,7 @@ export const NewPosts = () => {
     },
   });
 
-  const errorMessage = 'Something went wrong, sorry :(';
+  const postsData = data?.posts?.data;
 
   return (
     <ScrollView
@@ -30,22 +34,23 @@ export const NewPosts = () => {
       {loading && (
         <Spinner color={styles.spinnerColor} stroke={styles.spinnerStroke} />
       )}
-      {data?.posts?.data &&
-        Object.values(data.posts.data).map(post => (
-          <PostCard
-            key={post.id}
-            title={post.title}
-            createdAt={dayjs(post.createdAt).format('DD.MM.YY')}
-            description={post.description}
-            mediaUrl={post.mediaUrl}
-            avatarUrl={post.author.avatarUrl || ''}
-            authorName={formatAuthorName(
-              post.author.firstName || '',
-              post.author.lastName || '',
-            )}
-            likesCount={post.likesCount}
-          />
-        ))}
+      {postsData
+        ? Object.values(postsData).map(post => (
+            <PostCard
+              key={post.id}
+              title={post.title}
+              createdAt={dayjs(post.createdAt).format('DD.MM.YY')}
+              description={post.description}
+              mediaUrl={post.mediaUrl}
+              avatarUrl={post.author.avatarUrl || ''}
+              authorName={formatAuthorName(
+                post.author.firstName || '',
+                post.author.lastName || '',
+              )}
+              likesCount={post.likesCount}
+            />
+          ))
+        : !error && !loading && <NotFound text={notFoundMessage} />}
       {error && <NotFound text={errorMessage} />}
     </ScrollView>
   );
