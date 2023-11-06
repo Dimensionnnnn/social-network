@@ -1,20 +1,27 @@
 import React from 'react';
 import {View, FlatList} from 'react-native';
-import {PostFilterType} from 'src/shared/types/__generated__/gql-types';
-import {PostCard} from 'src/components/UI/post-card/post-card';
 import {useColorTheme} from 'src/hooks/useColorTheme';
-import {getTopPostsStyles} from './styles';
-import {formatAuthorName} from 'src/helpers/formatAuthorName';
-import {Spinner} from 'src/components/UI/spinner/spinner';
-import dayjs from 'dayjs';
 import {usePostsRequest} from 'src/hooks/usePostsRequest';
+import {PostFilterType} from 'src/shared/types/__generated__/gql-types';
+import {getMainPostsStyle} from './styles';
+import {Spinner} from 'src/components/UI/spinner/spinner';
 import {ListEmptyComponent} from 'src/components/UI/list-empty/list-empty';
+import {formatAuthorName} from 'src/helpers/formatAuthorName';
+import {PostCard} from 'src/components/UI/post-card/post-card';
+import {RouteProp} from '@react-navigation/native';
+import dayjs from 'dayjs';
 
-export const TopPosts = () => {
+type MainPostsRouteProp = RouteProp<
+  {MainPosts: {type: PostFilterType}},
+  'MainPosts'
+>;
+
+export const MainPosts = ({route}: {route?: MainPostsRouteProp}) => {
   const themeVariant = useColorTheme();
-  const styles = getTopPostsStyles(themeVariant);
+  const styles = getMainPostsStyle(themeVariant);
+  const {type} = route!.params;
   const {isLoading, isError, posts, fetchMore} = usePostsRequest({
-    type: PostFilterType.Top,
+    type,
   });
 
   return (

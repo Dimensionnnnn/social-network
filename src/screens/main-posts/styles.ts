@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {COLORS} from 'src/assets/styles/colors';
 
-const newPostsStyles = {
+const mainPostsStyle = {
   ['dark']: {
     containerBackground: {backgroundColor: COLORS.grayscale_dark_07},
     spinnerColor: COLORS.secondary_dark_01,
@@ -25,9 +25,9 @@ const newPostsStyles = {
   }),
 };
 
-export const getNewPostsStyles = (themeVariant: 'dark' | 'light') => {
+export const getMainPostsStyle = (themeVariant: 'dark' | 'light') => {
   return {
-    ...newPostsStyles[themeVariant],
-    ...newPostsStyles.root,
+    ...mainPostsStyle[themeVariant],
+    ...mainPostsStyle.root,
   };
 };
