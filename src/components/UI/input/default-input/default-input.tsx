@@ -1,4 +1,4 @@
-import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/useColorTheme';
 import React, {useState} from 'react';
 import {Text, TextInput, View, TextInputProps, Pressable} from 'react-native';
 import {getInputStyles} from './styles';
@@ -29,7 +29,7 @@ export const Input: React.FC<InputProps> = ({
   const [isTyping, setIsTyping] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
 
   const inputStyles = getInputStyles({
     themeVariant,

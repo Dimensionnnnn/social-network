@@ -3,13 +3,13 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {BottomTab} from 'src/components/tapbar/tapbar';
 import {DrawerContent} from 'src/components/drawer-content/drawer-content';
 import {getDrawerStyles} from './styles';
-import {ColorThemes, useColorTheme} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/useColorTheme';
 import {View} from 'react-native';
 
 const Drawer = createDrawerNavigator();
 
 export const CustomDrawer = () => {
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
   const styles = getDrawerStyles(themeVariant);
 
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, Pressable} from 'react-native';
-import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/useColorTheme';
 import {SvgUserIcon} from 'src/shared/icons/components/user-icon';
 import {getUserIconStyles} from './styles';
 
@@ -22,7 +22,7 @@ export const UserIcon: React.FC<UserIconProps> = ({
   userPhotoUrl,
   onPress,
 }) => {
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
   const userIconStyles = getUserIconStyles(themeVariant, size);
 
   return (

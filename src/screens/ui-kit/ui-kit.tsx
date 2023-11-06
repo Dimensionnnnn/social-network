@@ -25,7 +25,7 @@ import {UserIcon} from 'src/components/UI/button/user-icon/user-icon';
 
 import {CustomSwitch} from 'src/components/UI/switch/switch';
 
-import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/useColorTheme';
 
 const LABELS = [
   {id: 101, label: 'Male'},
@@ -38,7 +38,7 @@ const userPhotoUrl = require('src\\shared\\images\\userPhoto.png');
 const postPhotoUrl = require('src\\shared\\images\\postPhoto.png');
 
 export const UIKit = () => {
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
   return (
     <View style={[styles.container, styles[themeVariant]]}>
       <CustomSwitch />

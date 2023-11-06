@@ -1,13 +1,14 @@
 import {StyleSheet} from 'react-native';
 import {COLORS} from 'src/assets/styles/colors';
+import {ColorThemes} from 'src/hooks/useColorTheme';
 
 const mainPostsStyle = {
-  ['dark']: {
+  [ColorThemes.DARK]: {
     containerBackground: {backgroundColor: COLORS.grayscale_dark_07},
     spinnerColor: COLORS.secondary_dark_01,
     spinnerStroke: COLORS.grayscale_dark_01,
   },
-  ['light']: {
+  [ColorThemes.LIGHT]: {
     containerBackground: {backgroundColor: COLORS.grayscale_light_07},
     spinnerColor: COLORS.dark_mode,
     spinnerStroke: COLORS.grayscale_light_03,
@@ -25,7 +26,7 @@ const mainPostsStyle = {
   }),
 };
 
-export const getMainPostsStyle = (themeVariant: 'dark' | 'light') => {
+export const getMainPostsStyle = (themeVariant: ColorThemes) => {
   return {
     ...mainPostsStyle[themeVariant],
     ...mainPostsStyle.root,

@@ -1,5 +1,5 @@
 import React from 'react';
-import {ColorThemes, useColorTheme} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/useColorTheme';
 import {Text, Pressable} from 'react-native';
 import {SvgTrashIcon} from 'src/shared/icons/components/trash-svg';
 import {getButtonStyles} from './styles';
@@ -10,7 +10,7 @@ interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = ({title, onPress}) => {
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
   const buttonStyles = getButtonStyles(themeVariant);
 
   return (

@@ -2,14 +2,14 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {SvgNotFound} from 'src/shared/icons/components/not-found-svg';
 import {getNotFoundStyles} from './styles';
-import {ColorThemes, useColorTheme} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/useColorTheme';
 
 interface Props {
   text: string;
 }
 
 export const NotFound: React.FC<Props> = ({text}) => {
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
   const styles = getNotFoundStyles(themeVariant);
 
   return (

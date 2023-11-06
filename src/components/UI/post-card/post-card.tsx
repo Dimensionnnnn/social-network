@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/useColorTheme';
 import {SvgNotFound} from 'src/shared/icons/components/not-found-svg';
 import {View} from 'react-native';
 import {getPostCardStyles} from './styles';
@@ -28,7 +28,7 @@ export const PostCard: React.FC<PostCardProps> = ({
   likesCount,
 }) => {
   const [isPostOpen, setIsPostOpen] = useState(false);
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
   const postCardStyles = getPostCardStyles(themeVariant, isPostOpen);
 
   const handleOpenPost = () => {

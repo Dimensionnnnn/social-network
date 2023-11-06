@@ -1,6 +1,6 @@
 import React from 'react';
 import {Pressable, View, Text} from 'react-native';
-import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/useColorTheme';
 import {getRadioButtonStyles} from './styles';
 
 interface RadioButtonProps {
@@ -14,7 +14,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
   label,
   onPress,
 }) => {
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
   const radioButtonStyles = getRadioButtonStyles(themeVariant, isChecked);
 
   return (
