@@ -25,7 +25,7 @@ import {UserIcon} from 'src/components/UI/button/user-icon/user-icon';
 
 import {CustomSwitch} from 'src/components/UI/switch/switch';
 
-import {useColorTheme} from 'src/hooks/useColorTheme';
+import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
 
 const LABELS = [
   {id: 101, label: 'Male'},
