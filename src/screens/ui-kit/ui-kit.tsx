@@ -6,6 +6,7 @@ import {Button as UIButtonTextIcon} from 'src/components/UI/button/text-icon/tex
 import {Button as UIBUttonText} from 'src/components/UI/button/text-button/text-button';
 import {Button as UIButtonTextIconLeft} from 'src/components/UI/button/text-icon-left/text-icon-left';
 import {Button as UIButtonIcon} from 'src/components/UI/button/button-icon/button-icon';
+import {Button as UIButtonBgIcon} from 'src/components/UI/button/button-icon-bg/button-icon-bg';
 import {Button as UIButtonDelete} from 'src/components/UI/button/delete-button/delete-button';
 
 import {Input} from 'src/components/UI/input/default-input/default-input';
@@ -131,31 +132,19 @@ export const UIKit = () => {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <UIButtonIcon isDefaultIcon={true} Icon={SvgArrowLeft} />
+          <UIButtonIcon Icon={SvgArrowLeft} />
         </View>
         <View style={styles.buttonContainer}>
-          <UIButtonIcon isDefaultIcon={false} Icon={SvgXMark} />
+          <UIButtonIcon Icon={SvgXMark} />
         </View>
         <View style={styles.buttonContainer}>
-          <UIButtonIcon
-            isDefaultIcon={false}
-            Icon={SvgXMini}
-            buttonSize="small"
-          />
+          <UIButtonBgIcon Icon={SvgXMini} buttonSize="small" />
         </View>
         <View style={styles.buttonContainer}>
-          <UIButtonIcon
-            isDefaultIcon={false}
-            Icon={SvgCamera}
-            buttonSize="medium"
-          />
+          <UIButtonBgIcon Icon={SvgCamera} buttonSize="medium" />
         </View>
         <View style={styles.buttonContainer}>
-          <UIButtonIcon
-            isDefaultIcon={false}
-            Icon={SvgPlus}
-            buttonSize="large"
-          />
+          <UIButtonBgIcon Icon={SvgPlus} buttonSize="large" />
         </View>
         <View style={styles.buttonContainer}>
           <UIButtonDelete title="Delete" />
@@ -168,10 +157,10 @@ export const UIKit = () => {
         <UserIcon size="large" userPhotoUrl={userPhotoUrl} />
         <UserIcon size="large" />
         <PostCard
-          name="Apple love"
-          dateOfCreation="11.09.22"
-          photoUrl={postPhotoUrl}
-          authorPhotoUrl={userPhotoUrl}
+          title="Apple love"
+          createdAt="11.09.22"
+          //mediaUrl={postPhotoUrl}
+          //avatarUrl={userPhotoUrl}
           likesCount={137}
           authorName="Hannah K."
           description={description}

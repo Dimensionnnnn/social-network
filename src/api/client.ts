@@ -3,7 +3,7 @@ import Config from 'react-native-config';
 import {setContext} from '@apollo/client/link/context';
 import {getItemStorage} from 'src/utils/async-storage';
 import {TOKEN} from 'src/context/auth-context';
-import uniqBy from 'lodash/uniqBy';
+import {merge} from 'src/utils/merge';
 
 const httpLink = createHttpLink({
   uri: Config.API_URL,
@@ -36,15 +36,13 @@ export const apolloClient = new ApolloClient({
               ['type'],
             ],
             merge(existing, incoming) {
-              const existingData = existing?.data ?? [];
-              const incomingData = incoming?.data ?? [];
-              const uniqPosts = uniqBy(
-                [...existingData, ...incomingData],
-                '__ref',
-              );
-
-              const result = {...incoming, data: uniqPosts};
-              return result;
+              return merge({existing, incoming});
+            },
+          },
+          favouritePosts: {
+            keyArgs: ['data', ['id'], 'pageInfo', ['afterCursor']],
+            merge(existing, incoming) {
+              return merge({existing, incoming});
             },
           },
         },

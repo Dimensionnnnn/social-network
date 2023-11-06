@@ -5,18 +5,18 @@ import {Pressable} from 'react-native';
 import {getIconButtonBgStyles} from './styles';
 
 interface ButtonProps {
+  buttonSize: ButtonSize;
   Icon: (props: SvgProps) => JSX.Element;
   isDisabled?: boolean;
-  isLiked?: boolean;
-  isLikeButton?: boolean;
   onPress?: () => void;
 }
 
+export type ButtonSize = 'small' | 'medium' | 'large';
+
 export const Button: React.FC<ButtonProps> = ({
+  buttonSize,
   Icon,
-  isLiked,
   isDisabled,
-  isLikeButton,
   onPress,
 }) => {
   const [isPressed, setIsPressed] = useState(false);
@@ -28,15 +28,18 @@ export const Button: React.FC<ButtonProps> = ({
 
   const styles = getIconButtonBgStyles({
     themeVariant,
-    isLiked,
-    isLikeButton,
+    buttonSize,
     isPressed,
     isDisabled,
   });
 
   return (
     <Pressable
-      style={[styles.container]}
+      style={[
+        styles.container,
+        styles.sizeContainer,
+        styles.iconStyles.background,
+      ]}
       disabled={isDisabled}
       onPress={onPress}
       onPressIn={handlePress}

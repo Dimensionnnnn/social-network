@@ -1,0 +1,6 @@
+mutation PostLike($input: PostIdRequest!) {
+  postLike(input: $input) {
+    isLiked
+    likesCount
+  }
+}

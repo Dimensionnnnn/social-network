@@ -1,0 +1,10 @@
+query MyPosts($input: FindMyPostsRequest!) {
+  myPosts(input: $input) {
+    data {
+      ...PostFragment
+    }
+    pageInfo {
+      afterCursor
+    }
+  }
+}
