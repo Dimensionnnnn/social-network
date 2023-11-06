@@ -1,57 +1,54 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
-import {usePosts} from 'src/api/posts/gql/querys/__generated__/get-posts.query';
+import {View, FlatList} from 'react-native';
 import {PostCard} from 'src/components/UI/post-card/post-card';
 import {PostFilterType} from 'src/shared/types/__generated__/gql-types';
 import {getNewPostsStyles} from './styles';
-import {ColorThemes, useColorTheme} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/useColorTheme';
 import {formatAuthorName} from 'src/helpers/formatAuthorName';
 import {Spinner} from 'src/components/UI/spinner/spinner';
-import {NotFound} from 'src/components/UI/not-found/not-found';
-import {
-  errorMessage,
-  notFoundMessage,
-} from 'src/constants/notificationMessages';
 import dayjs from 'dayjs';
+import {usePostsRequest} from 'src/hooks/usePostsRequest';
+import {ListEmptyComponent} from 'src/components/UI/list-empty/list-empty';
 
 export const NewPosts = () => {
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
   const styles = getNewPostsStyles(themeVariant);
-
-  const {loading, error, data} = usePosts({
-    variables: {
-      input: {
-        type: PostFilterType.New,
-      },
-    },
+  const {isLoading, isError, posts, fetchMore} = usePostsRequest({
+    type: PostFilterType.New,
   });
 
-  const postsData = data?.posts?.data;
-
   return (
-    <ScrollView
-      contentContainerStyle={[styles.container, styles.containerBackground]}>
-      {loading && (
-        <Spinner color={styles.spinnerColor} stroke={styles.spinnerStroke} />
+    <>
+      <FlatList
+        contentContainerStyle={[styles.container, styles.containerBackground]}
+        data={posts}
+        renderItem={({item}) => (
+          <PostCard
+            key={item.id}
+            title={item.title}
+            createdAt={dayjs(item.createdAt).format('DD.MM.YY')}
+            description={item.description}
+            mediaUrl={item.mediaUrl}
+            avatarUrl={item.author.avatarUrl || ''}
+            authorName={formatAuthorName(
+              item.author.firstName || '',
+              item.author.lastName || '',
+            )}
+            likesCount={item.likesCount}
+          />
+        )}
+        keyExtractor={item => item.id}
+        onEndReached={fetchMore}
+        onEndReachedThreshold={0.1}
+        ListEmptyComponent={
+          <ListEmptyComponent isLoading={isLoading} isError={isError} />
+        }
+      />
+      {isLoading && posts && (
+        <View style={styles.containerSpinner}>
+          <Spinner color={styles.spinnerColor} stroke={styles.spinnerStroke} />
+        </View>
       )}
-      {postsData
-        ? Object.values(postsData).map(post => (
-            <PostCard
-              key={post.id}
-              title={post.title}
-              createdAt={dayjs(post.createdAt).format('DD.MM.YY')}
-              description={post.description}
-              mediaUrl={post.mediaUrl}
-              avatarUrl={post.author.avatarUrl || ''}
-              authorName={formatAuthorName(
-                post.author.firstName || '',
-                post.author.lastName || '',
-              )}
-              likesCount={post.likesCount}
-            />
-          ))
-        : !error && !loading && <NotFound text={notFoundMessage} />}
-      {error && <NotFound text={errorMessage} />}
-    </ScrollView>
+    </>
   );
 };

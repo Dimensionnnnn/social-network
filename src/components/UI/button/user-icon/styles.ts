@@ -26,6 +26,10 @@ export const userIconStyles = {
     },
   }),
   iconSize: {
+    verySmall: {
+      width: 16,
+      height: 16,
+    },
     small: {
       width: 23,
       height: 23,
@@ -40,6 +44,11 @@ export const userIconStyles = {
     },
   },
   containerBySize: {
+    verySmall: {
+      maxWidth: 24,
+      height: 24,
+      borderRadius: 12,
+    },
     small: {
       maxWidth: 40,
       height: 40,

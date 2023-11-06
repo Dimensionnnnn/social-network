@@ -5,6 +5,7 @@ import {SvgUserIcon} from 'src/shared/icons/components/user-icon';
 import {getUserIconStyles} from './styles';
 
 export enum UserIconSize {
+  VERY_SMALL = 'verySmall',
   SMALL = 'small',
   MEDIUM = 'medium',
   LARGE = 'large',

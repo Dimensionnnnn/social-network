@@ -5,6 +5,7 @@ import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
 import {Image, Text, View} from 'react-native';
 import {getCardFooterStyles} from './styles';
 import {Button} from 'src/components/UI/button/button-icon/button-icon';
+import {UserIcon, UserIconSize} from '../../button/user-icon/user-icon';
 
 interface PostCardFooterProps {
   authorName: string;
@@ -24,12 +25,16 @@ export const PostCardFooter: React.FC<PostCardFooterProps> = ({
     <View style={cardFooterStyles.container}>
       <View style={cardFooterStyles.containerAuthorInfo}>
         <View style={cardFooterStyles.containerImage}>
-          <Image
-            resizeMethod="resize"
-            resizeMode="contain"
-            source={{uri: authorPhotoUrl}}
-            style={cardFooterStyles.imageSize}
-          />
+          {authorPhotoUrl ? (
+            <Image
+              resizeMethod="resize"
+              resizeMode="contain"
+              source={{uri: authorPhotoUrl}}
+              style={cardFooterStyles.imageSize}
+            />
+          ) : (
+            <UserIcon size={UserIconSize.VERY_SMALL} />
+          )}
         </View>
         <Text
           style={[cardFooterStyles.fontText, cardFooterStyles.primaryColor]}>
