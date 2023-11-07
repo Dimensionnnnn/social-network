@@ -1,4 +1,4 @@
-import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
+import {useColorTheme, ColorThemes} from 'src/hooks/theme/useColorTheme';
 import React, {useState} from 'react';
 import {Text, TextInput, View, TextInputProps, Pressable} from 'react-native';
 import {getInputStyles} from './styles';

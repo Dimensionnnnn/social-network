@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {COLORS} from 'src/assets/styles/colors';
-import {ColorThemes} from 'src/hooks/useColorTheme';
+import {ColorThemes} from 'src/hooks/theme/useColorTheme';
 
 export const postCardStyles = {
   [ColorThemes.DARK]: {
@@ -12,7 +12,6 @@ export const postCardStyles = {
   root: StyleSheet.create({
     container: {
       width: '100%',
-      maxWidth: 375,
       alignItems: 'center',
       display: 'flex',
       flexDirection: 'column',

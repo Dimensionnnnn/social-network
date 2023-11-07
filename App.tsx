@@ -10,15 +10,15 @@ import {ToastProvider} from 'react-native-toast-notifications';
 
 function App(): JSX.Element {
   return (
-    <ApolloProvider client={apolloClient}>
-      <ToastProvider>
-        <AuthProvider>
+    <ToastProvider>
+      <AuthProvider>
+        <ApolloProvider client={apolloClient}>
           <NavigationContainer onReady={() => BootSplash.hide()}>
             <Routes />
           </NavigationContainer>
-        </AuthProvider>
-      </ToastProvider>
-    </ApolloProvider>
+        </ApolloProvider>
+      </AuthProvider>
+    </ToastProvider>
   );
 }
 

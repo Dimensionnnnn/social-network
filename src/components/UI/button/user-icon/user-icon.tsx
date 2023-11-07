@@ -1,10 +1,11 @@
 import React from 'react';
 import {Image, Pressable} from 'react-native';
-import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
+import {useColorTheme, ColorThemes} from 'src/hooks/theme/useColorTheme';
 import {SvgUserIcon} from 'src/shared/icons/components/user-icon';
 import {getUserIconStyles} from './styles';
 
 export enum UserIconSize {
+  VERY_SMALL = 'verySmall',
   SMALL = 'small',
   MEDIUM = 'medium',
   LARGE = 'large',

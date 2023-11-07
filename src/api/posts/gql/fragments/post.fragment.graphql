@@ -1,0 +1,15 @@
+fragment PostFragment on PostModel {
+    id
+    author {
+        avatarUrl
+        firstName
+        lastName
+    }
+    authorId
+    createdAt
+    description
+    isLiked
+    likesCount
+    mediaUrl
+    title
+}

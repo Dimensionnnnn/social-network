@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {COLORS} from 'src/assets/styles/colors';
 import {outfitTextStyles} from 'src/assets/styles/typography';
-import {ColorThemes} from 'src/hooks/useColorTheme';
+import {ColorThemes} from 'src/hooks/theme/useColorTheme';
 
 export const tabsStyles = {
   [ColorThemes.DARK]: {
@@ -47,6 +47,7 @@ export const tabsStyles = {
       elevation: 0,
       alignSelf: 'center',
       backgroundColor: 'transparent',
+      marginBottom: 40,
     },
     containerItem: {
       maxWidth: 171.5,

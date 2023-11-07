@@ -1,4 +1,4 @@
-import {ColorThemes} from 'src/hooks/useColorTheme';
+import {ColorThemes} from 'src/hooks/theme/useColorTheme';
 import {COLORS} from 'src/assets/styles/colors';
 import {StyleSheet} from 'react-native';
 import {ButtonSize} from './button-icon';

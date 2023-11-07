@@ -1,11 +1,11 @@
 import React from 'react';
-import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
+import {useColorTheme, ColorThemes} from 'src/hooks/theme/useColorTheme';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {getTabsStyles} from './styles';
-import {NewPosts} from 'src/screens/new-posts/new-posts';
-import {TopPosts} from 'src/screens/top-posts/top-posts';
 import {View} from 'react-native';
 import {Header} from '../header/header';
+import {MainPosts} from 'src/screens/main-posts/main-posts';
+import {PostFilterType} from 'src/shared/types/__generated__/gql-types';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -29,7 +29,8 @@ export const TopTabs = () => {
           }}>
           <Tab.Screen
             name="New"
-            component={NewPosts}
+            component={MainPosts}
+            initialParams={{type: PostFilterType.New}}
             options={{
               tabBarItemStyle: topTabStyles.containerItem,
               tabBarIndicatorStyle: [
@@ -41,7 +42,8 @@ export const TopTabs = () => {
           />
           <Tab.Screen
             name="Top"
-            component={TopPosts}
+            component={MainPosts}
+            initialParams={{type: PostFilterType.Top}}
             options={{
               tabBarItemStyle: topTabStyles.containerItem,
               tabBarIndicatorStyle: [

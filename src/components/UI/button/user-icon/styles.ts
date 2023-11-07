@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {COLORS} from 'src/assets/styles/colors';
-import {ColorThemes} from 'src/hooks/useColorTheme';
+import {ColorThemes} from 'src/hooks/theme/useColorTheme';
 import {UserIconSize} from './user-icon';
 
 export const userIconStyles = {
@@ -26,6 +26,10 @@ export const userIconStyles = {
     },
   }),
   iconSize: {
+    verySmall: {
+      width: 16,
+      height: 16,
+    },
     small: {
       width: 23,
       height: 23,
@@ -40,6 +44,11 @@ export const userIconStyles = {
     },
   },
   containerBySize: {
+    verySmall: {
+      maxWidth: 24,
+      height: 24,
+      borderRadius: 12,
+    },
     small: {
       maxWidth: 40,
       height: 40,
