@@ -7,7 +7,9 @@ import {getCardFooterStyles} from './styles';
 import {Button} from 'src/components/UI/button/button-icon/button-icon';
 import {UserIcon, UserIconSize} from '../../button/user-icon/user-icon';
 import {share} from 'src/utils/share';
-import {useLikePost, useUnlikePost} from 'src/hooks/useRatePost';
+import {showToast} from 'src/utils/serverError';
+import {useLikePost} from 'src/hooks/posts/useLikePost';
+import {useUnlikePost} from 'src/hooks/posts/useUnlikePost';
 
 interface PostCardFooterProps {
   postId: string;
@@ -53,6 +55,7 @@ export const PostCardFooter: React.FC<PostCardFooterProps> = ({
         }
       }
     } catch (e) {
+      showToast();
       console.log(e);
     }
   };

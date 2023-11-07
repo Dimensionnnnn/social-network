@@ -1,13 +1,17 @@
 import uniqBy from 'lodash/uniqBy';
-import {FavouritePosts} from 'src/api/posts/gql/querys/__generated__/get-favourite-posts.qury';
-import {Posts} from 'src/api/posts/gql/querys/__generated__/get-posts.query';
 
-type CustomFavourite = FavouritePosts['favouritePosts'];
-type CustomPosts = Posts['posts'];
+type Posts = {
+  __typename?: string;
+  data?: [{__ref: string}];
+  pageInfo?: {
+    __typename?: string;
+    afterCursor?: string;
+  };
+};
 
 interface Props {
-  existing: CustomFavourite | CustomPosts;
-  incoming: CustomFavourite | CustomPosts;
+  existing: Posts;
+  incoming: Posts;
 }
 
 export const merge = ({existing, incoming}: Props) => {

@@ -159,8 +159,6 @@ export const UIKit = () => {
         <PostCard
           title="Apple love"
           createdAt="11.09.22"
-          //mediaUrl={postPhotoUrl}
-          //avatarUrl={userPhotoUrl}
           likesCount={137}
           authorName="Hannah K."
           description={description}

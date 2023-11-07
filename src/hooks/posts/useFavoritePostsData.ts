@@ -1,31 +1,24 @@
-import {usePosts} from 'src/api/posts/gql/querys/__generated__/get-posts.query';
-import {PostFilterType} from 'src/shared/types/__generated__/gql-types';
+import {useFavouritePosts} from 'src/api/posts/gql/querys/__generated__/get-favourite-posts.qury';
 import {showToast} from 'src/utils/serverError';
 
-interface PostsProps {
-  type: PostFilterType;
-}
-
-export const usePostsData = ({type}: PostsProps) => {
-  const {loading, error, data, fetchMore} = usePosts({
+export const useFavouritePostsRequest = () => {
+  const {data, loading, error, fetchMore} = useFavouritePosts({
     variables: {
       input: {
-        type,
         afterCursor: null,
       },
     },
     notifyOnNetworkStatusChange: true,
   });
 
-  const posts = data?.posts?.data;
-  const pageAfterCursor = data?.posts?.pageInfo?.afterCursor;
+  const favouritePosts = data?.favouritePosts?.data;
+  const pageAfterCursor = data?.favouritePosts?.pageInfo?.afterCursor;
 
   const loadMorePosts = async () => {
     try {
       await fetchMore({
         variables: {
           input: {
-            type,
             afterCursor: pageAfterCursor,
           },
         },
@@ -39,7 +32,7 @@ export const usePostsData = ({type}: PostsProps) => {
   return {
     isLoading: loading,
     isError: !!error,
-    posts,
+    favouritePosts,
     fetchMore: loadMorePosts,
   };
 };

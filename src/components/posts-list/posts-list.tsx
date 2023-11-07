@@ -2,9 +2,9 @@ import React from 'react';
 import {View, FlatList} from 'react-native';
 import {Spinner} from 'src/components/UI/spinner/spinner';
 import {PostCard} from 'src/components/UI/post-card/post-card';
-import {ListEmptyComponent} from 'src/components/UI/list-empty/list-empty';
+import {ListEmpty} from 'src/components/UI/list-empty/list-empty';
 import {formatAuthorName} from 'src/helpers/formatAuthorName';
-import {useColorTheme} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {getPostsListsStyle} from './styles';
 import {FavouritePosts} from 'src/api/posts/gql/querys/__generated__/get-favourite-posts.qury';
 import {Posts} from 'src/api/posts/gql/querys/__generated__/get-posts.query';
@@ -55,7 +55,7 @@ export const PostsList: React.FC<Props> = ({
         onEndReached={fetchMore}
         onEndReachedThreshold={0.1}
         ListEmptyComponent={
-          <ListEmptyComponent isLoading={isLoading} isError={isError} />
+          <ListEmpty isLoading={isLoading} isError={isError} />
         }
       />
       {isLoading && data && (

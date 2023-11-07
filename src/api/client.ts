@@ -39,12 +39,6 @@ export const apolloClient = new ApolloClient({
               return merge({existing, incoming});
             },
           },
-          favouritePosts: {
-            keyArgs: ['data', ['id'], 'pageInfo', ['afterCursor']],
-            merge(existing, incoming) {
-              return merge({existing, incoming});
-            },
-          },
         },
       },
     },
