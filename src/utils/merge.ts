@@ -1,6 +1,6 @@
 import uniqBy from 'lodash/uniqBy';
 
-type Posts = {
+type DataFields = {
   __typename?: string;
   data?: [{__ref: string}];
   pageInfo?: {
@@ -10,8 +10,8 @@ type Posts = {
 };
 
 interface Props {
-  existing: Posts;
-  incoming: Posts;
+  existing: DataFields;
+  incoming: DataFields;
 }
 
 export const merge = ({existing, incoming}: Props) => {
