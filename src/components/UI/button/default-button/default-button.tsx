@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Text, Pressable} from 'react-native';
-import {useColorTheme, ColorThemes} from 'src/hooks/theme/useColorTheme';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {getButtonStyles} from './default-button-styles';
 import {Spinner} from 'src/components/UI/spinner/spinner';
 
@@ -24,7 +24,7 @@ export const Button: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   const [isPressed, setIsPressed] = useState(false);
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
 
   const buttonStyles = getButtonStyles({
     themeVariant,

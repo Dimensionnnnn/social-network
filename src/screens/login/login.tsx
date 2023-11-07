@@ -3,7 +3,7 @@ import {Input} from 'src/components/UI/input/default-input/default-input';
 import {Text, View} from 'react-native';
 import {Button as RegistrationButton} from 'src/components/UI/button/text-button/text-button';
 import {Button as LogInButton} from 'src/components/UI/button/default-button/default-button';
-import {useColorTheme, ColorThemes} from 'src/hooks/theme/useColorTheme';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {getLoginScreenStyles} from './styles';
 import {useForm, Controller} from 'react-hook-form';
 import {RootStackParamList} from 'src/routes/routes';
@@ -58,7 +58,7 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
     }
   };
 
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
   const styles = getLoginScreenStyles(themeVariant);
 
   return (

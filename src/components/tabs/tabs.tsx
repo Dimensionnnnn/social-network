@@ -1,5 +1,5 @@
 import React from 'react';
-import {useColorTheme, ColorThemes} from 'src/hooks/theme/useColorTheme';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {getTabsStyles} from './styles';
 import {View} from 'react-native';
@@ -10,7 +10,7 @@ import {PostFilterType} from 'src/shared/types/__generated__/gql-types';
 const Tab = createMaterialTopTabNavigator();
 
 export const TopTabs = () => {
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
   const topTabStyles = getTabsStyles(themeVariant);
 
   return (

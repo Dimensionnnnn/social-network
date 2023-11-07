@@ -1,6 +1,6 @@
 import React from 'react';
 import {getCardTitleStyles} from './styles';
-import {useColorTheme, ColorThemes} from 'src/hooks/theme/useColorTheme';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {Text, View} from 'react-native';
 
 interface PostCardTitleProps {
@@ -14,7 +14,7 @@ export const PostCardTitle: React.FC<PostCardTitleProps> = ({
   dateOfCreation,
   isPostOpen,
 }) => {
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
   const cardTitleStyles = getCardTitleStyles(themeVariant, isPostOpen);
   return (
     <View

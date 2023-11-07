@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ColorThemes, useColorTheme} from 'src/hooks/theme/useColorTheme';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {Pressable, Text} from 'react-native';
 import {getButtonStyles} from './styles';
 import {SvgProps} from 'react-native-svg';
@@ -18,7 +18,7 @@ export const Button: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   const [isPressed, setIsPressed] = useState(false);
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
 
   const buttonStyles = getButtonStyles(themeVariant, isPressed, isDisabled);
 

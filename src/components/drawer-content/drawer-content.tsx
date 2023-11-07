@@ -15,7 +15,7 @@ import {SvgExit} from 'src/shared/icons/components/exit-svg';
 import {SvgLightTheme} from 'src/shared/icons/components/light-theme-svg';
 import {SvgDarkTheme} from 'src/shared/icons/components/dark-theme-svg';
 import {Text, View} from 'react-native';
-import {ColorThemes, useColorTheme} from 'src/hooks/theme/useColorTheme';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {getDrawerContentStyles} from './styles';
 import {SvgProps} from 'react-native-svg';
 import {Appearance, useColorScheme} from 'react-native';
@@ -28,7 +28,7 @@ const DrawerItemIcon = (
 };
 
 export const DrawerContent = (props: DrawerContentComponentProps) => {
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
   const isDarkMode = useColorScheme() === 'dark';
   const {logout} = useAuth();
 

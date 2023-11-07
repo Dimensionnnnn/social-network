@@ -38,7 +38,7 @@ const userPhotoUrl = require('src\\shared\\images\\userPhoto.png');
 const postPhotoUrl = require('src\\shared\\images\\postPhoto.png');
 
 export const UIKit = () => {
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
   return (
     <View style={[styles.container, styles[themeVariant]]}>
       <CustomSwitch />

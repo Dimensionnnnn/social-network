@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Pressable, Text} from 'react-native';
-import {ColorThemes, useColorTheme} from 'src/hooks/theme/useColorTheme';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {getButtonStyles} from './styles';
 
 interface ButtonProps {
@@ -11,7 +11,7 @@ interface ButtonProps {
 
 export const Button: React.FC<ButtonProps> = ({title, isDisabled, onPress}) => {
   const [isPressed, setIsPressed] = useState(false);
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
 
   const buttonStyles = getButtonStyles(themeVariant, isPressed, isDisabled);
 

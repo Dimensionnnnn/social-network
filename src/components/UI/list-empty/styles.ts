@@ -1,12 +1,13 @@
 import {StyleSheet} from 'react-native';
 import {COLORS} from 'src/assets/styles/colors';
+import {ColorThemes} from 'src/hooks/theme/useColorTheme';
 
 const listEmptyStyles = {
-  ['dark']: {
+  [ColorThemes.DARK]: {
     spinnerColor: COLORS.secondary_dark_01,
     spinnerStroke: COLORS.grayscale_dark_01,
   },
-  ['light']: {
+  [ColorThemes.LIGHT]: {
     spinnerColor: COLORS.dark_mode,
     spinnerStroke: COLORS.grayscale_light_03,
   },
@@ -19,7 +20,7 @@ const listEmptyStyles = {
   }),
 };
 
-export const getListEmptyStyles = (themeVariant: 'dark' | 'light') => {
+export const getListEmptyStyles = (themeVariant: ColorThemes) => {
   return {
     ...listEmptyStyles.root,
     ...listEmptyStyles[themeVariant],

@@ -1,5 +1,5 @@
 import React from 'react';
-import {useColorTheme, ColorThemes} from 'src/hooks/theme/useColorTheme';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {getTapBarStyles} from './styles';
 import {Favorites} from 'src/screens/favorites/favorites';
@@ -11,7 +11,7 @@ import {UIKit} from 'src/screens/ui-kit/ui-kit';
 const Tab = createBottomTabNavigator();
 
 export const BottomTab = () => {
-  const themeVariant: ColorThemes = useColorTheme();
+  const themeVariant = useColorTheme();
   const tapBarStyles = getTapBarStyles(themeVariant);
   return (
     <Tab.Navigator
