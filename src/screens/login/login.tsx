@@ -3,13 +3,13 @@ import {Input} from 'src/components/UI/input/default-input/default-input';
 import {Text, View} from 'react-native';
 import {Button as RegistrationButton} from 'src/components/UI/button/text-button/text-button';
 import {Button as LogInButton} from 'src/components/UI/button/default-button/default-button';
-import {useColorTheme} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {getLoginScreenStyles} from './styles';
 import {useForm, Controller} from 'react-hook-form';
 import {RootStackParamList} from 'src/routes/routes';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useUserSignIn} from 'src/api/user/gql/mutations/__generated__/user-signin.mutation';
-import {useAuth} from 'src/hooks/useAuth';
+import {useAuth} from 'src/hooks/authentication/useAuth';
 import {validateEmail, validatePassword} from 'src/utils/validation';
 import {showToast} from 'src/utils/serverError';
 

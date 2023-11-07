@@ -26,7 +26,7 @@ import {UserIcon} from 'src/components/UI/button/user-icon/user-icon';
 
 import {CustomSwitch} from 'src/components/UI/switch/switch';
 
-import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
+import {useColorTheme, ColorThemes} from 'src/hooks/theme/useColorTheme';
 
 const LABELS = [
   {id: 101, label: 'Male'},
@@ -159,8 +159,6 @@ export const UIKit = () => {
         <PostCard
           title="Apple love"
           createdAt="11.09.22"
-          //mediaUrl={postPhotoUrl}
-          //avatarUrl={userPhotoUrl}
           likesCount={137}
           authorName="Hannah K."
           description={description}
