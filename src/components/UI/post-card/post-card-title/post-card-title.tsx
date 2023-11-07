@@ -6,7 +6,7 @@ import {Text, View} from 'react-native';
 interface PostCardTitleProps {
   name: string;
   dateOfCreation: string;
-  isPostOpen: boolean;
+  isPostOpen?: boolean;
 }
 
 export const PostCardTitle: React.FC<PostCardTitleProps> = ({
