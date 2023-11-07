@@ -1,5 +1,5 @@
 import React from 'react';
-import {useColorTheme} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {getTapBarStyles} from './styles';
 import {Posts} from 'src/screens/posts/posts';

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Text, Pressable} from 'react-native';
-import {useColorTheme} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {getButtonStyles} from './default-button-styles';
 import {Spinner} from 'src/components/UI/spinner/spinner';
 

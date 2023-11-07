@@ -11,7 +11,7 @@ type MainPostsRouteProp = RouteProp<
 
 export const MainPosts = ({route}: {route?: MainPostsRouteProp}) => {
   const {type} = route!.params;
-  const {isLoading, isError, posts, fetchMore} = usePostsRequest({
+  const {isLoading, isError, posts, fetchMore} = usePostsData({
     type,
   });
 

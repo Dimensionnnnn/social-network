@@ -1,5 +1,5 @@
 import React from 'react';
-import {useColorTheme} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {getTabsStyles} from './styles';
 import {View} from 'react-native';

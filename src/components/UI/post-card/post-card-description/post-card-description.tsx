@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text} from 'react-native';
-import {useColorTheme} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {getCardDescriptionStyles} from './styles';
 
 interface PostCardDescriptionProps {
