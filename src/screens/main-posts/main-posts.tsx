@@ -5,7 +5,7 @@ import {usePostsData} from 'src/hooks/posts/usePostsData';
 import {PostFilterType} from 'src/shared/types/__generated__/gql-types';
 import {getMainPostsStyle} from './styles';
 import {Spinner} from 'src/components/UI/spinner/spinner';
-import {ListEmptyComponent} from 'src/components/UI/list-empty/list-empty';
+import {ListEmpty} from 'src/components/UI/list-empty/list-empty';
 import {formatAuthorName} from 'src/helpers/formatAuthorName';
 import {PostCard} from 'src/components/UI/post-card/post-card';
 import {RouteProp} from '@react-navigation/native';
@@ -48,7 +48,7 @@ export const MainPosts = ({route}: {route?: MainPostsRouteProp}) => {
         onEndReached={fetchMore}
         onEndReachedThreshold={0.1}
         ListEmptyComponent={
-          <ListEmptyComponent isLoading={isLoading} isError={isError} />
+          <ListEmpty isLoading={isLoading} isError={isError} />
         }
       />
       {isLoading && posts && (

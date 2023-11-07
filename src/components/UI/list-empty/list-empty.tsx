@@ -11,10 +11,7 @@ interface ListEmptyProps {
   isError?: boolean;
 }
 
-export const ListEmptyComponent: React.FC<ListEmptyProps> = ({
-  isLoading,
-  isError,
-}) => {
+export const ListEmpty: React.FC<ListEmptyProps> = ({isLoading, isError}) => {
   const themeVariant = useColorTheme();
   const styles = getListEmptyStyles(themeVariant);
 
