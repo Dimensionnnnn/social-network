@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {SvgNotFound} from 'src/shared/icons/components/not-found-svg';
 import {getNotFoundStyles} from './styles';
-import {ColorThemes, useColorTheme} from 'src/hooks/useColorTheme';
+import {ColorThemes, useColorTheme} from 'src/hooks/theme/useColorTheme';
 
 interface Props {
   text: string;

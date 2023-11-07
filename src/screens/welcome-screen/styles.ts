@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {outfitTextStyles} from 'src/assets/styles/typography';
-import {ColorThemes} from 'src/hooks/useColorTheme';
+import {ColorThemes} from 'src/hooks/theme/useColorTheme';
 import {COLORS} from 'src/assets/styles/colors';
 
 const welcomeScreenStyles = {

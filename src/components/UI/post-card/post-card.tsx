@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useColorTheme, ColorThemes} from 'src/hooks/useColorTheme';
+import {useColorTheme, ColorThemes} from 'src/hooks/theme/useColorTheme';
 import {SvgNotFound} from 'src/shared/icons/components/not-found-svg';
 import {View} from 'react-native';
 import {getPostCardStyles} from './styles';

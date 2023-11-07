@@ -1,7 +1,7 @@
 import React from 'react';
 import {UserIcon, UserIconSize} from '../UI/button/user-icon/user-icon';
 import {Text, View} from 'react-native';
-import {ColorThemes, useColorTheme} from 'src/hooks/useColorTheme';
+import {ColorThemes, useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {getHeaderStyles} from './styles';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
 

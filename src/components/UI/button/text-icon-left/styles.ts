@@ -1,6 +1,6 @@
 import {outfitTextStyles} from 'src/assets/styles/typography';
 import {COLORS} from 'src/assets/styles/colors';
-import {ColorThemes} from 'src/hooks/useColorTheme';
+import {ColorThemes} from 'src/hooks/theme/useColorTheme';
 import {StyleSheet} from 'react-native';
 
 export const textIconLeftButtonStyles = {

@@ -1,11 +1,12 @@
 import {usePosts} from 'src/api/posts/gql/querys/__generated__/get-posts.query';
 import {PostFilterType} from 'src/shared/types/__generated__/gql-types';
+import {showToast} from 'src/utils/serverError';
 
 interface PostsProps {
   type: PostFilterType;
 }
 
-export const usePostsRequest = ({type}: PostsProps) => {
+export const usePostsData = ({type}: PostsProps) => {
   const {loading, error, data, fetchMore} = usePosts({
     variables: {
       input: {
@@ -30,6 +31,7 @@ export const usePostsRequest = ({type}: PostsProps) => {
         },
       });
     } catch (e) {
+      showToast();
       console.log(e);
     }
   };

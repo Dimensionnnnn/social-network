@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Pressable, Text} from 'react-native';
-import {ColorThemes, useColorTheme} from 'src/hooks/useColorTheme';
+import {ColorThemes, useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {getButtonStyles} from './styles';
 
 interface ButtonProps {
