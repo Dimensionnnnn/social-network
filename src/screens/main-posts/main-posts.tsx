@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, FlatList} from 'react-native';
-import {useColorTheme} from 'src/hooks/useColorTheme';
-import {usePostsRequest} from 'src/hooks/usePostsRequest';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
+import {usePostsData} from 'src/hooks/posts/usePostsData';
 import {PostFilterType} from 'src/shared/types/__generated__/gql-types';
 import {getMainPostsStyle} from './styles';
 import {Spinner} from 'src/components/UI/spinner/spinner';
@@ -20,7 +20,7 @@ export const MainPosts = ({route}: {route?: MainPostsRouteProp}) => {
   const themeVariant = useColorTheme();
   const styles = getMainPostsStyle(themeVariant);
   const {type} = route!.params;
-  const {isLoading, isError, posts, fetchMore} = usePostsRequest({
+  const {isLoading, isError, posts, fetchMore} = usePostsData({
     type,
   });
 

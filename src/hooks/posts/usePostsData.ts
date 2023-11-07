@@ -5,7 +5,7 @@ interface PostsProps {
   type: PostFilterType;
 }
 
-export const usePostsRequest = ({type}: PostsProps) => {
+export const usePostsData = ({type}: PostsProps) => {
   const {loading, error, data, fetchMore} = usePosts({
     variables: {
       input: {

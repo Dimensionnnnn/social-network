@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {COLORS} from 'src/assets/styles/colors';
-import {ColorThemes} from 'src/hooks/useColorTheme';
+import {ColorThemes} from 'src/hooks/theme/useColorTheme';
 import {UserIconSize} from './user-icon';
 
 export const userIconStyles = {

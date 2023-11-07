@@ -1,5 +1,5 @@
 import React from 'react';
-import {useColorTheme} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {Pressable, Text} from 'react-native';
 import {getButtonStyles} from './styles';
 import {SvgCopy} from 'src/shared/icons/components/copy-svg';

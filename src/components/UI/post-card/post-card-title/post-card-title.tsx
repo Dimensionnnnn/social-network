@@ -1,6 +1,6 @@
 import React from 'react';
 import {getCardTitleStyles} from './styles';
-import {useColorTheme} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {Text, View} from 'react-native';
 
 interface PostCardTitleProps {

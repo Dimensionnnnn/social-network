@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {Spinner} from 'src/components/UI/spinner/spinner';
 import {NotFound} from 'src/components/UI/not-found/not-found';
 import {notFoundMessage} from 'src/constants/notificationMessages';
-import {useColorTheme} from 'src/hooks/useColorTheme';
+import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {getListEmptyStyles} from './styles';
 
 interface ListEmptyProps {
