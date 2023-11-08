@@ -37,7 +37,7 @@ export const PostCard: React.FC<PostCardProps> = ({
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const handleOpenPost = () => {
-    navigation.navigate(RouteNames.OPEN_POST, {
+    navigation.navigate(RouteNames.POST, {
       postId: postId,
       title: title,
       createdAt: createdAt,

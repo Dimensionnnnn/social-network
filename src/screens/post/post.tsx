@@ -10,9 +10,9 @@ import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {getPostOpenStyles} from './styles';
 import {RootStackParamList, RouteNames} from 'src/routes/routes';
 
-export const OpenPost = () => {
+export const Post = () => {
   const navigation = useNavigation();
-  const route = useRoute<RouteProp<RootStackParamList, RouteNames.OPEN_POST>>();
+  const route = useRoute<RouteProp<RootStackParamList, RouteNames.POST>>();
   const themeVariant = useColorTheme();
   const styles = getPostOpenStyles(themeVariant);
 

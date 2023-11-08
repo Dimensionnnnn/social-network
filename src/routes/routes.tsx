@@ -5,7 +5,7 @@ import {LoginScreen} from 'src/screens/login/login';
 import {RegistrationScreen} from 'src/screens/registration/registration';
 import {useAuth} from 'src/hooks/authentication/useAuth';
 import {CustomDrawer} from 'src/screens/drawer/drawer';
-import {OpenPost} from 'src/screens/open-post/open-post';
+import {Post} from 'src/screens/post/post';
 import {CreatePost} from 'src/screens/create-post/create-post';
 
 const Stack = createNativeStackNavigator();
@@ -27,7 +27,7 @@ export type RootStackParamList = {
   Login: undefined;
   Registration: undefined;
   BottomTab: undefined;
-  OpenPost: PostCardRouteParams;
+  Post: PostCardRouteParams;
   CreatePost: undefined;
 };
 
@@ -36,7 +36,7 @@ export enum RouteNames {
   WELCOME_SCREEN = 'WelcomeScreen',
   LOGIN = 'Login',
   REGISTRATION = 'Registration',
-  OPEN_POST = 'OpenPost',
+  POST = 'Post',
   CREATE_POST = 'CreatePost',
 }
 
@@ -53,8 +53,8 @@ export const Routes = () => {
             options={{headerShown: false}}
           />
           <Stack.Screen
-            name={RouteNames.OPEN_POST}
-            component={OpenPost}
+            name={RouteNames.POST}
+            component={Post}
             options={{headerShown: false}}
           />
           <Stack.Screen

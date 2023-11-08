@@ -10,11 +10,7 @@ import {Button as PublishButton} from 'src/components/UI/button/default-button/d
 import {useNavigation} from '@react-navigation/native';
 import {ImageUpload} from 'src/components/UI/image-upload/image-upload';
 import * as ImagePicker from 'react-native-image-picker';
-
-const inputsPlaceholders = {
-  title: 'Enter title of post',
-  post: 'Enter your post',
-};
+import {inputsPlaceholders} from 'src/constants/placeholdersText';
 
 export const CreatePost = () => {
   const themeVariant = useColorTheme();
@@ -22,8 +18,6 @@ export const CreatePost = () => {
   const navigation = useNavigation();
 
   const [image, setImage] = React.useState<any>(null);
-
-  //   console.log(image.assets[0].uri);
 
   const handleGoBack = () => {
     navigation.goBack();
