@@ -19,6 +19,9 @@ import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {getDrawerContentStyles} from './styles';
 import {SvgProps} from 'react-native-svg';
 import {Appearance, useColorScheme} from 'react-native';
+import {Profile} from 'src/screens/profile/profile';
+import {useNavigation, NavigationProp} from '@react-navigation/native';
+import {RootStackParamList, RouteNames} from 'src/routes/routes';
 
 const DrawerItemIcon = (
   Icon: (props: SvgProps) => JSX.Element,
@@ -31,8 +34,13 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
   const themeVariant = useColorTheme();
   const isDarkMode = useColorScheme() === 'dark';
   const {logout} = useAuth();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const styles = getDrawerContentStyles(themeVariant);
+
+  const handleOpenProfile = () => {
+    navigation.navigate(RouteNames.PROFILE);
+  };
 
   const handleToggleTheme = () => {
     Appearance.setColorScheme(isDarkMode ? 'light' : 'dark');
@@ -52,9 +60,7 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
         <DrawerItem
           label="Profile"
           icon={() => DrawerItemIcon(SvgUserIcon, styles.colorIcon)}
-          onPress={() => {
-            console.log('profile');
-          }}
+          onPress={handleOpenProfile}
           labelStyle={[
             styles.itemLabel,
             styles.fontItemLabel,
