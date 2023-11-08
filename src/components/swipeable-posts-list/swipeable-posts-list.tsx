@@ -11,6 +11,7 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 import dayjs from 'dayjs';
 import {Button as DeleteButton} from 'src/components/UI/button/delete-button/delete-button';
 import {getPostsListsStyle} from '../posts-list/styles';
+import {usePostDelete} from 'src/api/posts/gql/mutations/__generated__/post-delete.mutation';
 
 type CustomFavourite = FavouritePosts['favouritePosts']['data'];
 type CustomPosts = Posts['posts']['data'];
@@ -22,11 +23,11 @@ interface Props {
   fetchMore: () => void;
 }
 
-const renderItemSwipe = (item: any) => {
+const ItemSwipe = (item: any, handleDeletePost: any) => {
   const renderRightActions = () => {
     return (
       <View style={{width: 73}}>
-        <DeleteButton />
+        <DeleteButton onPress={() => handleDeletePost(item.id)} />
       </View>
     );
   };
@@ -61,12 +62,28 @@ export const SwipeablePostsList: React.FC<Props> = ({
   const themeVariant = useColorTheme();
   const styles = getPostsListsStyle(themeVariant);
 
+  const [postDelete] = usePostDelete();
+
+  const handleDeletePost = async (id: string) => {
+    try {
+      await postDelete({
+        variables: {
+          input: {
+            id,
+          },
+        },
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <>
       <FlatList
         contentContainerStyle={[styles.container, styles.containerBackground]}
         data={data}
-        renderItem={({item}) => renderItemSwipe(item)}
+        renderItem={({item}) => ItemSwipe(item, handleDeletePost)}
         keyExtractor={item => item.id}
         onEndReached={fetchMore}
         onEndReachedThreshold={0.1}

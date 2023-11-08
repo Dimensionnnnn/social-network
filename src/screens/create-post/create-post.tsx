@@ -11,27 +11,88 @@ import {useNavigation} from '@react-navigation/native';
 import {ImageUpload} from 'src/components/UI/image-upload/image-upload';
 import * as ImagePicker from 'react-native-image-picker';
 import {inputsPlaceholders} from 'src/constants/placeholdersText';
+import {uploadImageToS3} from 'src/utils/s3-signed-url';
+import {useForm, Controller} from 'react-hook-form';
+import {useCreatePost} from 'src/api/posts/gql/mutations/__generated__/post-create.mutation';
+import {showToast} from 'src/utils/serverError';
+
+interface SubmitProps {
+  title: string;
+  description: string;
+}
 
 export const CreatePost = () => {
   const themeVariant = useColorTheme();
   const styles = getCreatePostStyles(themeVariant);
   const navigation = useNavigation();
+  const [createPost, {loading}] = useCreatePost();
+
+  const {
+    control,
+    handleSubmit,
+    formState: {dirtyFields},
+  } = useForm({
+    defaultValues: {
+      title: '',
+      description: '',
+    },
+  });
 
   const [image, setImage] = React.useState<any>(null);
+  const [mediaUrl, setMediaUrl] = React.useState<string | undefined>('');
 
   const handleGoBack = () => {
     navigation.goBack();
   };
 
-  const handlePhotoUpload = () => {
+  const handlePhotoUpload = async () => {
     ImagePicker.launchImageLibrary(
       {
         selectionLimit: 1,
         mediaType: 'photo',
         includeBase64: false,
       },
-      setImage,
+      async response => {
+        if (!response.didCancel && !response.errorMessage && response.assets) {
+          const {uri, fileName} = response.assets[0];
+          setImage(uri);
+
+          const url = await uploadImageToS3({
+            fileName,
+            fileCategory: 'POSTS',
+            imageUri: uri,
+          });
+          setMediaUrl(url);
+        }
+      },
     );
+  };
+
+  const onSubmit = async (dataSubmit: SubmitProps) => {
+    if (!mediaUrl) {
+      showToast();
+      return;
+    }
+
+    try {
+      await createPost({
+        variables: {
+          input: {
+            title: dataSubmit.title,
+            description: dataSubmit.description,
+            mediaUrl,
+          },
+        },
+      });
+      handleGoBack();
+    } catch (e) {
+      showToast();
+      console.log(e);
+    }
+  };
+
+  const isDisabled = () => {
+    return !dirtyFields.title || !dirtyFields.description || !mediaUrl;
   };
 
   return (
@@ -47,14 +108,46 @@ export const CreatePost = () => {
             style={styles.containerImage}
             resizeMode="contain"
             resizeMethod="resize"
-            source={{uri: image.assets[0].uri}}
+            source={{uri: image}}
           />
         ) : (
           <ImageUpload onUpload={handlePhotoUpload} />
         )}
-        <Input label="Title" placeholder={inputsPlaceholders.title} multiline />
-        <Input label="Post" placeholder={inputsPlaceholders.post} multiline />
-        <PublishButton buttonSize="large" title="Publish" />
+        <Controller
+          control={control}
+          rules={{required: true}}
+          render={({field: {onChange, value}}) => (
+            <Input
+              label="Title"
+              placeholder={inputsPlaceholders.title}
+              value={value}
+              onChangeText={onChange}
+              multiline
+            />
+          )}
+          name="title"
+        />
+        <Controller
+          control={control}
+          rules={{required: true}}
+          render={({field: {onChange, value}}) => (
+            <Input
+              label="Post"
+              placeholder={inputsPlaceholders.post}
+              value={value}
+              onChangeText={onChange}
+              multiline
+            />
+          )}
+          name="description"
+        />
+        <PublishButton
+          buttonSize="large"
+          title="Publish"
+          onPress={handleSubmit(onSubmit)}
+          isDisabled={isDisabled()}
+          isLoading={loading}
+        />
       </ScrollView>
     </>
   );
