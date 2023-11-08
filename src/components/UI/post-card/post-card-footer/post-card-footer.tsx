@@ -6,6 +6,7 @@ import {Image, Text, View} from 'react-native';
 import {getCardFooterStyles} from './styles';
 import {Button} from 'src/components/UI/button/button-icon/button-icon';
 import {UserIcon, UserIconSize} from '../../button/user-icon/user-icon';
+import {share} from 'src/utils/share';
 
 interface PostCardFooterProps {
   authorName: string;
@@ -52,7 +53,7 @@ export const PostCardFooter: React.FC<PostCardFooterProps> = ({
             {likesCount}
           </Text>
         </View>
-        <Button isDefaultIcon Icon={SvgShare} />
+        <Button isDefaultIcon Icon={SvgShare} onPress={share} />
       </View>
     </View>
   );
