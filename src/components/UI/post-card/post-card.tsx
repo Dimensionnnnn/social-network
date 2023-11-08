@@ -9,22 +9,26 @@ import {PostCardFooter} from './post-card-footer/post-card-footer';
 import {PostCardDescription} from './post-card-description/post-card-description';
 
 interface PostCardProps {
+  postId: string;
   title: string;
   createdAt: string;
   description: string;
   mediaUrl: string;
   avatarUrl?: string;
   authorName?: string;
+  isLiked?: boolean;
   likesCount: number;
 }
 
 export const PostCard: React.FC<PostCardProps> = ({
+  postId,
   title,
   createdAt,
   description,
   mediaUrl,
   avatarUrl,
   authorName,
+  isLiked,
   likesCount,
 }) => {
   const [isPostOpen, setIsPostOpen] = useState(false);
@@ -52,8 +56,10 @@ export const PostCard: React.FC<PostCardProps> = ({
           <PostCardImage photoUrl={mediaUrl} onPress={handleOpenPost} />
           <PostCardDescription description={description} />
           <PostCardFooter
+            postId={postId}
             authorName={authorName ? authorName : 'User'}
             likesCount={likesCount}
+            isLiked={isLiked}
             authorPhotoUrl={avatarUrl}
           />
         </>
@@ -66,8 +72,10 @@ export const PostCard: React.FC<PostCardProps> = ({
           />
           <PostCardImage photoUrl={mediaUrl} onPress={handleOpenPost} />
           <PostCardFooter
+            postId={postId}
             authorName={authorName ? authorName : 'User'}
             likesCount={likesCount}
+            isLiked={isLiked}
             authorPhotoUrl={avatarUrl}
           />
         </>

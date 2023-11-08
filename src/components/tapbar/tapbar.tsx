@@ -2,11 +2,11 @@ import React from 'react';
 import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {getTapBarStyles} from './styles';
-import {Favorites} from 'src/screens/favorites/favorites';
 import {Posts} from 'src/screens/posts/posts';
 import {TabBarIcon, TabBarIconsNames} from '../UI/tapbar-icon/tapbar-iсon';
 import {TopTabs} from 'src/components/tabs/tabs';
 import {UIKit} from 'src/screens/ui-kit/ui-kit';
+import {FavouritePosts} from 'src/screens/favourite-posts/favourite-posts';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,7 +35,7 @@ export const BottomTab = () => {
       />
       <Tab.Screen
         name={TabBarIconsNames.FAVORITES}
-        component={Favorites}
+        component={FavouritePosts}
         options={{
           tabBarLabel: TabBarIconsNames.FAVORITES,
           tabBarIcon: ({color}) => (
