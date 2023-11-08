@@ -39,6 +39,10 @@ const loginScreenStyles = {
       flexDirection: 'row',
       gap: 4,
     },
+    containerButtonText: {
+      maxWidth: 60,
+      width: '100%',
+    },
     containerTitle: {
       paddingBottom: 20,
       gap: 4,
