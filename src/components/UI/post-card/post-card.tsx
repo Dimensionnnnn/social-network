@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {View} from 'react-native';
