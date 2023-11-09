@@ -14,19 +14,70 @@ import {
 } from 'src/components/UI/button/user-icon/user-icon';
 import {useNavigation} from '@react-navigation/native';
 import {getProfileStyles} from './styles';
+import {DateTimePicker} from 'src/components/UI/date-time-picker/date-time-picker';
+import {useForm, Controller} from 'react-hook-form';
+import {useUserEditProfile} from 'src/api/user/gql/mutations/__generated__/user-edit-profile.mutation';
+import {GenderType} from 'src/shared/types/__generated__/gql-types';
+import {validateEmail} from 'src/utils/validation';
+import {showToast} from 'src/utils/serverError';
+import {formatUserInputData} from 'src/helpers/formatUserInputData';
 
 const RadioLables = [
-  {id: 101, label: 'Male'},
-  {id: 102, label: 'Female'},
+  {id: '101', label: 'Male', type: GenderType.Male},
+  {id: '102', label: 'Female', type: GenderType.Female},
 ];
+
+export interface UserInputDataSubmitProps {
+  avatarUrl?: string;
+  firstName?: string;
+  lastName?: string;
+  middleName?: string;
+  gender?: GenderType;
+  birthDate?: Date;
+  email: string;
+  phone?: string;
+  country?: string;
+}
 
 export const Profile = () => {
   const themeVariant = useColorTheme();
   const styles = getProfileStyles(themeVariant);
   const navigate = useNavigation();
+  const [userEditProfile] = useUserEditProfile();
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm({
+    defaultValues: {
+      avatarUrl: '',
+      firstName: '',
+      lastName: '',
+      middleName: '',
+      gender: GenderType.Male,
+      birthDate: new Date(),
+      email: '',
+      phone: '',
+      country: '',
+    },
+  });
 
   const handleGoBack = () => {
     navigate.goBack();
+  };
+
+  const onSubmit = async (dataSubmit: UserInputDataSubmitProps) => {
+    try {
+      await userEditProfile({
+        variables: {
+          input: formatUserInputData(dataSubmit),
+        },
+      });
+      handleGoBack();
+    } catch (e) {
+      showToast();
+      console.error(e);
+    }
   };
 
   return (
@@ -38,7 +89,7 @@ export const Profile = () => {
           Profile
         </Text>
         <View style={styles.containerTextButton}>
-          <TextButton title="Done" onPress={handleGoBack} />
+          <TextButton title="Done" onPress={handleSubmit(onSubmit)} />
         </View>
       </View>
       <ScrollView contentContainerStyle={styles.containerScroll}>
@@ -50,23 +101,115 @@ export const Profile = () => {
         </View>
         <View style={styles.wrapper}>
           <Text style={[styles.fontText, styles.textColor]}>Personal info</Text>
-          <Input placeholder="Enter your first name" label="First name" />
-          <Input placeholder="Enter your last name" label="Last name" />
-          <Input placeholder="Enter your surname" label="Surname" />
+          <Controller
+            control={control}
+            name="firstName"
+            render={({field: {onChange, value}}) => (
+              <Input
+                placeholder="Enter your first name"
+                label="First name"
+                value={value}
+                onChangeText={onChange}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="lastName"
+            render={({field: {onChange, value}}) => (
+              <Input
+                placeholder="Enter your last name"
+                label="Last name"
+                value={value}
+                onChangeText={onChange}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="middleName"
+            render={({field: {onChange, value}}) => (
+              <Input
+                placeholder="Enter your surname"
+                label="Surname"
+                value={value}
+                onChangeText={onChange}
+              />
+            )}
+          />
         </View>
         <View style={styles.wrapper}>
           <Text style={[styles.fontText, styles.textColor]}>Gender</Text>
-          <RadioGroup labels={RadioLables} />
+          <Controller
+            control={control}
+            name="gender"
+            render={({field: {onChange, value}}) => (
+              <RadioGroup
+                labels={RadioLables}
+                selectedGenderType={value}
+                onGenderChange={(selectedGenderType: string) =>
+                  onChange(selectedGenderType)
+                }
+              />
+            )}
+          />
         </View>
         <View style={styles.wrapper}>
           <Text style={[styles.fontText, styles.textColor]}>Date of birth</Text>
-          <Input placeholder="Enter B-day" label="B-day" />
+          <Controller
+            control={control}
+            name="birthDate"
+            render={({field: {onChange, value}}) => (
+              <DateTimePicker
+                label="B-day"
+                placeholder="Enter B-day"
+                value={value}
+                onChange={onChange}
+              />
+            )}
+          />
         </View>
         <View style={styles.wrapper}>
           <Text style={[styles.fontText, styles.textColor]}>Account info</Text>
-          <Input placeholder="Enter your email" label="Email" />
-          <Input placeholder="Enter your phone number" label="Phone number" />
-          <Input placeholder="Enter your country" label="Country" />
+          <Controller
+            control={control}
+            name="email"
+            rules={{required: true, validate: validateEmail}}
+            render={({field: {onChange, value}}) => (
+              <Input
+                placeholder="Enter your email"
+                label="Email"
+                value={value}
+                onChangeText={onChange}
+                isError={!!errors.email}
+                errorMessage={errors.email?.message}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="phone"
+            render={({field: {onChange, value}}) => (
+              <Input
+                placeholder="Enter your phone number"
+                label="Phone number"
+                value={value}
+                onChangeText={onChange}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="country"
+            render={({field: {onChange, value}}) => (
+              <Input
+                placeholder="Enter your country"
+                label="Country"
+                value={value}
+                onChangeText={onChange}
+              />
+            )}
+          />
         </View>
       </ScrollView>
     </View>
