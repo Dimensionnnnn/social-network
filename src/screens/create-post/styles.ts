@@ -35,6 +35,10 @@ export const createPostStyles = {
       borderRadius: 24,
       paddingBottom: 20,
     },
+    imageSize: {
+      width: '100%',
+      height: '100%',
+    },
   }),
 };
 

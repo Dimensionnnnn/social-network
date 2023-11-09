@@ -12,6 +12,7 @@ import dayjs from 'dayjs';
 import {Button as DeleteButton} from 'src/components/UI/button/delete-button/delete-button';
 import {getPostsListsStyle} from '../posts-list/styles';
 import {usePostDelete} from 'src/api/posts/gql/mutations/__generated__/post-delete.mutation';
+import {showToast} from 'src/utils/serverError';
 
 type CustomFavourite = FavouritePosts['favouritePosts']['data'];
 type CustomPosts = Posts['posts']['data'];
@@ -23,7 +24,25 @@ interface Props {
   fetchMore: () => void;
 }
 
-const ItemSwipe = (item: any, handleDeletePost: any) => {
+interface ItemSwipeProps {
+  item: {
+    id: string;
+    title: string;
+    createdAt: string;
+    description: string;
+    mediaUrl: string;
+    likesCount: number;
+    isLiked: boolean;
+    author: {
+      firstName: string;
+      lastName: string;
+      avatarUrl: string;
+    };
+  };
+  handleDeletePost: (id: string) => void;
+}
+
+const ItemSwipe = ({item, handleDeletePost}: ItemSwipeProps) => {
   const renderRightActions = () => {
     return (
       <View style={{width: 73}}>
@@ -74,7 +93,8 @@ export const SwipeablePostsList: React.FC<Props> = ({
         },
       });
     } catch (e) {
-      console.log(e);
+      showToast();
+      console.error(e);
     }
   };
 
@@ -83,8 +103,10 @@ export const SwipeablePostsList: React.FC<Props> = ({
       <FlatList
         contentContainerStyle={[styles.container, styles.containerBackground]}
         data={data}
-        renderItem={({item}) => ItemSwipe(item, handleDeletePost)}
-        keyExtractor={item => item.id}
+        renderItem={({item}: {item: ItemSwipeProps['item']}) =>
+          ItemSwipe({item, handleDeletePost})
+        }
+        keyExtractor={(item: {id: string}) => item.id}
         onEndReached={fetchMore}
         onEndReachedThreshold={0.1}
         ListEmptyComponent={
