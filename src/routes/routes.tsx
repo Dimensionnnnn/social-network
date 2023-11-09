@@ -21,7 +21,6 @@ type PostCardRouteParams = {
   isLiked?: boolean;
   likesCount: number;
 };
-
 export type RootStackParamList = {
   WelcomeScreen: undefined;
   Login: undefined;
