@@ -7,7 +7,7 @@ import Config from 'react-native-config';
 interface Props {
   fileName?: string;
   fileCategory: string;
-  imageUri?: string;
+  imageUri?: any;
 }
 
 export const uploadImageToS3 = async ({
@@ -36,12 +36,20 @@ export const uploadImageToS3 = async ({
       return;
     }
 
-    const uploadImageToS3Server = await axios.put(signedUrlResponse.data, {
-      imageUri,
+    const response = await fetch(imageUri);
+    const blob = await response.blob();
+
+    const uploadImageToS3Server = await fetch(signedUrlResponse.data, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/octet-stream',
+      },
+      body: blob,
     });
 
-    if (uploadImageToS3Server.config.url) {
-      const baseUrl = formatS3Url(uploadImageToS3Server.config.url);
+    if (uploadImageToS3Server.url) {
+      const baseUrl = formatS3Url(uploadImageToS3Server.url);
+      console.log(baseUrl);
       return baseUrl;
     }
   } catch (error) {

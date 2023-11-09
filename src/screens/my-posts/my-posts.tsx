@@ -1,5 +1,5 @@
-import {StyleSheet, View} from 'react-native';
 import React from 'react';
+import {StyleSheet, View} from 'react-native';
 import {Button} from 'src/components/UI/button/button-icon-bg/button-icon-bg';
 import {SvgPlus} from 'src/shared/icons/components/plus-svg';
 import {SwipeablePostsList} from 'src/components/swipeable-posts-list/swipeable-posts-list';
@@ -41,7 +41,6 @@ export const MyPosts = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 8,
   },
   containerNewPost: {
     width: '100%',

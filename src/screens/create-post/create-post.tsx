@@ -103,16 +103,18 @@ export const CreatePost = () => {
         <IconButton Icon={SvgXMark} onPress={handleGoBack} />
       </View>
       <ScrollView contentContainerStyle={styles.container}>
-        {image ? (
-          <Image
-            style={styles.containerImage}
-            resizeMode="contain"
-            resizeMethod="resize"
-            source={{uri: image}}
-          />
-        ) : (
-          <ImageUpload onUpload={handlePhotoUpload} />
-        )}
+        <View style={styles.containerImage}>
+          {image ? (
+            <Image
+              style={styles.imageSize}
+              resizeMethod="resize"
+              resizeMode="contain"
+              source={{uri: image}}
+            />
+          ) : (
+            <ImageUpload onUpload={handlePhotoUpload} />
+          )}
+        </View>
         <Controller
           control={control}
           rules={{required: true}}
