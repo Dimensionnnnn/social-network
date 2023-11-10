@@ -7,7 +7,7 @@ import Config from 'react-native-config';
 interface Props {
   fileName?: string;
   fileCategory: string;
-  imageUri?: any;
+  imageUri?: string;
 }
 
 export const uploadImageToS3 = async ({
@@ -49,7 +49,6 @@ export const uploadImageToS3 = async ({
 
     if (uploadImageToS3Server.url) {
       const baseUrl = formatS3Url(uploadImageToS3Server.url);
-      console.log(baseUrl);
       return baseUrl;
     }
   } catch (error) {
