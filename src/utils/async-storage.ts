@@ -4,7 +4,7 @@ export const setItemStorage = async (key: string, value: string) => {
   try {
     await AsyncStorage.setItem(key, value);
   } catch (e) {
-    console.log(e);
+    return null;
   }
 };
 
@@ -13,7 +13,6 @@ export const getItemStorage = async (key: string) => {
     const value = await AsyncStorage.getItem(key);
     return value ? value : null;
   } catch (e) {
-    console.log(e);
     return null;
   }
 };
@@ -22,6 +21,6 @@ export const removeItemStorage = async (key: string) => {
   try {
     await AsyncStorage.removeItem(key);
   } catch (e) {
-    console.log(e);
+    return null;
   }
 };

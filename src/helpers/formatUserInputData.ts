@@ -7,16 +7,14 @@ export const formatUserInputData = (
 ) => {
   const formatData: EditProfileRequest = {
     email: userInputData?.email,
-    ...(userInputData?.firstName && {firstName: userInputData.firstName}),
-    ...(userInputData?.lastName && {lastName: userInputData.lastName}),
-    ...(userInputData?.middleName && {middleName: userInputData.middleName}),
-    ...(userInputData?.gender && {gender: userInputData.gender}),
-    ...(userInputData?.country && {country: userInputData.country}),
-    ...(userInputData?.phone && {phone: userInputData.phone}),
-    ...(userInputData?.birthDate && {
-      birthDate: dayjs(userInputData?.birthDate).format('YYYY-MM-DD'),
-    }),
-    ...(userInputData?.avatarUrl && {avatarUrl: userInputData.avatarUrl}),
+    firstName: userInputData?.firstName ?? '',
+    lastName: userInputData?.lastName ?? '',
+    middleName: userInputData?.middleName ?? '',
+    gender: userInputData?.gender,
+    country: userInputData?.country ?? '',
+    birthDate: dayjs(userInputData?.birthDate).format('YYYY-MM-DD') ?? '',
+    ...(userInputData?.phone && {phone: userInputData?.phone}),
+    ...(userInputData?.avatarUrl && {avatarUrl: userInputData?.avatarUrl}),
   };
 
   return formatData;

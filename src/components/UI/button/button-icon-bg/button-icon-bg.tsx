@@ -8,7 +8,7 @@ interface ButtonProps {
   buttonSize: ButtonSize;
   Icon: (props: SvgProps) => JSX.Element;
   isDisabled?: boolean;
-  onPress?: () => void;
+  onPress?: (() => void) | Promise<void>;
 }
 
 export type ButtonSize = 'small' | 'medium' | 'large';

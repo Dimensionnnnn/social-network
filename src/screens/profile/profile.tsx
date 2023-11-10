@@ -18,9 +18,17 @@ import {DateTimePicker} from 'src/components/UI/date-time-picker/date-time-picke
 import {useForm, Controller} from 'react-hook-form';
 import {useUserEditProfile} from 'src/api/user/gql/mutations/__generated__/user-edit-profile.mutation';
 import {GenderType} from 'src/shared/types/__generated__/gql-types';
-import {validateEmail} from 'src/utils/validation';
+import {
+  validateDate,
+  validateEmail,
+  validatePhoneNumber,
+} from 'src/utils/validation';
 import {showToast} from 'src/utils/serverError';
 import {formatUserInputData} from 'src/helpers/formatUserInputData';
+import {
+  FileCategory,
+  handlePhotoUpload,
+} from 'src/utils/imagePickerUploadPhoto';
 
 const RadioLables = [
   {id: '101', label: 'Male', type: GenderType.Male},
@@ -62,21 +70,28 @@ export const Profile = () => {
     },
   });
 
+  const [avatarUri, setAvatarUri] = React.useState<string | undefined>();
+  const [mediaUrl, setMediaUrl] = React.useState<string | undefined>();
+
   const handleGoBack = () => {
     navigate.goBack();
   };
 
   const onSubmit = async (dataSubmit: UserInputDataSubmitProps) => {
     try {
+      if (mediaUrl && mediaUrl !== undefined) {
+        dataSubmit.avatarUrl = mediaUrl;
+      }
+
       await userEditProfile({
         variables: {
           input: formatUserInputData(dataSubmit),
         },
       });
+
       handleGoBack();
     } catch (e) {
       showToast();
-      console.error(e);
     }
   };
 
@@ -94,9 +109,19 @@ export const Profile = () => {
       </View>
       <ScrollView contentContainerStyle={styles.containerScroll}>
         <View style={styles.containerIcons}>
-          <UserIcon size={UserIconSize.LARGE} />
+          <UserIcon size={UserIconSize.LARGE} userPhotoUrl={avatarUri} />
           <View style={styles.containerCamera}>
-            <IconButtonBg Icon={SvgCamera} buttonSize="medium" />
+            <IconButtonBg
+              Icon={SvgCamera}
+              buttonSize="medium"
+              onPress={() =>
+                handlePhotoUpload({
+                  fileCategory: FileCategory.AVATARS,
+                  onImageUriSet: setAvatarUri,
+                  onMediaUrlSet: setMediaUrl,
+                })
+              }
+            />
           </View>
         </View>
         <View style={styles.wrapper}>
@@ -159,12 +184,15 @@ export const Profile = () => {
           <Controller
             control={control}
             name="birthDate"
+            rules={{validate: validateDate}}
             render={({field: {onChange, value}}) => (
               <DateTimePicker
                 label="B-day"
                 placeholder="Enter B-day"
                 value={value}
                 onChange={onChange}
+                isError={!!errors.birthDate}
+                errorMessage={errors.birthDate?.message}
               />
             )}
           />
@@ -174,7 +202,7 @@ export const Profile = () => {
           <Controller
             control={control}
             name="email"
-            rules={{required: true, validate: validateEmail}}
+            rules={{requiredvalidate: validateEmail}}
             render={({field: {onChange, value}}) => (
               <Input
                 placeholder="Enter your email"
@@ -186,9 +214,11 @@ export const Profile = () => {
               />
             )}
           />
+          {errors.email && showToast()}
           <Controller
             control={control}
             name="phone"
+            rules={{validate: validatePhoneNumber}}
             render={({field: {onChange, value}}) => (
               <Input
                 placeholder="Enter your phone number"
@@ -198,6 +228,7 @@ export const Profile = () => {
               />
             )}
           />
+          {errors.phone && showToast()}
           <Controller
             control={control}
             name="country"

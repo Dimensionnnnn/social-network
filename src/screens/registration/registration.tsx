@@ -57,7 +57,6 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
       }
     } catch (e) {
       showToast();
-      console.log(e);
     }
   };
 

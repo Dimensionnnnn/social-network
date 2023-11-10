@@ -13,6 +13,8 @@ interface Props {
   placeholder: string;
   value: Date;
   onChange: (selectedDate: any) => void;
+  isError?: boolean;
+  errorMessage?: string;
 }
 
 export const DateTimePicker = ({
@@ -20,10 +22,12 @@ export const DateTimePicker = ({
   placeholder,
   value,
   onChange,
+  isError,
+  errorMessage,
 }: Props) => {
   const [isFilled, setIsFilled] = useState(false);
   const themeVariant = useColorTheme();
-  const styles = getDateTimePickerStyles({themeVariant, isFilled});
+  const styles = getDateTimePickerStyles({themeVariant, isFilled, isError});
 
   const handleChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
     onChange(selectedDate);
@@ -56,6 +60,11 @@ export const DateTimePicker = ({
           <Text
             style={[styles.containerValue, styles.fontText, styles.textColor]}>
             {placeholder}
+          </Text>
+        )}
+        {isError && (
+          <Text style={[styles.containerError, styles.fontError]}>
+            {errorMessage}
           </Text>
         )}
       </Pressable>

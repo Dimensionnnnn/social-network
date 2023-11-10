@@ -3,7 +3,7 @@ import {View, FlatList} from 'react-native';
 import {Spinner} from 'src/components/UI/spinner/spinner';
 import {PostCard} from 'src/components/UI/post-card/post-card';
 import {ListEmpty} from 'src/components/UI/list-empty/list-empty';
-import {formatAuthorName} from 'src/helpers/formatAuthorName';
+import {formatUserName} from 'src/helpers/formatUserName';
 import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {FavouritePosts} from 'src/api/posts/gql/querys/__generated__/get-favourite-posts.qury';
 import {Posts} from 'src/api/posts/gql/querys/__generated__/get-posts.query';
@@ -61,7 +61,7 @@ const ItemSwipe = ({item, handleDeletePost}: ItemSwipeProps) => {
         description={item.description}
         mediaUrl={item.mediaUrl}
         avatarUrl={item.author.avatarUrl || ''}
-        authorName={formatAuthorName(
+        authorName={formatUserName(
           item.author.firstName || '',
           item.author.lastName || '',
         )}
@@ -94,7 +94,6 @@ export const SwipeablePostsList: React.FC<Props> = ({
       });
     } catch (e) {
       showToast();
-      console.error(e);
     }
   };
 

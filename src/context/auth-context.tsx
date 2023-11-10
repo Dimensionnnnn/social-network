@@ -5,6 +5,7 @@ import {
   removeItemStorage,
 } from 'src/utils/async-storage';
 import {apolloClient} from 'src/api/client';
+import {showToast} from 'src/utils/serverError';
 
 export enum TOKEN {
   USER_TOKEN = 'userToken',
@@ -47,7 +48,7 @@ export const AuthProvider: React.FC<AuthContextProviderProps> = ({
       const userTokenStorage = await getItemStorage(TOKEN.USER_TOKEN);
       setUserToken(userTokenStorage);
     } catch (e) {
-      console.log(e);
+      showToast();
     }
   };
 

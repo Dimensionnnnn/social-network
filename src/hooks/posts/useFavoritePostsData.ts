@@ -25,7 +25,6 @@ export const useFavouritePostsRequest = () => {
       });
     } catch (e) {
       showToast();
-      console.log(e);
     }
   };
 

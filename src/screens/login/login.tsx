@@ -54,7 +54,6 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
       }
     } catch (e) {
       showToast();
-      console.log(e);
     }
   };
 
