@@ -1,3 +1,5 @@
+import {isDateCorrect} from './isDateCorrect';
+
 export const validateEmail = (email: string) => {
   const regexp = new RegExp(
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -19,10 +21,7 @@ export const validatePhoneNumber = (phoneNumber: string) => {
 };
 
 export const validateDate = (date: Date) => {
-  const currentDate = new Date();
-  const minDate = new Date(1900, 0, 1);
-
-  return date <= currentDate && date >= minDate ? true : ErrorsMessages.date;
+  return isDateCorrect(date) ? true : ErrorsMessages.date;
 };
 
 enum ErrorsMessages {

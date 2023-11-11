@@ -27,7 +27,7 @@ import {showToast} from 'src/utils/serverError';
 import {formatUserInputData} from 'src/helpers/formatUserInputData';
 import {
   FileCategory,
-  handlePhotoUpload,
+  imagePickerUploadPhoto,
 } from 'src/utils/imagePickerUploadPhoto';
 
 const RadioLables = [
@@ -115,7 +115,7 @@ export const Profile = () => {
               Icon={SvgCamera}
               buttonSize="medium"
               onPress={() =>
-                handlePhotoUpload({
+                imagePickerUploadPhoto({
                   fileCategory: FileCategory.AVATARS,
                   onImageUriSet: setAvatarUri,
                   onMediaUrlSet: setMediaUrl,
@@ -202,7 +202,7 @@ export const Profile = () => {
           <Controller
             control={control}
             name="email"
-            rules={{requiredvalidate: validateEmail}}
+            rules={{validate: validateEmail}}
             render={({field: {onChange, value}}) => (
               <Input
                 placeholder="Enter your email"

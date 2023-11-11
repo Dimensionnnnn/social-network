@@ -15,7 +15,7 @@ import {useCreatePost} from 'src/api/posts/gql/mutations/__generated__/post-crea
 import {showToast} from 'src/utils/serverError';
 import {
   FileCategory,
-  handlePhotoUpload,
+  imagePickerUploadPhoto,
 } from 'src/utils/imagePickerUploadPhoto';
 
 interface SubmitProps {
@@ -92,7 +92,7 @@ export const CreatePost = () => {
           ) : (
             <ImageUpload
               onUpload={() =>
-                handlePhotoUpload({
+                imagePickerUploadPhoto({
                   fileCategory: FileCategory.POSTS,
                   onImageUriSet: setImage,
                   onMediaUrlSet: setMediaUrl,

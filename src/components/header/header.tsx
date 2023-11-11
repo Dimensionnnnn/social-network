@@ -5,7 +5,7 @@ import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {getHeaderStyles} from './styles';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
 import {formatUserName} from 'src/helpers/formatUserName';
-import {useUserMeRequest} from 'src/hooks/user/useUserMe';
+import {useGetMeRequest} from 'src/hooks/user/useGetMe';
 
 interface Props {
   headerInfo?: string;
@@ -15,7 +15,7 @@ export const Header: React.FC<Props> = ({headerInfo}) => {
   const themeVariant = useColorTheme();
   const styles = getHeaderStyles(themeVariant);
   const navigation = useNavigation();
-  const {user} = useUserMeRequest();
+  const {user} = useGetMeRequest();
 
   const userName = formatUserName(user?.firstName, user?.lastName);
 

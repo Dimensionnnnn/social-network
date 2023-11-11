@@ -21,7 +21,7 @@ import {SvgProps} from 'react-native-svg';
 import {Appearance, useColorScheme} from 'react-native';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {RootStackParamList, RouteNames} from 'src/routes/routes';
-import {useUserMeRequest} from 'src/hooks/user/useUserMe';
+import {useGetMeRequest} from 'src/hooks/user/useGetMe';
 import {formatUserName} from 'src/helpers/formatUserName';
 
 const DrawerItemIcon = (
@@ -35,7 +35,7 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
   const themeVariant = useColorTheme();
   const isDarkMode = useColorScheme() === 'dark';
   const {logout} = useAuth();
-  const {user} = useUserMeRequest();
+  const {user} = useGetMeRequest();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const userName = formatUserName(user?.firstName, user?.lastName);

@@ -12,7 +12,7 @@ interface Props {
   onMediaUrlSet: (mediaUrl?: string) => void;
 }
 
-export const handlePhotoUpload = async ({
+export const imagePickerUploadPhoto = async ({
   fileCategory,
   onImageUriSet,
   onMediaUrlSet,

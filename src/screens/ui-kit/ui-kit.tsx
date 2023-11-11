@@ -35,8 +35,8 @@ const LABELS = [
 ];
 const description =
   'The Queen of the Carnival in Rio de Janeiro and up to two princesses having the duty to woo the revelry, along with the King Momo. Unlike some cities, in the city of Rio de Janeiro, Queens of Carnival do not see a certain school of samba. In competitions, princesses are usually placed as second and third, and are correspondingly 1st and 2nd Princess. Some of them after the reign become queens or battery bridesmaids. Incorporated into every aspect of the Rio carnival are dancing and music. The most famous dance is carnival samba, a Brazilian dance with African influences. The samba remains a popular dance not only in carnival but in the ghettos outside of the main cities.Some of them after the reign become queens or battery bridesmaids. Incorporated into every aspect of the Rio';
-const userPhotoUrl = require('src\\shared\\images\\userPhoto.png');
-const postPhotoUrl = require('src\\shared\\images\\postPhoto.png');
+const userPhotoUrl = 'src\\shared\\images\\userPhoto.png';
+const postPhotoUrl = 'src\\shared\\images\\postPhoto.png';
 
 export const UIKit = () => {
   const themeVariant = useColorTheme();
@@ -157,11 +157,13 @@ export const UIKit = () => {
         <UserIcon size="large" userPhotoUrl={userPhotoUrl} />
         <UserIcon size="large" />
         <PostCard
+          postId="1"
           title="Apple love"
           createdAt="11.09.22"
           likesCount={137}
           authorName="Hannah K."
           description={description}
+          mediaUrl={postPhotoUrl}
         />
       </ScrollView>
     </View>
