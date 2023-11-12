@@ -8,16 +8,15 @@ import {getListEmptyStyles} from './styles';
 
 interface ListEmptyProps {
   isLoading?: boolean;
-  isError?: boolean;
 }
 
-export const ListEmpty: React.FC<ListEmptyProps> = ({isLoading, isError}) => {
+export const ListEmpty: React.FC<ListEmptyProps> = ({isLoading}) => {
   const themeVariant = useColorTheme();
   const styles = getListEmptyStyles(themeVariant);
 
   return (
     <View style={styles.container}>
-      {isError && <NotFound text={notFoundMessage} />}
+      {!isLoading && <NotFound text={notFoundMessage} />}
       {isLoading && (
         <Spinner color={styles.spinnerColor} stroke={styles.spinnerStroke} />
       )}
