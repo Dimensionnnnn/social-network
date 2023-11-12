@@ -6,14 +6,17 @@ import {ColorThemes} from 'src/hooks/theme/useColorTheme';
 export const createPostStyles = {
   [ColorThemes.DARK]: {
     colorTitle: {color: COLORS.grayscale_dark_01},
+    containerColor: {backgroundColor: COLORS.grayscale_dark_07},
   },
   [ColorThemes.LIGHT]: {
     colorTitle: {color: COLORS.grayscale_light_01},
+    containerColor: {backgroundColor: COLORS.grayscale_light_07},
   },
   root: StyleSheet.create({
     fontTitle: outfitTextStyles.headlineSemiBold_18,
     container: {
       width: '100%',
+      height: '100%',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',

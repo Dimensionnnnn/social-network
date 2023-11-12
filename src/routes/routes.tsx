@@ -44,11 +44,11 @@ export enum RouteNames {
 }
 
 export const Routes = () => {
-  const {userToken} = useAuth();
+  const {userInfo} = useAuth();
 
   return (
     <Stack.Navigator>
-      {userToken ? (
+      {userInfo?.userToken ? (
         <>
           <Stack.Screen
             name={RouteNames.CUSTOM_DRAWER}

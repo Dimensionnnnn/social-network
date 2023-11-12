@@ -75,12 +75,13 @@ export const CreatePost = () => {
 
   return (
     <>
-      <View style={styles.containerHeader}>
+      <View style={[styles.containerHeader, styles.containerColor]}>
         <IconButton Icon={SvgArrowLeft} onPress={handleGoBack} />
         <Text style={[styles.fontTitle, styles.colorTitle]}>Create post</Text>
         <IconButton Icon={SvgXMark} onPress={handleGoBack} />
       </View>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView
+        contentContainerStyle={[styles.container, styles.containerColor]}>
         <View style={styles.containerImage}>
           {image ? (
             <Image

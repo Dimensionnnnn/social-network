@@ -50,7 +50,7 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
       if (response.data?.userSignIn?.problem) {
         showToast({message: response.data?.userSignIn?.problem.message});
       } else if (response.data?.userSignIn?.token) {
-        authenticate(response.data.userSignIn.token);
+        authenticate(response.data.userSignIn.token, dataSubmit.email);
       }
     } catch (e) {
       showToast();

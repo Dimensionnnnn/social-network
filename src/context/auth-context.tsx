@@ -7,18 +7,24 @@ import {
 import {apolloClient} from 'src/api/client';
 import {showToast} from 'src/utils/serverError';
 
-export enum TOKEN {
+export enum USER_INFO {
   USER_TOKEN = 'userToken',
+  USER_EMAIL = 'userEmail',
+}
+
+interface UserInfo {
+  userToken: string | null;
+  userEmail: string | null;
 }
 
 export interface AuthContextProps {
-  userToken: string | null;
-  authenticate: (token: string) => void;
+  userInfo: UserInfo | null;
+  authenticate: (token: string, email: string) => void;
   logout: () => void;
 }
 
 export const AuthContext = createContext<AuthContextProps>({
-  userToken: null,
+  userInfo: null,
   authenticate: () => {},
   logout: () => {},
 });
@@ -30,23 +36,25 @@ interface AuthContextProviderProps {
 export const AuthProvider: React.FC<AuthContextProviderProps> = ({
   children,
 }) => {
-  const [userToken, setUserToken] = useState<string | null>(null);
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
 
-  const authenticate = (token: string) => {
-    setUserToken(token);
-    setItemStorage(TOKEN.USER_TOKEN, token);
+  const authenticate = (token: string, email: string) => {
+    setUserInfo({userToken: token, userEmail: email});
+    setItemStorage(USER_INFO.USER_TOKEN, token);
+    setItemStorage(USER_INFO.USER_EMAIL, email);
   };
 
   const logout = () => {
-    setUserToken(null);
+    setUserInfo(null);
     removeItemStorage('userToken');
     apolloClient.cache.reset();
   };
 
   const setStorageToken = async () => {
     try {
-      const userTokenStorage = await getItemStorage(TOKEN.USER_TOKEN);
-      setUserToken(userTokenStorage);
+      const userTokenStorage = await getItemStorage(USER_INFO.USER_TOKEN);
+      const userEmailStorage = await getItemStorage(USER_INFO.USER_EMAIL);
+      setUserInfo({userToken: userTokenStorage, userEmail: userEmailStorage});
     } catch (e) {
       showToast();
     }
@@ -57,7 +65,7 @@ export const AuthProvider: React.FC<AuthContextProviderProps> = ({
   }, []);
 
   return (
-    <AuthContext.Provider value={{userToken, authenticate, logout}}>
+    <AuthContext.Provider value={{userInfo, authenticate, logout}}>
       {children}
     </AuthContext.Provider>
   );

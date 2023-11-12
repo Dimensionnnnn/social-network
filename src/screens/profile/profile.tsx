@@ -29,6 +29,7 @@ import {
   FileCategory,
   imagePickerUploadPhoto,
 } from 'src/utils/imagePickerUploadPhoto';
+import {useAuth} from 'src/hooks/authentication/useAuth';
 
 const RadioLables = [
   {id: '101', label: 'Male', type: GenderType.Male},
@@ -52,6 +53,7 @@ export const Profile = () => {
   const styles = getProfileStyles(themeVariant);
   const navigate = useNavigation();
   const [userEditProfile] = useUserEditProfile();
+  const {userInfo} = useAuth();
   const {
     control,
     handleSubmit,
@@ -64,7 +66,7 @@ export const Profile = () => {
       middleName: '',
       gender: GenderType.Male,
       birthDate: new Date(),
-      email: '',
+      email: userInfo?.userEmail,
       phone: '',
       country: '',
     },
