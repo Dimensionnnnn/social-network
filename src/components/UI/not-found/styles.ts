@@ -12,7 +12,7 @@ const notFoundStyles = {
   [ColorThemes.LIGHT]: {
     primary: COLORS.dark_mode,
     secondary: COLORS.grayscale_light_07,
-    titleColor: {color: COLORS.grayscale_light_07},
+    titleColor: {color: COLORS.grayscale_light_01},
   },
   root: StyleSheet.create({
     fontTitle: outfitTextStyles.bodyRegular_16,

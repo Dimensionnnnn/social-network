@@ -54,9 +54,7 @@ export const PostsList: React.FC<Props> = ({
         keyExtractor={item => item.id}
         onEndReached={fetchMore}
         onEndReachedThreshold={0.1}
-        ListEmptyComponent={
-          <ListEmpty isLoading={isLoading} isError={isError} />
-        }
+        ListEmptyComponent={<ListEmpty isLoading={isLoading} />}
       />
       {isLoading && data && (
         <View style={styles.containerSpinner}>
