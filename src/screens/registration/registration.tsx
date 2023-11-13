@@ -4,7 +4,7 @@ import {ScrollView, Text, View} from 'react-native';
 import {Button as LogInButton} from 'src/components/UI/button/text-button/text-button';
 import {Button as RegistrationButton} from 'src/components/UI/button/default-button/default-button';
 import {useColorTheme} from 'src/hooks/theme/useColorTheme';
-import {getLoginScreenStyles} from './styles';
+import {getRegistrationScreenStyles} from './styles';
 import {useForm, Controller} from 'react-hook-form';
 import {RootStackParamList} from 'src/routes/routes';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -62,7 +62,7 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
   };
 
   const themeVariant = useColorTheme();
-  const styles = getLoginScreenStyles(themeVariant);
+  const styles = getRegistrationScreenStyles(themeVariant);
   return (
     <ScrollView
       style={styles.containerBackground}
@@ -130,7 +130,7 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
           <Text style={[styles.fontText, styles.textColor]}>
             Already have an account?
           </Text>
-          <View>
+          <View style={styles.containerButtonText}>
             <LogInButton
               title="Log in"
               onPress={() => navigation.navigate('Login')}

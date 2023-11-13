@@ -107,7 +107,7 @@ export const LoginScreen = ({navigation}: LoginScreenProps) => {
       <View style={styles.containerButton}>
         <View style={styles.containerNoAccount}>
           <Text style={[styles.fontText, styles.textColor]}>No account?</Text>
-          <View>
+          <View style={styles.containerButtonText}>
             <RegistrationButton
               title="Register"
               onPress={() => navigation.navigate('Registration')}

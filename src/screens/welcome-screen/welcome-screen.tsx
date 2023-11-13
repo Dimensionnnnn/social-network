@@ -26,7 +26,7 @@ export const WelcomeScreen = ({navigation}: WelcomeScreenProps) => {
         <Text style={[styles.text, styles.textColor]}>
           Already have an accout?
         </Text>
-        <View>
+        <View style={styles.containerButtonText}>
           <LogInButton
             title="Log in"
             onPress={() => navigation.navigate('Login')}

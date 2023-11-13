@@ -31,7 +31,7 @@ export const cardTitleStyles = {
 
 export const getCardTitleStyles = (
   themeVariant: ColorThemes,
-  isPostOpen: boolean,
+  isPostOpen?: boolean,
 ) => {
   return {
     container: cardTitleStyles.root.container,

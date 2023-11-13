@@ -2,7 +2,7 @@ import React from 'react';
 import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {getTapBarStyles} from './styles';
-import {Posts} from 'src/screens/posts/posts';
+import {MyPosts} from 'src/screens/my-posts/my-posts';
 import {TabBarIcon, TabBarIconsNames} from '../UI/tapbar-icon/tapbar-iсon';
 import {TopTabs} from 'src/components/tabs/tabs';
 import {UIKit} from 'src/screens/ui-kit/ui-kit';
@@ -45,7 +45,7 @@ export const BottomTab = () => {
       />
       <Tab.Screen
         name={TabBarIconsNames.MY_POSTS}
-        component={Posts}
+        component={MyPosts}
         options={{
           tabBarLabel: TabBarIconsNames.MY_POSTS,
           tabBarIcon: ({color}) => (

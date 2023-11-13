@@ -3,7 +3,7 @@ import {COLORS} from 'src/assets/styles/colors';
 import {outfitTextStyles} from 'src/assets/styles/typography';
 import {ColorThemes} from 'src/hooks/theme/useColorTheme';
 
-const loginScreenStyles = {
+const registrationScreenStyles = {
   [ColorThemes.DARK]: {
     containerBackground: {backgroundColor: COLORS.grayscale_dark_07},
     titleColor: {color: COLORS.secondary_dark_01},
@@ -39,6 +39,10 @@ const loginScreenStyles = {
       flexDirection: 'row',
       gap: 4,
     },
+    containerButtonText: {
+      maxWidth: 50,
+      width: '100%',
+    },
     containerTitle: {
       paddingBottom: 20,
       gap: 4,
@@ -46,9 +50,9 @@ const loginScreenStyles = {
   }),
 };
 
-export const getLoginScreenStyles = (themeVariant: ColorThemes) => {
+export const getRegistrationScreenStyles = (themeVariant: ColorThemes) => {
   return {
-    ...loginScreenStyles[themeVariant],
-    ...loginScreenStyles.root,
+    ...registrationScreenStyles[themeVariant],
+    ...registrationScreenStyles.root,
   };
 };

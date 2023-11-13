@@ -4,35 +4,32 @@ import {ColorThemes} from 'src/hooks/theme/useColorTheme';
 
 export const postCardStyles = {
   [ColorThemes.DARK]: {
-    cardBakground: {backgroundColor: COLORS.grayscale_dark_06},
+    containerBackground: {backgroundColor: COLORS.grayscale_dark_07},
   },
   [ColorThemes.LIGHT]: {
-    cardBakground: {backgroundColor: COLORS.grayscale_light_06},
+    containerBackground: {backgroundColor: COLORS.grayscale_light_07},
   },
   root: StyleSheet.create({
     container: {
       width: '100%',
+      flex: 1,
+    },
+    wrapper: {
+      width: '100%',
       alignItems: 'center',
       display: 'flex',
       flexDirection: 'column',
-      paddingTop: 24,
+      paddingTop: 0,
       paddingBottom: 32,
       paddingLeft: 20,
       paddingRight: 20,
     },
-    postOpenContainer: {
-      paddingTop: 0,
-    },
   }),
 };
 
-export const getPostCardStyles = (
-  themeVariant: ColorThemes,
-  isPostOpen?: boolean,
-) => {
+export const getPostOpenStyles = (themeVariant: ColorThemes) => {
   return {
-    container: postCardStyles.root.container,
-    postOpenContainer: isPostOpen && postCardStyles.root.postOpenContainer,
-    cardBakground: postCardStyles[themeVariant].cardBakground,
+    ...postCardStyles.root,
+    ...postCardStyles[themeVariant],
   };
 };

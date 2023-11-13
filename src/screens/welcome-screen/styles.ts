@@ -25,6 +25,10 @@ const welcomeScreenStyles = {
       display: 'flex',
       flexDirection: 'row',
     },
+    containerButtonText: {
+      maxWidth: 50,
+      width: '100%',
+    },
     text: outfitTextStyles.bodyRegular_16,
   }),
 };
