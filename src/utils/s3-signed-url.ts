@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {getItemStorage} from './async-storage';
-import {USER_INFO} from 'src/context/auth-context';
+import {TOKEN} from 'src/context/auth-context';
 import {formatS3Url} from 'src/helpers/formatS3Url';
 import Config from 'react-native-config';
 import {showToast} from './serverError';
@@ -16,7 +16,7 @@ export const uploadImageToS3 = async ({
   fileCategory,
   imageUri,
 }: Props) => {
-  const userTokenStorage = await getItemStorage(USER_INFO.USER_TOKEN);
+  const userTokenStorage = await getItemStorage(TOKEN.USER_TOKEN);
   const signedUrlEndpoint = Config.S3_BASE_URL;
 
   if (!signedUrlEndpoint) {

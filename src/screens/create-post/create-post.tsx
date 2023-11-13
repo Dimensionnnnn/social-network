@@ -17,6 +17,7 @@ import {
   FileCategory,
   imagePickerUploadPhoto,
 } from 'src/utils/imagePickerUploadPhoto';
+import {validatePostDescription} from 'src/utils/validation';
 
 interface SubmitProps {
   title: string;
@@ -32,7 +33,8 @@ export const CreatePost = () => {
   const {
     control,
     handleSubmit,
-    formState: {dirtyFields},
+    setError,
+    formState: {dirtyFields, errors},
   } = useForm({
     defaultValues: {
       title: '',
@@ -53,6 +55,20 @@ export const CreatePost = () => {
       return;
     }
 
+    if (!dataSubmit.title || !dataSubmit.description) {
+      setError(
+        'title',
+        {type: 'required', message: 'Title is required'},
+        {shouldFocus: true},
+      );
+      setError(
+        'description',
+        {type: 'required', message: 'Description is required'},
+        {shouldFocus: true},
+      );
+      return;
+    }
+
     try {
       await createPost({
         variables: {
@@ -62,6 +78,7 @@ export const CreatePost = () => {
             mediaUrl,
           },
         },
+        refetchQueries: ['Posts', 'MyPosts'],
       });
       handleGoBack();
     } catch (e) {
@@ -112,13 +129,15 @@ export const CreatePost = () => {
               value={value}
               onChangeText={onChange}
               multiline
+              errorMessage={errors.title?.message}
+              isError={!!errors.title?.message}
             />
           )}
           name="title"
         />
         <Controller
           control={control}
-          rules={{required: true}}
+          rules={{required: true, validate: validatePostDescription}}
           render={({field: {onChange, value}}) => (
             <Input
               label="Post"
@@ -126,6 +145,8 @@ export const CreatePost = () => {
               value={value}
               onChangeText={onChange}
               multiline
+              errorMessage={errors.description?.message}
+              isError={!!errors.description?.message}
             />
           )}
           name="description"

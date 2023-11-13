@@ -2,7 +2,7 @@ import {ApolloClient, createHttpLink, InMemoryCache} from '@apollo/client';
 import Config from 'react-native-config';
 import {setContext} from '@apollo/client/link/context';
 import {getItemStorage} from 'src/utils/async-storage';
-import {USER_INFO} from 'src/context/auth-context';
+import {TOKEN} from 'src/context/auth-context';
 import {merge} from 'src/utils/merge';
 
 const httpLink = createHttpLink({
@@ -10,7 +10,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext(async (_, {headers}) => {
-  const userTokenStorage = await getItemStorage(USER_INFO.USER_TOKEN);
+  const userTokenStorage = await getItemStorage(TOKEN.USER_TOKEN);
   return {
     headers: {
       ...headers,

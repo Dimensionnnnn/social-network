@@ -29,7 +29,8 @@ import {
   FileCategory,
   imagePickerUploadPhoto,
 } from 'src/utils/imagePickerUploadPhoto';
-import {useAuth} from 'src/hooks/authentication/useAuth';
+import {useGetMeRequest} from 'src/hooks/user/useGetMe';
+import {formatDefaultUserValues} from 'src/helpers/formatDefaultUserValues';
 
 const RadioLables = [
   {id: '101', label: 'Male', type: GenderType.Male},
@@ -53,26 +54,23 @@ export const Profile = () => {
   const styles = getProfileStyles(themeVariant);
   const navigate = useNavigation();
   const [userEditProfile] = useUserEditProfile();
-  const {userInfo} = useAuth();
+  const {user} = useGetMeRequest();
+
+  const defaultUserValues = formatDefaultUserValues(user);
+
   const {
     control,
     handleSubmit,
     formState: {errors},
   } = useForm({
     defaultValues: {
-      avatarUrl: '',
-      firstName: '',
-      lastName: '',
-      middleName: '',
-      gender: GenderType.Male,
-      birthDate: new Date(),
-      email: userInfo?.userEmail,
-      phone: '',
-      country: '',
+      ...defaultUserValues,
     },
   });
 
-  const [avatarUri, setAvatarUri] = React.useState<string | undefined>();
+  const [avatarUri, setAvatarUri] = React.useState<string | undefined>(
+    defaultUserValues?.avatarUrl,
+  );
   const [mediaUrl, setMediaUrl] = React.useState<string | undefined>();
 
   const handleGoBack = () => {
@@ -89,6 +87,7 @@ export const Profile = () => {
         variables: {
           input: formatUserInputData(dataSubmit),
         },
+        refetchQueries: ['UserMe'],
       });
 
       handleGoBack();
@@ -96,6 +95,9 @@ export const Profile = () => {
       showToast();
     }
   };
+
+  errors.email && showToast();
+  errors.phone && showToast();
 
   return (
     <View style={[styles.containerBackground, styles.container]}>
@@ -216,7 +218,6 @@ export const Profile = () => {
               />
             )}
           />
-          {errors.email && showToast()}
           <Controller
             control={control}
             name="phone"
@@ -230,7 +231,6 @@ export const Profile = () => {
               />
             )}
           />
-          {errors.phone && showToast()}
           <Controller
             control={control}
             name="country"

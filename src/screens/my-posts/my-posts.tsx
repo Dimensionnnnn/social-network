@@ -10,7 +10,7 @@ import {useMyPostsData} from 'src/hooks/posts/useMyPostsData';
 
 export const MyPosts = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const {isLoading, isError, myPosts, fetchMore} = useMyPostsData();
+  const {isLoading, myPosts, fetchMore} = useMyPostsData();
 
   const handleOpenCreatePostScreen = () => {
     navigation.navigate(RouteNames.CREATE_POST);
@@ -22,7 +22,6 @@ export const MyPosts = () => {
       <View style={styles.container}>
         <SwipeablePostsList
           isLoading={isLoading}
-          isError={isError}
           data={myPosts}
           fetchMore={fetchMore}
         />

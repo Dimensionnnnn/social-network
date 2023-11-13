@@ -53,7 +53,7 @@ export const RegistrationScreen = ({navigation}: RegistrationScreenProps) => {
       if (respone.data?.userSignUp?.problem) {
         showToast({message: respone.data?.userSignUp?.problem.message});
       } else if (respone.data?.userSignUp?.token) {
-        authenticate(respone.data.userSignUp.token, dataSubmit.email);
+        authenticate(respone.data.userSignUp.token);
       }
     } catch (e) {
       showToast();
