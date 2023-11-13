@@ -3,5 +3,12 @@ query UserMe {
     avatarUrl
     firstName
     lastName
+    birthDate
+    country
+    createdAt
+    email
+    gender
+    middleName
+    phone
   }
 }

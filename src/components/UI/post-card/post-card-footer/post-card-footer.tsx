@@ -40,14 +40,18 @@ export const PostCardFooter: React.FC<PostCardFooterProps> = ({
     );
     try {
       if (!isLikedLocal) {
-        await postLike();
+        await postLike({
+          refetchQueries: ['Posts', 'FavouritePosts', 'MyPosts'],
+        });
 
         if (dataLike) {
           setIsLikedLocal(dataLike.postLike.isLiked);
           setLikesCountLocal(dataLike.postLike.likesCount);
         }
       } else {
-        await postUnlike();
+        await postUnlike({
+          refetchQueries: ['Posts', 'FavouritePosts', 'MyPosts'],
+        });
 
         if (dataUnlike) {
           setIsLikedLocal(dataUnlike.postUnlike.isLiked);

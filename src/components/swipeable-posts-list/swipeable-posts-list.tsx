@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, FlatList} from 'react-native';
-import {Spinner} from 'src/components/UI/spinner/spinner';
 import {PostCard} from 'src/components/UI/post-card/post-card';
 import {ListEmpty} from 'src/components/UI/list-empty/list-empty';
 import {formatUserName} from 'src/helpers/formatUserName';
@@ -18,7 +17,6 @@ type CustomFavourite = FavouritePosts['favouritePosts']['data'];
 type CustomPosts = Posts['posts']['data'];
 
 interface Props {
-  isError: boolean;
   isLoading: boolean;
   data: CustomFavourite | CustomPosts | undefined;
   fetchMore: () => void;
@@ -73,7 +71,6 @@ const ItemSwipe = ({item, handleDeletePost}: ItemSwipeProps) => {
 };
 
 export const SwipeablePostsList: React.FC<Props> = ({
-  isError,
   isLoading,
   data,
   fetchMore,
@@ -91,6 +88,7 @@ export const SwipeablePostsList: React.FC<Props> = ({
             id,
           },
         },
+        refetchQueries: ['Posts', 'FavouritePosts', 'MyPosts'],
       });
     } catch (e) {
       showToast();
@@ -108,15 +106,8 @@ export const SwipeablePostsList: React.FC<Props> = ({
         keyExtractor={(item: {id: string}) => item.id}
         onEndReached={fetchMore}
         onEndReachedThreshold={0.1}
-        ListEmptyComponent={
-          <ListEmpty isLoading={isLoading} isError={isError} />
-        }
+        ListEmptyComponent={<ListEmpty isLoading={isLoading} />}
       />
-      {isLoading && data && (
-        <View style={styles.containerSpinner}>
-          <Spinner color={styles.spinnerColor} stroke={styles.spinnerStroke} />
-        </View>
-      )}
     </>
   );
 };

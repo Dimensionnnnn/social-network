@@ -18,10 +18,9 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
   const radioButtonStyles = getRadioButtonStyles(themeVariant, isChecked);
 
   return (
-    <View style={radioButtonStyles.radioButtonContainer}>
-      <Pressable
-        style={[radioButtonStyles.container, radioButtonStyles.containerColor]}
-        onPress={onPress}>
+    <Pressable style={radioButtonStyles.radioButtonContainer} onPress={onPress}>
+      <View
+        style={[radioButtonStyles.container, radioButtonStyles.containerColor]}>
         {isChecked && (
           <View
             style={[
@@ -30,10 +29,10 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
             ]}
           />
         )}
-      </Pressable>
+      </View>
       <Text style={[radioButtonStyles.fontText, radioButtonStyles.labelColor]}>
         {label}
       </Text>
-    </View>
+    </Pressable>
   );
 };

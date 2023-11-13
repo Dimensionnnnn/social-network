@@ -51,7 +51,7 @@ export const DateTimePicker = ({
     <View style={styles.container}>
       <Text style={[styles.fontLabel, styles.labelColor]}>{label}</Text>
       <Pressable onPress={showDatepicker}>
-        {isFilled ? (
+        {isFilled || value ? (
           <Text
             style={[styles.containerValue, styles.fontText, styles.textColor]}>
             {dayjs(value).format('DD.MM.YYYY')}

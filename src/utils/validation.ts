@@ -24,9 +24,14 @@ export const validateDate = (date: Date) => {
   return isDateCorrect(date) ? true : ErrorsMessages.date;
 };
 
+export const validatePostDescription = (description: string) => {
+  return description.length > 40 ? true : ErrorsMessages.description;
+};
+
 enum ErrorsMessages {
   email = 'Enter correct e-mail',
   password = 'Password field must be at leat 4 characters',
   phone = 'Enter correct phone number',
   date = 'Enter correct date',
+  description = 'Enter minimum 40 characters',
 }

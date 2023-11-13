@@ -14,18 +14,12 @@ type CustomFavourite = FavouritePosts['favouritePosts']['data'];
 type CustomPosts = Posts['posts']['data'];
 
 interface Props {
-  isError: boolean;
   isLoading: boolean;
   data: CustomFavourite | CustomPosts | undefined;
   fetchMore: () => void;
 }
 
-export const PostsList: React.FC<Props> = ({
-  isError,
-  isLoading,
-  data,
-  fetchMore,
-}) => {
+export const PostsList: React.FC<Props> = ({isLoading, data, fetchMore}) => {
   const themeVariant = useColorTheme();
   const styles = getPostsListsStyle(themeVariant);
 
@@ -57,7 +51,7 @@ export const PostsList: React.FC<Props> = ({
         ListEmptyComponent={<ListEmpty isLoading={isLoading} />}
       />
       {isLoading && data && (
-        <View style={styles.containerSpinner}>
+        <View style={[styles.containerBackground, styles.containerSpinner]}>
           <Spinner color={styles.spinnerColor} stroke={styles.spinnerStroke} />
         </View>
       )}
