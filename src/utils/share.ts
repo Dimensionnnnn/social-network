@@ -1,4 +1,5 @@
 import {Share} from 'react-native';
+import {showToast} from './serverError';
 
 export const share = async () => {
   try {
@@ -15,6 +16,6 @@ export const share = async () => {
       // dismissed
     }
   } catch (error) {
-    console.log(error);
+    showToast();
   }
 };

@@ -19,6 +19,10 @@ import {useColorTheme} from 'src/hooks/theme/useColorTheme';
 import {getDrawerContentStyles} from './styles';
 import {SvgProps} from 'react-native-svg';
 import {Appearance, useColorScheme} from 'react-native';
+import {useNavigation, NavigationProp} from '@react-navigation/native';
+import {RootStackParamList, RouteNames} from 'src/routes/routes';
+import {useGetMeRequest} from 'src/hooks/user/useGetMe';
+import {formatUserName} from 'src/helpers/formatUserName';
 
 const DrawerItemIcon = (
   Icon: (props: SvgProps) => JSX.Element,
@@ -31,8 +35,16 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
   const themeVariant = useColorTheme();
   const isDarkMode = useColorScheme() === 'dark';
   const {logout} = useAuth();
+  const {user} = useGetMeRequest();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
+  const userName = formatUserName(user?.firstName, user?.lastName);
 
   const styles = getDrawerContentStyles(themeVariant);
+
+  const handleOpenProfile = () => {
+    navigation.navigate(RouteNames.PROFILE);
+  };
 
   const handleToggleTheme = () => {
     Appearance.setColorScheme(isDarkMode ? 'light' : 'dark');
@@ -46,15 +58,18 @@ export const DrawerContent = (props: DrawerContentComponentProps) => {
       <DrawerItemList {...props} />
       <View>
         <View style={styles.userContainer}>
-          <UserIcon size={UserIconSize.MEDIUM} />
-          <Text style={[styles.fontUserName, styles.colorText]}>John Moor</Text>
+          <UserIcon
+            size={UserIconSize.MEDIUM}
+            userPhotoUrl={user?.avatarUrl ?? undefined}
+          />
+          <Text style={[styles.fontUserName, styles.colorText]}>
+            {userName ?? 'Hello'}
+          </Text>
         </View>
         <DrawerItem
           label="Profile"
           icon={() => DrawerItemIcon(SvgUserIcon, styles.colorIcon)}
-          onPress={() => {
-            console.log('profile');
-          }}
+          onPress={handleOpenProfile}
           labelStyle={[
             styles.itemLabel,
             styles.fontItemLabel,

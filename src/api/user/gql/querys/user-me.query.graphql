@@ -1,0 +1,7 @@
+query UserMe {
+  userMe {
+    avatarUrl
+    firstName
+    lastName
+  }
+}

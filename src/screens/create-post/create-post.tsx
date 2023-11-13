@@ -9,12 +9,14 @@ import {Input} from 'src/components/UI/input/default-input/default-input';
 import {Button as PublishButton} from 'src/components/UI/button/default-button/default-button';
 import {useNavigation} from '@react-navigation/native';
 import {ImageUpload} from 'src/components/UI/image-upload/image-upload';
-import * as ImagePicker from 'react-native-image-picker';
 import {inputsPlaceholders} from 'src/constants/placeholdersText';
-import {uploadImageToS3} from 'src/utils/s3-signed-url';
 import {useForm, Controller} from 'react-hook-form';
 import {useCreatePost} from 'src/api/posts/gql/mutations/__generated__/post-create.mutation';
 import {showToast} from 'src/utils/serverError';
+import {
+  FileCategory,
+  imagePickerUploadPhoto,
+} from 'src/utils/imagePickerUploadPhoto';
 
 interface SubmitProps {
   title: string;
@@ -38,34 +40,11 @@ export const CreatePost = () => {
     },
   });
 
-  const [image, setImage] = React.useState<any>(null);
-  const [mediaUrl, setMediaUrl] = React.useState<string | undefined>('');
+  const [image, setImage] = React.useState<string | undefined>();
+  const [mediaUrl, setMediaUrl] = React.useState<string | undefined>();
 
   const handleGoBack = () => {
     navigation.goBack();
-  };
-
-  const handlePhotoUpload = async () => {
-    ImagePicker.launchImageLibrary(
-      {
-        selectionLimit: 1,
-        mediaType: 'photo',
-        includeBase64: false,
-      },
-      async response => {
-        if (!response.didCancel && !response.errorMessage && response.assets) {
-          const {uri, fileName} = response.assets[0];
-          setImage(uri);
-
-          const url = await uploadImageToS3({
-            fileName,
-            fileCategory: 'POSTS',
-            imageUri: uri,
-          });
-          setMediaUrl(url);
-        }
-      },
-    );
   };
 
   const onSubmit = async (dataSubmit: SubmitProps) => {
@@ -87,7 +66,6 @@ export const CreatePost = () => {
       handleGoBack();
     } catch (e) {
       showToast();
-      console.log(e);
     }
   };
 
@@ -112,7 +90,15 @@ export const CreatePost = () => {
               source={{uri: image}}
             />
           ) : (
-            <ImageUpload onUpload={handlePhotoUpload} />
+            <ImageUpload
+              onUpload={() =>
+                imagePickerUploadPhoto({
+                  fileCategory: FileCategory.POSTS,
+                  onImageUriSet: setImage,
+                  onMediaUrlSet: setMediaUrl,
+                })
+              }
+            />
           )}
         </View>
         <Controller

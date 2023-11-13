@@ -7,6 +7,7 @@ import {useAuth} from 'src/hooks/authentication/useAuth';
 import {CustomDrawer} from 'src/screens/drawer/drawer';
 import {Post} from 'src/screens/post/post';
 import {CreatePost} from 'src/screens/create-post/create-post';
+import {Profile} from 'src/screens/profile/profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,7 @@ export type RootStackParamList = {
   BottomTab: undefined;
   Post: PostCardRouteParams;
   CreatePost: undefined;
+  Profile: undefined;
 };
 
 export enum RouteNames {
@@ -37,6 +39,7 @@ export enum RouteNames {
   REGISTRATION = 'Registration',
   POST = 'Post',
   CREATE_POST = 'CreatePost',
+  PROFILE = 'Profile',
 }
 
 export const Routes = () => {
@@ -59,6 +62,11 @@ export const Routes = () => {
           <Stack.Screen
             name={RouteNames.CREATE_POST}
             component={CreatePost}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name={RouteNames.PROFILE}
+            component={Profile}
             options={{headerShown: false}}
           />
         </>

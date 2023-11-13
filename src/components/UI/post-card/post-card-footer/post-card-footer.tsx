@@ -56,7 +56,6 @@ export const PostCardFooter: React.FC<PostCardFooterProps> = ({
       }
     } catch (e) {
       showToast();
-      console.log(e);
     }
   };
 

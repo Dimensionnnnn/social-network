@@ -72,3 +72,5 @@ yarn-error.log
 schema.json
 possible-types.json
 **/__generated__/**
+
+yarn.lock

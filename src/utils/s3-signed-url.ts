@@ -3,6 +3,7 @@ import {getItemStorage} from './async-storage';
 import {TOKEN} from 'src/context/auth-context';
 import {formatS3Url} from 'src/helpers/formatS3Url';
 import Config from 'react-native-config';
+import {showToast} from './serverError';
 
 interface Props {
   fileName?: string;
@@ -32,7 +33,7 @@ export const uploadImageToS3 = async ({
     });
 
     if (!signedUrlResponse.data) {
-      console.log('Error getting signed URL');
+      showToast({message: 'Error getting signed URL'});
       return;
     }
 
@@ -52,6 +53,6 @@ export const uploadImageToS3 = async ({
       return baseUrl;
     }
   } catch (error) {
-    console.log(error);
+    showToast();
   }
 };

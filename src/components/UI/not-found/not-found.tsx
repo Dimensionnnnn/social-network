@@ -18,7 +18,10 @@ export const NotFound: React.FC<Props> = ({text}) => {
         primaryFill={styles.primary}
         secondaryFill={styles.secondary}
       />
-      <Text style={[styles.fontTitle, styles.containerTitle]}>{text}</Text>
+      <Text
+        style={[styles.fontTitle, styles.containerTitle, styles.titleColor]}>
+        {text}
+      </Text>
     </View>
   );
 };

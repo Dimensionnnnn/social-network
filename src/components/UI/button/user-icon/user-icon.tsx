@@ -13,7 +13,7 @@ export enum UserIconSize {
 
 interface UserIconProps {
   size: UserIconSize;
-  userPhotoUrl?: number;
+  userPhotoUrl?: string;
   onPress?: () => void;
 }
 
@@ -37,7 +37,7 @@ export const UserIcon: React.FC<UserIconProps> = ({
         <Image
           resizeMethod="resize"
           resizeMode="contain"
-          source={userPhotoUrl}
+          source={{uri: userPhotoUrl}}
           style={userIconStyles.imageSize}
         />
       ) : (

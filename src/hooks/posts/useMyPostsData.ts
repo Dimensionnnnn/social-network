@@ -25,7 +25,6 @@ export const useMyPostsData = () => {
       });
     } catch (e) {
       showToast();
-      console.log(e);
     }
   };
 

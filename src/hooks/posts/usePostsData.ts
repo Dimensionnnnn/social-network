@@ -32,7 +32,6 @@ export const usePostsData = ({type}: PostsProps) => {
       });
     } catch (e) {
       showToast();
-      console.log(e);
     }
   };
 
